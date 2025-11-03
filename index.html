@@ -10,7 +10,7 @@
       --marin:#003049;
       --gul:#FECB2F;
       --bakgrund:#ffffff;
-      --text:#0f172a;
+      --text:#0a0a0a; /* mörkare text */
     }
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text)}
@@ -40,12 +40,26 @@
     .band small{margin-left:auto;opacity:.9;font-size:clamp(12px,1.8vh,18px)}
     /* Cards */
     .cards{display:grid;grid-template-columns:repeat(12,1fr);gap:2.2vh}
-    .card{grid-column:span 6;background:rgba(255,255,255,.88);backdrop-filter:blur(2px);border:2px solid rgba(238,242,247,.8);border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.06);padding:3vh 3vw}
+    .card{
+      grid-column:span 6;
+      background:rgba(255,255,255,.60);   /* mer transparent */
+      backdrop-filter:blur(8px);           /* mer blur */
+      border:2px solid rgba(238,242,247,.8);
+      border-radius:24px;
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      padding:3vh 3vw
+    }
     .card h2{margin:.2rem 0 1.2rem 0;color:var(--marin);font-size:clamp(18px,3vh,34px)}
     .card p,.card li{font-size:clamp(16px,2.4vh,26px);line-height:1.35;margin:.2rem 0}
     .pill{display:inline-block;background:var(--gul);color:#111;padding:.35rem .7rem;border-radius:999px;font-weight:700;font-size:clamp(12px,1.9vh,18px)}
     /* Welcome block gets a soft panel */
-    .welcome-panel{background:rgba(255,255,255,.85);border-radius:20px;padding:2.5vh 3vw;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .welcome-panel{
+      background:rgba(255,255,255,.50);   /* mer transparent */
+      backdrop-filter:blur(10px);          /* extra blur */
+      border-radius:20px;
+      padding:2.5vh 3vw;
+      box-shadow:0 8px 24px rgba(0,0,0,.08)
+    }
     /* Footer timing dot */
     .progress{position:absolute;bottom:2.6vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:3}
     .dot{width:12px;height:12px;border-radius:50%;background:#cbd5e1;transition:all .3s}
@@ -84,7 +98,7 @@
           <h2>📞 Kontakt</h2>
           <p><strong>Telefon:</strong> <span class="pill">+46 73 402 84 98</span></p>
           <p><strong>Telefontid:</strong> 24/7</p>
-          <p><strong>E‑post:</strong> svenshogensvandrarhem@gmail.com</p>
+          <p><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</p>
           <p><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</p>
           <p><strong>Reception:</strong> 16:00–19:00</p>
         </div>
