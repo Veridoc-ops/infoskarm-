@@ -65,7 +65,15 @@
       border-radius:20px; padding:2.5vh 3vw; text-align:center;
       margin-top:18vh; align-self:center; width:min(900px,92vw);
     }
-    /* QR-ruta & layout */
+    /* Loggor (diskreta vita) */
+    .brand{
+      height:36px; max-width:200px; object-fit:contain;
+      filter: brightness(0) invert(1) contrast(1.05) drop-shadow(0 1px 2px rgba(0,0,0,.35));
+      opacity:.95;
+      margin:-4px 0 10px 0;
+    }
+    .brand-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+    /* QR & layout */
     .qr{display:flex; align-items:center; gap:1rem; margin-top:.6rem; flex-wrap:wrap}
     .qr img{width:110px; height:110px; border-radius:12px; background:#fff; padding:6px; box-shadow:0 4px 12px rgba(0,0,0,.08)}
     .qr a{font-size:clamp(14px,2.1vh,18px); word-break:break-word}
@@ -143,6 +151,10 @@
     <section class="slide" data-title="Affärer">
       <div class="cards" style="margin-top:10vh">
         <div class="card half">
+          <div class="brand-row">
+            <img class="brand" alt="ICA Kvantum logotyp"
+                 src="https://upload.wikimedia.org/wikipedia/commons/1/19/ICA_logo.svg">
+          </div>
           <h2>🛒 ICA Kvantum Stenungsund</h2>
           <p>Vassgatan 1, 444 31 Stenungsund</p>
           <p>Tel: 0303-72 62 00</p>
@@ -151,7 +163,12 @@
             <a href="https://www.ica.se/butiker/kvantum/stenungsund/ica-kvantum-stenungsund-1003398/" target="_blank" rel="noopener">Öppna hemsida</a>
           </div>
         </div>
+
         <div class="card half">
+          <div class="brand-row">
+            <img class="brand" alt="Willys logotyp"
+                 src="https://upload.wikimedia.org/wikipedia/commons/5/51/Willys_logo.svg">
+          </div>
           <h2>🛍️ Willys Stenungsund</h2>
           <p>Strandvägen 35, 444 31 Stenungsund</p>
           <p>Tel: 0303-72 82 80</p>
@@ -167,6 +184,10 @@
     <section class="slide" data-title="Restauranger">
       <div class="cards" style="margin-top:6vh">
         <div class="card half">
+          <div class="brand-row">
+            <img class="brand" alt="Laxbutiken logotyp"
+                 src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Laxbutiken_Ljungskile.png">
+          </div>
           <h2>🐟 Laxbutiken Ljungskile</h2>
           <p>Ljungs Berg 200</p>
           <p>Tel: 0522-208 10</p>
@@ -197,6 +218,10 @@
         </div>
 
         <div class="card half">
+          <div class="brand-row">
+            <img class="brand" alt="McDonald’s logotyp"
+                 src="https://upload.wikimedia.org/wikipedia/commons/5/5f/McDonald%27s_logo.svg">
+          </div>
           <h2>🍔 McDonald’s Stenungsund</h2>
           <p>Stenunge Allé 1</p>
           <p>Tel: 0303-65 48 00</p>
@@ -277,7 +302,7 @@
 </div>
 
 <script>
-  const SLIDE_TIME_MS = 12000; // 12 sek/slide när du har fler sidor
+  const SLIDE_TIME_MS = 12000; // 12 sek/slide
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dots = Array.from(document.querySelectorAll('.dot'));
   let index = 0, timer;
@@ -291,7 +316,7 @@
   function start(){ clearInterval(timer); timer = setInterval(next, SLIDE_TIME_MS); }
   start();
 
-  // Uppdatera rubriken "Infoskärm" -> aktuell slide-titel
+  // Uppdatera bandtext med aktuell slidetitel
   function updateBand(){
     const el = document.querySelector('.band small');
     el.textContent = slides[index]?.dataset?.title || 'Infoskärm';
@@ -308,7 +333,7 @@
       const j = await r.json();
       const c = j.current_weather;
       const codeMap = {
-        0: "Klar himmel ☀️", 1:"Mest klart 🌤️", 2:"Växlande moln ⛅", 3:"Mulet ☁️",
+        0:"Klar himmel ☀️", 1:"Mest klart 🌤️", 2:"Växlande moln ⛅", 3:"Mulet ☁️",
         45:"Dimma 🌫️", 48:"Dimma 🌫️",
         51:"Duggregn 🌦️", 53:"Duggregn 🌦️", 55:"Duggregn 🌦️",
         61:"Regn 🌧️", 63:"Regn 🌧️", 65:"Regn 🌧️",
