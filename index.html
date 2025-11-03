@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Svenshögens Vandrarhem – Info</title>
+  <title>Svenshögens Gästhem – Info</title>
   <style>
     :root{
       --turkos:#2EC7C9; --marin:#003049; --gul:#FECB2F; --text:#0a0a0a;
@@ -19,40 +19,33 @@
     .slide{position:absolute;inset:0;padding:7vh 6vw;display:flex;flex-direction:column;gap:3vh;justify-content:center;opacity:0;transform:scale(1.01);transition:opacity .8s,transform .8s;background:transparent;z-index:2}
     .slide.active{opacity:1;transform:scale(1)}
 
-    /* Headerband – centrerat, två rader med samma font */
+    /* Headerband – centrerade rubriker i samma typsnitt */
     .band{
       position:absolute;top:0;left:0;right:0;
       background:linear-gradient(90deg,var(--marin),var(--turkos));
-      color:#fff;padding:2.4vh 6vw;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4vh;z-index:3;
-      text-align:center;
+      color:#fff;padding:2.6vh 6vw;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35vh;z-index:3;text-align:center
     }
-    .band h1, .band small{margin:0;font-family:inherit;letter-spacing:.3px}
+    .band h1,.band small{margin:0;font-family:inherit;letter-spacing:.3px}
     .band h1{font-weight:800;font-size:clamp(22px,3.8vh,48px)}
-    .band small{font-weight:700;font-size:clamp(14px,2.2vh,22px);opacity:.95}
+    .band small{font-weight:700;font-size:clamp(14px,2.2vh,22px);opacity:.96}
 
     /* Kort & layout */
     .cards{display:grid;grid-template-columns:repeat(12,1fr);gap:2.2vh}
     .card{grid-column:span 6;background:rgba(255,255,255,.22);backdrop-filter:blur(16px);border:2px solid rgba(255,255,255,.35);border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.05);padding:3vh 3vw}
-    .card h2{margin:.3rem 0 1.2rem;color:var(--marin);font-size:clamp(18px,3vh,34px)}
+    .card h2{margin:.3rem 0 1.2rem;color:var(--marin);font-size:clamp(18px,3vh,34px);text-align:center}
     .card p,.card li{font-size:clamp(16px,2.4vh,26px);line-height:1.35;margin:.2rem 0}
 
     /* Välkomstpanel */
     .welcome-panel{background:rgba(255,255,255,.22);backdrop-filter:blur(20px);border-radius:20px;padding:2.5vh 3vw;text-align:center;margin-top:18vh;align-self:center;width:min(900px,92vw)}
 
-    /* Ikon-rutor (mini-kort) */
+    /* Mini-kort (faciliteter) */
     .mini-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.4rem;margin-top:1rem}
-    .mini-card{
-      background:rgba(255,255,255,.22);
-      border:2px solid rgba(255,255,255,.35);
-      border-radius:18px;padding:2vh 1vw;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      backdrop-filter:blur(14px);text-align:center
-    }
+    .mini-card{background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.35);border-radius:18px;padding:2vh 1vw;display:flex;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(14px);text-align:center}
     .mini-card .emoji{font-size:clamp(34px,6vh,64px);line-height:1;margin-bottom:.4em}
     .mini-card .label{font-size:clamp(14px,2.4vh,22px);font-weight:600}
 
-    /* QR & listor */
+    /* Listor + QR-layout */
     .item{display:grid;grid-template-columns:80px 1fr 130px;gap:1.2rem;align-items:center}
     .icon{font-size:clamp(28px,4.5vh,40px);display:grid;place-items:center;width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,.35);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4)}
     .qr img{width:110px;height:110px;border-radius:12px;background:#fff;padding:6px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
@@ -72,7 +65,7 @@
 <div class="app">
   <div class="frame">
     <div class="band">
-      <h1>Svenshögens Vandrarhem</h1>
+      <h1>Svenshögens Gästhem</h1>
       <small>Infoskärm</small>
     </div>
 
@@ -88,7 +81,7 @@
     <section class="slide" data-title="Kontakt">
       <div class="cards" style="margin-top:12vh">
         <div class="card" style="grid-column:span 7">
-          <h2>📞 Kontakt</h2>
+          <h2>Kontakt</h2>
           <div class="list">
             <div><strong>Telefon (Jour):</strong> +46 73 402 84 98</div>
             <div><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</div>
@@ -96,7 +89,7 @@
           </div>
         </div>
         <div class="card" style="grid-column:span 5">
-          <h2>🆘 Vid behov</h2>
+          <h2>Vid behov</h2>
           <div class="list">
             <div>112 – Nödnummer</div>
             <div>1177 – Sjukvårdsrådgivning</div>
@@ -110,7 +103,7 @@
     <section class="slide" data-title="Faciliteter">
       <div class="cards" style="margin-top:10vh">
         <div class="card" style="grid-column:span 12">
-          <h2>🏠 Faciliteter</h2>
+          <h2>Faciliteter</h2>
           <div class="mini-grid">
             <div class="mini-card"><div class="emoji">🍽️</div><div class="label">Kök & allrum 24/7</div></div>
             <div class="mini-card"><div class="emoji">🧺</div><div class="label">Tvätt (fritt i duschrum)</div></div>
@@ -119,7 +112,7 @@
             <div class="mini-card"><div class="emoji">🏓</div><div class="label">Bordtennis</div></div>
           </div>
 
-          <h2 style="margin-top:3.6vh">📝 Regler</h2>
+          <h2 style="margin-top:3.6vh">Regler</h2>
           <ul>
             <li>Incheckning från 15:00</li>
             <li>Utcheckning senast 13:00</li>
@@ -133,7 +126,7 @@
     <section class="slide" data-title="Affärer">
       <div class="cards" style="margin-top:10vh">
         <div class="card">
-          <h2>🛒 ICA Kvantum Stenungsund</h2>
+          <h2>Affärer – ICA Kvantum</h2>
           <div class="item">
             <div class="icon">🛍️</div>
             <div>
@@ -149,7 +142,7 @@
         </div>
 
         <div class="card">
-          <h2>🛍️ Willys Stenungsund</h2>
+          <h2>Affärer – Willys</h2>
           <div class="item">
             <div class="icon">🛒</div>
             <div>
@@ -170,7 +163,7 @@
     <section class="slide" data-title="Restauranger">
       <div class="cards" style="margin-top:8vh">
         <div class="card">
-          <h2>🐟 Laxbutiken Ljungskile</h2>
+          <h2>Restauranger – Laxbutiken</h2>
           <div class="item">
             <div class="icon">🐟</div>
             <div>
@@ -186,7 +179,7 @@
         </div>
 
         <div class="card">
-          <h2>🍕 Pizzeria Milano (Stenungsund)</h2>
+          <h2>Restauranger – Pizzeria Milano</h2>
           <div class="item">
             <div class="icon">🍕</div>
             <div>
@@ -202,7 +195,7 @@
         </div>
 
         <div class="card">
-          <h2>🍽️ Mr Johanssons</h2>
+          <h2>Restauranger – Mr Johanssons</h2>
           <div class="item">
             <div class="icon">🍽️</div>
             <div>
@@ -218,7 +211,7 @@
         </div>
 
         <div class="card">
-          <h2>🍔 McDonald’s Stenungsund</h2>
+          <h2>Restauranger – McDonald’s</h2>
           <div class="item">
             <div class="icon">🍔</div>
             <div>
@@ -239,17 +232,17 @@
     <section class="slide" data-title="Väder">
       <div class="cards" style="margin-top:12vh">
         <div class="card" style="grid-column:span 7" id="weather-card">
-          <h2>🌤️ Väder i Svenshögen (nu)</h2>
+          <h2>Väder</h2>
           <p id="w-temp">Temperatur: …</p>
           <p id="w-wind">Vind: …</p>
           <p id="w-code">Väder: …</p>
           <small>Uppdateras från Open-Meteo.</small>
         </div>
         <div class="card" style="grid-column:span 5">
-          <h2>ℹ️ Tips</h2>
+          <h2>Tips</h2>
           <ul>
             <li>Packa regnjacka vid risk för skurar</li>
-            <li>Naturstig & badplats nära vandrarhemmet</li>
+            <li>Naturstig & badplats nära gästhemmet</li>
           </ul>
         </div>
       </div>
@@ -259,10 +252,10 @@
     <section class="slide" data-title="Kollektivtrafik">
       <div class="cards" style="margin-top:10vh">
         <div class="card">
-          <h2>🚆 Svenshögen station</h2>
+          <h2>Kollektivtrafik – Tåg</h2>
           <div class="item">
             <div class="icon">🚆</div>
-            <div>Tåg mot Göteborg / Uddevalla.</div>
+            <div>Svenshögen station – mot Göteborg / Uddevalla.</div>
             <div class="qr">
               <img alt="QR – Karta Svenshögen station"
                    src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
@@ -272,7 +265,7 @@
         </div>
 
         <div class="card">
-          <h2>🚌 Buss 334 – Svenshögens sjukhus</h2>
+          <h2>Kollektivtrafik – Buss 334</h2>
           <div class="item">
             <div class="icon">🚌</div>
             <div>Hållplats: <strong>Svenshögens sjukhus</strong> (linje 334).</div>
@@ -285,10 +278,10 @@
         </div>
 
         <div class="card">
-          <h2>📱 Västtrafik To Go</h2>
+          <h2>Kollektivtrafik – App</h2>
           <div class="item">
             <div class="icon">📱</div>
-            <div>Köp biljett i appen (iOS & Android).</div>
+            <div>Västtrafik To Go – köp biljett i appen.</div>
             <div class="qr">
               <img alt="QR – App Store"
                    src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
@@ -320,7 +313,7 @@
   function start(){clearInterval(t);t=setInterval(next,SLIDE_TIME_MS)}
   start();
 
-  // Uppdatera bandets underrubrik med aktuell sidrubrik
+  // Uppdatera bandets underrubrik med aktuell sidrubrik (centrerad & samma font via CSS)
   setInterval(()=>{document.querySelector('.band small').textContent=slides[i]?.dataset?.title||'Infoskärm'},300);
 
   // Väder (Open-Meteo)
