@@ -1,1 +1,168 @@
 
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Svenshögens Vandrarhem – Info</title>
+  <style>
+    :root{
+      --turkos:#2EC7C9;
+      --marin:#003049;
+      --gul:#FECB2F;
+      --bakgrund:#ffffff;
+      --text:#0f172a;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bakgrund);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text)}
+    .app{height:100%;display:grid;place-items:center}
+    .frame{position:relative;width:100vw;height:100vh;overflow:hidden}
+
+    /* Slides */
+    .slide{position:absolute;inset:0;padding:7vh 6vw;display:flex;flex-direction:column;gap:3vh;justify-content:center;opacity:0;transform:scale(1.01);transition:opacity .8s ease,transform .8s ease;background:var(--bakgrund)}
+    .slide.active{opacity:1;transform:scale(1)}
+
+    /* Header band */
+    .band{position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,var(--marin),var(--turkos));color:#fff;padding:2.8vh 6vw;display:flex;align-items:center;gap:1rem}
+    .band h1{margin:0;font-weight:800;letter-spacing:.5px;font-size:clamp(22px,3.8vh,48px)}
+    .band small{margin-left:auto;opacity:.9;font-size:clamp(12px,1.8vh,18px)}
+
+    /* Cards */
+    .cards{display:grid;grid-template-columns:repeat(12,1fr);gap:2.2vh}
+    .card{grid-column:span 6;background:#fff;border:2px solid #eef2f7;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.06);padding:3vh 3vw}
+    .card h2{margin:.2rem 0 1.2rem 0;color:var(--marin);font-size:clamp(18px,3vh,34px)}
+    .card p,.card li{font-size:clamp(16px,2.4vh,26px);line-height:1.35;margin:.2rem 0}
+    .pill{display:inline-block;background:var(--gul);color:#111;padding:.35rem .7rem;border-radius:999px;font-weight:700;font-size:clamp(12px,1.9vh,18px)}
+
+    /* Footer timing dot */
+    .progress{position:absolute;bottom:2.6vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem}
+    .dot{width:12px;height:12px;border-radius:50%;background:#cbd5e1;transition:all .3s}
+    .dot.active{background:var(--turkos);box-shadow:0 0 0 6px rgba(46,199,201,.18)}
+
+    /* Responsive tweaks */
+    @media (max-width: 960px){
+      .card{grid-column:span 12}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="frame">
+    <div class="band">
+      <h1>Svenshögens Vandrarhem</h1>
+      <small>Infoskärm</small>
+    </div>
+
+    <!-- SLIDE 1: Välkommen -->
+    <section class="slide active" data-title="Välkommen" style="background:linear-gradient(180deg, #ffffff 0%, #f8ffff 100%)">
+      <div style="margin-top:18vh;display:flex;flex-direction:column;gap:2.2vh;align-items:center;text-align:center;">
+        <p style="font-size:clamp(28px,5vh,60px);margin:0;color:var(--marin);font-weight:800;letter-spacing:.5px;">Välkommen</p>
+        <p style="font-size:clamp(24px,4.2vh,52px);margin:0">Welcome</p>
+        <p style="font-size:clamp(24px,4.2vh,52px);margin:0">Willkommen</p>
+        <p style="font-size:clamp(24px,4.2vh,52px);margin:0">Bienvenidos</p>
+        <p style="font-size:clamp(24px,4.2vh,52px);margin:0">Bienvenue</p>
+        <p style="font-size:clamp(24px,4.2vh,52px);margin:0">Witamy</p>
+        <p style="font-size:clamp(24px,4.2vh,52px);margin:0">ようこそ</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: Kontakt -->
+    <section class="slide" data-title="Kontakt" style="background:linear-gradient(180deg, #ffffff 0%, #f8ffff 100%)">
+      <div class="cards" style="margin-top:10vh">
+        <div class="card" style="grid-column:span 7">
+          <h2>📞 Kontakt</h2>
+          <p><strong>Telefon:</strong> <span class="pill">+46 XX XXX XX XX</span></p>
+          <p><strong>E‑post:</strong> info@svenshogensvandrarhem.se</p>
+          <p><strong>Adress:</strong> Exempelvägen 1, 444 00 Svenshögen</p>
+          <p><strong>Reception:</strong> 08:00–11:00, 15:00–20:00</p>
+        </div>
+        <div class="card" style="grid-column:span 5">
+          <h2>🆘 Vid behov</h2>
+          <p><strong>Nödnummer:</strong> 112</p>
+          <p><strong>Sjukvårdsrådgivning:</strong> 1177</p>
+          <p><strong>Jour:</strong> +46 XX XXX XX XX</p>
+          <p><strong>WiFi (gäst):</strong> SSID <span class="pill">Gäst‑WiFi</span> · Lösen <span class="pill">••••••••</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: Faciliteter -->
+    <section class="slide" data-title="Faciliteter" style="background:linear-gradient(180deg,#ffffff 0%, #fff8e1 100%)">
+      <div class="cards" style="margin-top:10vh">
+        <div class="card" style="grid-column:span 7">
+          <h2>🏠 Faciliteter på plats</h2>
+          <ul>
+            <li>Kök & allrum öppet 06:00–23:00</li>
+            <li>Frukost 08:00–10:00 (förbokas i receptionen)</li>
+            <li>Tvättmaskin & tork (fråga i receptionen)</li>
+            <li>Gratis parkering · Cykelförvaring</li>
+            <li>Tyst tid 22:00–07:00</li>
+          </ul>
+        </div>
+        <div class="card" style="grid-column:span 5">
+          <h2>📝 Praktiskt</h2>
+          <ul>
+            <li>Utcheckning senast 11:00</li>
+            <li>Nyckel återlämnas i receptionen/nyckelinkast</li>
+            <li>Rökfritt i alla rum</li>
+            <li>Husdjur i markerade rum (förbokas)</li>
+            <li>Badplats 10 min · Station nära</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress dots -->
+    <div class="progress" aria-hidden="true">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ======= Konfiguration =======
+  const SLIDE_TIME_MS = 10000; // 10 sekunder per slide
+
+  // ======= Logik för automatisk växling =======
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  let index = 0;
+  let timer;
+
+  function show(i){
+    slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
+    dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
+    index = i;
+  }
+
+  function next(){ show((index+1)%slides.length); }
+
+  function start(){
+    clearInterval(timer);
+    timer = setInterval(next, SLIDE_TIME_MS);
+  }
+
+  // Starta när sidan laddats
+  start();
+
+  // Tangentnavigering (valfritt): vänster/höger/byta slide, paus/play med mellanslag
+  let paused = false;
+  addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight'){ next(); start(); }
+    if(e.key==='ArrowLeft'){ show((index-1+slides.length)%slides.length); start(); }
+    if(e.key===' '){ paused = !paused; paused?clearInterval(timer):start(); }
+  });
+
+  // Visa aktuell slidetiteln i bandet
+  function updateBand(){
+    const band = document.querySelector('.band small');
+    const active = slides[index];
+    const t = active?.dataset?.title || 'Infoskärm';
+    band.textContent = t;
+  }
+  setInterval(updateBand, 300);
+</script>
+</body>
+</html>
