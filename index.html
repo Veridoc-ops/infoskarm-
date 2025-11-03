@@ -14,36 +14,67 @@
     .frame{position:relative;width:100vw;height:100vh;overflow:hidden}
     .frame::before{content:"";position:absolute;inset:0;background:url('bg.jpg') center/cover no-repeat;transform:scale(1.02);z-index:0}
     .frame::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.15);z-index:1}
+
+    /* Slides */
     .slide{position:absolute;inset:0;padding:7vh 6vw;display:flex;flex-direction:column;gap:3vh;justify-content:center;opacity:0;transform:scale(1.01);transition:opacity .8s,transform .8s;background:transparent;z-index:2}
     .slide.active{opacity:1;transform:scale(1)}
-    .band{position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,var(--marin),var(--turkos));color:#fff;padding:2.8vh 6vw;display:flex;align-items:center;z-index:3}
-    .band h1{margin:0;font-weight:800;font-size:clamp(22px,3.8vh,48px)}
-    .band small{margin-left:auto;opacity:.9;font-size:clamp(12px,1.8vh,18px)}
+
+    /* Headerband – centrerat, två rader med samma font */
+    .band{
+      position:absolute;top:0;left:0;right:0;
+      background:linear-gradient(90deg,var(--marin),var(--turkos));
+      color:#fff;padding:2.4vh 6vw;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4vh;z-index:3;
+      text-align:center;
+    }
+    .band h1, .band small{margin:0;font-family:inherit;letter-spacing:.3px}
+    .band h1{font-weight:800;font-size:clamp(22px,3.8vh,48px)}
+    .band small{font-weight:700;font-size:clamp(14px,2.2vh,22px);opacity:.95}
+
+    /* Kort & layout */
     .cards{display:grid;grid-template-columns:repeat(12,1fr);gap:2.2vh}
     .card{grid-column:span 6;background:rgba(255,255,255,.22);backdrop-filter:blur(16px);border:2px solid rgba(255,255,255,.35);border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.05);padding:3vh 3vw}
-    .card h2{margin:.3rem 0 1rem;color:var(--marin);font-size:clamp(18px,3vh,34px)}
+    .card h2{margin:.3rem 0 1.2rem;color:var(--marin);font-size:clamp(18px,3vh,34px)}
     .card p,.card li{font-size:clamp(16px,2.4vh,26px);line-height:1.35;margin:.2rem 0}
+
+    /* Välkomstpanel */
     .welcome-panel{background:rgba(255,255,255,.22);backdrop-filter:blur(20px);border-radius:20px;padding:2.5vh 3vw;text-align:center;margin-top:18vh;align-self:center;width:min(900px,92vw)}
-    .row{display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center}
-    .badge{display:inline-block;background:var(--gul);color:#111;padding:.35rem .7rem;border-radius:999px;font-weight:700;font-size:clamp(12px,1.9vh,18px)}
+
+    /* Ikon-rutor (mini-kort) */
+    .mini-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.4rem;margin-top:1rem}
+    .mini-card{
+      background:rgba(255,255,255,.22);
+      border:2px solid rgba(255,255,255,.35);
+      border-radius:18px;padding:2vh 1vw;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      backdrop-filter:blur(14px);text-align:center
+    }
+    .mini-card .emoji{font-size:clamp(34px,6vh,64px);line-height:1;margin-bottom:.4em}
+    .mini-card .label{font-size:clamp(14px,2.4vh,22px);font-weight:600}
+
+    /* QR & listor */
     .item{display:grid;grid-template-columns:80px 1fr 130px;gap:1.2rem;align-items:center}
     .icon{font-size:clamp(28px,4.5vh,40px);display:grid;place-items:center;width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,.35);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4)}
     .qr img{width:110px;height:110px;border-radius:12px;background:#fff;padding:6px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
     .qr a{display:block;font-size:clamp(12px,1.9vh,18px);margin-top:.4rem}
     .list{display:grid;gap:1.2rem}
-    .mini-cards{display:flex;gap:2vh;margin-top:2vh;flex-wrap:wrap}
-    .mini-card{flex:1 1 240px;background:rgba(255,255,255,.22);border-radius:18px;padding:2vh 2vw;display:flex;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(14px);font-size:clamp(18px,3vh,30px);text-align:center;border:2px solid rgba(255,255,255,.35)}
-    .mini-card span{font-size:clamp(40px,6vh,70px);margin-bottom:.4em}
+
+    /* Progress */
     .progress{position:absolute;bottom:2.6vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:3}
     .dot{width:12px;height:12px;border-radius:50%;background:#cbd5e1}
     .dot.active{background:var(--turkos);box-shadow:0 0 0 6px rgba(46,199,201,.18)}
-    @media(max-width:960px){.card{grid-column:span 12}.item{grid-template-columns:64px 1fr 110px}}
+
+    @media(max-width:1200px){.mini-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:800px){.mini-grid{grid-template-columns:repeat(2,1fr)}.item{grid-template-columns:64px 1fr 110px}.card{grid-column:span 12}}
   </style>
 </head>
 <body>
 <div class="app">
   <div class="frame">
-    <div class="band"><h1>Svenshögens Vandrarhem</h1><small>Infoskärm</small></div>
+    <div class="band">
+      <h1>Svenshögens Vandrarhem</h1>
+      <small>Infoskärm</small>
+    </div>
 
     <!-- 1: Välkommen -->
     <section class="slide active" data-title="Välkommen">
@@ -55,13 +86,13 @@
 
     <!-- 2: Kontakt -->
     <section class="slide" data-title="Kontakt">
-      <div class="cards" style="margin-top:10vh">
+      <div class="cards" style="margin-top:12vh">
         <div class="card" style="grid-column:span 7">
           <h2>📞 Kontakt</h2>
           <div class="list">
-            <div class="row"><strong>Telefon (Jour):</strong> <span class="badge">+46 73 402 84 98</span></div>
-            <div class="row"><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</div>
-            <div class="row"><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</div>
+            <div><strong>Telefon (Jour):</strong> +46 73 402 84 98</div>
+            <div><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</div>
+            <div><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</div>
           </div>
         </div>
         <div class="card" style="grid-column:span 5">
@@ -75,20 +106,19 @@
       </div>
     </section>
 
-    <!-- 3: Faciliteter -->
+    <!-- 3: Faciliteter (alla som mini-kort) -->
     <section class="slide" data-title="Faciliteter">
-      <div class="cards" style="margin-top:8vh">
+      <div class="cards" style="margin-top:10vh">
         <div class="card" style="grid-column:span 12">
-          <h2>🏠 Faciliteter & praktiskt</h2>
-          <div class="list" style="margin-bottom:2vh">
-            <div class="row">Kök & allrum öppet 24/7</div>
-            <div class="row">Tvätt: fritt i duschrum</div>
-            <div class="row">Gratis parkering</div>
+          <h2>🏠 Faciliteter</h2>
+          <div class="mini-grid">
+            <div class="mini-card"><div class="emoji">🍽️</div><div class="label">Kök & allrum 24/7</div></div>
+            <div class="mini-card"><div class="emoji">🧺</div><div class="label">Tvätt (fritt i duschrum)</div></div>
+            <div class="mini-card"><div class="emoji">🅿️</div><div class="label">Gratis parkering</div></div>
+            <div class="mini-card"><div class="emoji">🎱</div><div class="label">Biljard</div></div>
+            <div class="mini-card"><div class="emoji">🏓</div><div class="label">Bordtennis</div></div>
           </div>
-          <div class="mini-cards">
-            <div class="mini-card"><span>🎱</span>Biljard</div>
-            <div class="mini-card"><span>🏓</span>Bordtennis</div>
-          </div>
+
           <h2 style="margin-top:3.6vh">📝 Regler</h2>
           <ul>
             <li>Incheckning från 15:00</li>
@@ -99,9 +129,9 @@
       </div>
     </section>
 
-    <!-- 4: Affärer -->
+    <!-- 4: Affärer (QR till Google Maps vägbeskrivning) -->
     <section class="slide" data-title="Affärer">
-      <div class="cards" style="margin-top:8vh">
+      <div class="cards" style="margin-top:10vh">
         <div class="card">
           <h2>🛒 ICA Kvantum Stenungsund</h2>
           <div class="item">
@@ -136,9 +166,9 @@
       </div>
     </section>
 
-    <!-- 5: Restauranger -->
+    <!-- 5: Restauranger (QR till Google Maps vägbeskrivning) -->
     <section class="slide" data-title="Restauranger">
-      <div class="cards" style="margin-top:6vh">
+      <div class="cards" style="margin-top:8vh">
         <div class="card">
           <h2>🐟 Laxbutiken Ljungskile</h2>
           <div class="item">
@@ -207,7 +237,7 @@
 
     <!-- 6: Väder (live) -->
     <section class="slide" data-title="Väder">
-      <div class="cards" style="margin-top:10vh">
+      <div class="cards" style="margin-top:12vh">
         <div class="card" style="grid-column:span 7" id="weather-card">
           <h2>🌤️ Väder i Svenshögen (nu)</h2>
           <p id="w-temp">Temperatur: …</p>
@@ -227,7 +257,7 @@
 
     <!-- 7: Kollektivtrafik -->
     <section class="slide" data-title="Kollektivtrafik">
-      <div class="cards" style="margin-top:8vh">
+      <div class="cards" style="margin-top:10vh">
         <div class="card">
           <h2>🚆 Svenshögen station</h2>
           <div class="item">
@@ -289,6 +319,8 @@
   function next(){show((i+1)%slides.length)}
   function start(){clearInterval(t);t=setInterval(next,SLIDE_TIME_MS)}
   start();
+
+  // Uppdatera bandets underrubrik med aktuell sidrubrik
   setInterval(()=>{document.querySelector('.band small').textContent=slides[i]?.dataset?.title||'Infoskärm'},300);
 
   // Väder (Open-Meteo)
