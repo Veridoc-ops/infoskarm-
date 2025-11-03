@@ -21,10 +21,10 @@
       background:url('bg.jpg') center/cover no-repeat;
       transform:scale(1.02); z-index:0;
     }
-    /* Ljus toning för läsbarhet */
+    /* Svag toning ovanpå fotot */
     .frame::after{
       content:""; position:absolute; inset:0;
-      background:rgba(255,255,255,.20); /* svag toning */
+      background:rgba(255,255,255,.15);
       z-index:1;
     }
     /* Slides */
@@ -44,15 +44,15 @@
     }
     .band h1{margin:0; font-weight:800; letter-spacing:.5px; font-size:clamp(22px,3.8vh,48px)}
     .band small{margin-left:auto; opacity:.9; font-size:clamp(12px,1.8vh,18px)}
-    /* Grid + kort (extremt transparent “glass”) */
+    /* Grid + kort (mycket transparent glass) */
     .cards{display:grid; grid-template-columns:repeat(12,1fr); gap:2.2vh}
     .card{
       grid-column:span 6;
-      background:rgba(255,255,255,.25);   /* NÄSTAN genomskinlig */
-      backdrop-filter:blur(14px);         /* mer blur för läsbarhet */
-      border:2px solid rgba(238,242,247,.6);
+      background:rgba(255,255,255,.22);   /* nästan genomskinlig */
+      backdrop-filter:blur(16px);
+      border:2px solid rgba(255,255,255,.35);
       border-radius:24px;
-      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      box-shadow:0 10px 30px rgba(0,0,0,.05);
       padding:3vh 3vw
     }
     .card h2{margin:.2rem 0 1.2rem 0; color:var(--marin); font-size:clamp(18px,3vh,34px)}
@@ -60,12 +60,12 @@
     .pill{display:inline-block; background:var(--gul); color:#111; padding:.35rem .7rem; border-radius:999px; font-weight:700; font-size:clamp(12px,1.9vh,18px)}
     /* Välkomstpanel */
     .welcome-panel{
-      background:rgba(255,255,255,.25);
-      backdrop-filter:blur(16px);
-      border-radius:20px; padding:2.5vh 3vw; box-shadow:0 8px 24px rgba(0,0,0,.08); text-align:center;
+      background:rgba(255,255,255,.22);
+      backdrop-filter:blur(20px);
+      border-radius:20px; padding:2.5vh 3vw; text-align:center;
       margin-top:18vh; align-self:center; width:min(900px,92vw);
     }
-    /* QR-ruta */
+    /* QR-ruta & layout */
     .qr{display:flex; align-items:center; gap:1rem; margin-top:.6rem; flex-wrap:wrap}
     .qr img{width:110px; height:110px; border-radius:12px; background:#fff; padding:6px; box-shadow:0 4px 12px rgba(0,0,0,.08)}
     .qr a{font-size:clamp(14px,2.1vh,18px); word-break:break-word}
@@ -86,7 +86,7 @@
       <small>Infoskärm</small>
     </div>
 
-    <!-- 1: VÄLKOMMEN -->
+    <!-- 1: Välkommen -->
     <section class="slide active" data-title="Välkommen">
       <div class="welcome-panel">
         <p style="font-size:clamp(28px,5vh,60px);margin:0;color:var(--marin);font-weight:800;letter-spacing:.5px;">Välkommen</p>
@@ -99,7 +99,7 @@
       </div>
     </section>
 
-    <!-- 2: KONTAKT -->
+    <!-- 2: Kontakt -->
     <section class="slide" data-title="Kontakt">
       <div class="cards" style="margin-top:10vh">
         <div class="card" style="grid-column:span 7">
@@ -107,44 +107,39 @@
           <p><strong>Telefon:</strong> <span class="pill">+46 73 402 84 98</span> <em>(Journummer)</em></p>
           <p><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</p>
           <p><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</p>
-          <p><strong>Reception:</strong> 16:00–19:00</p>
         </div>
         <div class="card" style="grid-column:span 5">
           <h2>🆘 Vid behov</h2>
           <p><strong>Nödnummer:</strong> 112</p>
           <p><strong>Sjukvårdsrådgivning:</strong> 1177</p>
-          <p><strong>WiFi (gäst):</strong> SSID <span class="pill">Annexet</span> · <span class="pill">Ingen kod behövs</span></p>
+          <p><strong>WiFi (gäst):</strong> SSID <span class="pill">Annexet</span> · <span class="pill">Ingen kod</span></p>
         </div>
       </div>
     </section>
 
-    <!-- 3: FACILITETER -->
+    <!-- 3: Faciliteter -->
     <section class="slide" data-title="Faciliteter">
       <div class="cards" style="margin-top:10vh">
-        <div class="card" style="grid-column:span 7">
-          <h2>🏠 Faciliteter på plats</h2>
+        <div class="card half">
+          <h2>🏠 På plats</h2>
           <ul>
             <li>Kök & allrum öppet 24/7</li>
-            <li>Frukost kan bokas i receptionen senast kl 16.00 dagen före</li>
             <li>Tvätt: fritt i duschrum</li>
             <li>Gratis parkering · Cykelförvaring</li>
           </ul>
         </div>
-        <div class="card" style="grid-column:span 5">
+        <div class="card half">
           <h2>📝 Praktiskt</h2>
           <ul>
             <li>Incheckning från 15:00</li>
             <li>Utcheckning senast 13:00</li>
-            <li>Nyckel återlämnas i receptionen/nyckelinkast</li>
-            <li>Rökfritt i alla rum</li>
-            <li>Husdjur tillåtet, ej i gemensamma utrymmen</li>
-            <li>Gratis parkering vid anvisad plats</li>
+            <li>Husdjur tillåtet (ej i gemensamma utrymmen)</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- 4: AFFÄRER -->
+    <!-- 4: Affärer -->
     <section class="slide" data-title="Affärer">
       <div class="cards" style="margin-top:10vh">
         <div class="card half">
@@ -152,7 +147,7 @@
           <p>Vassgatan 1, 444 31 Stenungsund</p>
           <p>Tel: 0303-72 62 00</p>
           <div class="qr">
-            <img alt="QR till ICA Kvantum Stenungsund" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.ica.se%2Fbutiker%2Fkvantum%2Fstenungsund%2Fica-kvantum-stenungsund-1003398%2F">
+            <img alt="QR ICA Kvantum Stenungsund" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.ica.se%2Fbutiker%2Fkvantum%2Fstenungsund%2Fica-kvantum-stenungsund-1003398%2F">
             <a href="https://www.ica.se/butiker/kvantum/stenungsund/ica-kvantum-stenungsund-1003398/" target="_blank" rel="noopener">Öppna hemsida</a>
           </div>
         </div>
@@ -161,19 +156,19 @@
           <p>Strandvägen 35, 444 31 Stenungsund</p>
           <p>Tel: 0303-72 82 80</p>
           <div class="qr">
-            <img alt="QR till Willys Stenungsund (karta)" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fmaps.google.com%2F%3Fq%3DWillys%20Stenungsund%20Strandv%C3%A4gen%2035">
+            <img alt="QR Willys Stenungsund karta" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fmaps.google.com%2F%3Fq%3DWillys%20Stenungsund%20Strandv%C3%A4gen%2035">
             <a href="https://www.willys.se/butik-sok" target="_blank" rel="noopener">Sök butik på willys.se</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5: RESTAURANGER -->
+    <!-- 5: Restauranger -->
     <section class="slide" data-title="Restauranger">
-      <div class="cards" style="margin-top:10vh">
+      <div class="cards" style="margin-top:6vh">
         <div class="card half">
           <h2>🐟 Laxbutiken Ljungskile</h2>
-          <p>Ljungs Berg 200 (E6 avfart 93), 459 93 Ljungskile</p>
+          <p>Ljungs Berg 200</p>
           <p>Tel: 0522-208 10</p>
           <div class="qr">
             <img alt="QR Laxbutiken" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.laxbutiken.se%2F">
@@ -183,7 +178,7 @@
 
         <div class="card half">
           <h2>🍕 Pizzeria Milano (Stenungsund)</h2>
-          <p>Strandplan 35, 444 31 Stenungsund</p>
+          <p>Strandplan 35</p>
           <p>Tel: 0303-45 99 00</p>
           <div class="qr">
             <img alt="QR Milano" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fpizzeriamilano-stenungsund.se%2F">
@@ -192,19 +187,19 @@
         </div>
 
         <div class="card half">
-          <h2>🍽️ Mr Johanssons (Stenungsund)</h2>
-          <p>Gärdesvägen 1, 444 31 Stenungsund</p>
+          <h2>🍽️ Mr Johanssons</h2>
+          <p>Gärdesvägen 1</p>
           <p>Tel: 0303-67 212</p>
           <div class="qr">
             <img alt="QR Mr Johanssons" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.mrjohanssons.se%2Fstenungsund%2F">
-            <a href="https://www.mrjohanssons.se/stenungsund/" target="_blank" rel="noopener">mrjohanssons.se/stenungsund</a>
+            <a href="https://www.mrjohanssons.se/stenungsund/" target="_blank" rel="noopener">mrjohanssons.se</a>
           </div>
         </div>
 
         <div class="card half">
           <h2>🍔 McDonald’s Stenungsund</h2>
-          <p>Stenunge Allé 1, 444 30 Stenungsund</p>
-          <p>Tel: 0303-65 48 0</p>
+          <p>Stenunge Allé 1</p>
+          <p>Tel: 0303-65 48 00</p>
           <div class="qr">
             <img alt="QR McDonald's Stenungsund" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.mcdonalds.com%2Fse%2Fsv-se%2Flocation%2Fstenungsund%2Fstenungsund%2Fstenunge-all--1%2F160.html">
             <a href="https://www.mcdonalds.com/se/sv-se/location/stenungsund/stenungsund/stenunge-all--1/160.html" target="_blank" rel="noopener">mcdonalds.com – Stenungsund</a>
@@ -213,9 +208,66 @@
       </div>
     </section>
 
-    <!-- Progress-prickar: 5 slides -->
+    <!-- 6: Väder (live) -->
+    <section class="slide" data-title="Väder">
+      <div class="cards" style="margin-top:10vh">
+        <div class="card half" id="weather-card">
+          <h2>🌤️ Väder i Svenshögen (nu)</h2>
+          <p id="w-temp">Temperatur: …</p>
+          <p id="w-wind">Vind: …</p>
+          <p id="w-code">Väder: …</p>
+          <small>Uppdateras automatiskt från Open-Meteo.</small>
+        </div>
+        <div class="card half">
+          <h2>ℹ️ Tips</h2>
+          <ul>
+            <li>Ta med regnjacka vid >50% nederbördsrisk</li>
+            <li>Badplats & naturstig nära vandrarhemmet</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7: Kollektivtrafik -->
+    <section class="slide" data-title="Kollektivtrafik">
+      <div class="cards" style="margin-top:8vh">
+        <div class="card half">
+          <h2>🚆 Svenshögen station</h2>
+          <p>Tåg mot Stenungsund/Göteborg & Uddevalla/Trollhättan.</p>
+          <div class="qr">
+            <img alt="QR – Svenshögen station (karta)" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
+            <a href="https://www.google.com/maps/search/Svensh%C3%B6gen%20station" target="_blank" rel="noopener">Karta: Svenshögen station</a>
+          </div>
+        </div>
+        <div class="card half">
+          <h2>🚌 Buss 334 – Svenshögens sjukhus</h2>
+          <p>Hållplats: <strong>Svenshögens sjukhus</strong> (linje 334).</p>
+          <div class="qr">
+            <img alt="QR – Reseplaneraren" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.vasttrafik.se%2Freseplanering%2F">
+            <a href="https://www.vasttrafik.se/reseplanering/" target="_blank" rel="noopener">Öppna Västtrafiks reseplanerare</a>
+          </div>
+        </div>
+
+        <div class="card half">
+          <h2>📱 Västtrafik To Go</h2>
+          <p>Köp biljett direkt i appen.</p>
+          <div class="qr">
+            <img alt="QR – iOS To Go" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
+            <a href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
+          </div>
+          <div class="qr">
+            <img alt="QR – Android To Go" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
+            <a href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prickar: 7 slides -->
     <div class="progress" aria-hidden="true">
       <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
       <span class="dot"></span>
       <span class="dot"></span>
       <span class="dot"></span>
@@ -225,22 +277,53 @@
 </div>
 
 <script>
-  const SLIDE_TIME_MS = 10000; // 10 sek/slide
+  const SLIDE_TIME_MS = 12000; // 12 sek/slide när du har fler sidor
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dots = Array.from(document.querySelectorAll('.dot'));
   let index = 0, timer;
-  function show(i){ slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
-                    dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
-                    index=i; }
+
+  function show(i){
+    slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
+    dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
+    index = i;
+  }
   function next(){ show((index+1)%slides.length); }
   function start(){ clearInterval(timer); timer = setInterval(next, SLIDE_TIME_MS); }
   start();
-  addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight'){next();start();}
-                                     if(e.key==='ArrowLeft'){show((index-1+slides.length)%slides.length);start();}
-                                     if(e.key===' '){ clearInterval(timer); timer?timer=null:start(); }});
-  function updateBand(){ const el=document.querySelector('.band small');
-                         el.textContent = document.querySelectorAll('.slide')[index]?.dataset?.title || 'Infoskärm'; }
-  setInterval(updateBand,300);
+
+  // Uppdatera rubriken "Infoskärm" -> aktuell slide-titel
+  function updateBand(){
+    const el = document.querySelector('.band small');
+    el.textContent = slides[index]?.dataset?.title || 'Infoskärm';
+  }
+  setInterval(updateBand, 300);
+
+  // ====== Enkel väder-widget (Open-Meteo, ingen nyckel) ======
+  (async function(){
+    try{
+      // Koordinater ungefär för Svenshögen
+      const lat = 58.15, lon = 11.94;
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+      const r = await fetch(url);
+      const j = await r.json();
+      const c = j.current_weather;
+      const codeMap = {
+        0: "Klar himmel ☀️", 1:"Mest klart 🌤️", 2:"Växlande moln ⛅", 3:"Mulet ☁️",
+        45:"Dimma 🌫️", 48:"Dimma 🌫️",
+        51:"Duggregn 🌦️", 53:"Duggregn 🌦️", 55:"Duggregn 🌦️",
+        61:"Regn 🌧️", 63:"Regn 🌧️", 65:"Regn 🌧️",
+        71:"Snö ❄️", 73:"Snö ❄️", 75:"Snö ❄️",
+        80:"Skurar 🌦️", 81:"Skurar 🌦️", 82:"Skurar 🌦️",
+        95:"Åska ⛈️", 96:"Åska ⛈️", 99:"Åska ⛈️"
+      };
+      document.getElementById('w-temp').textContent = `Temperatur: ${Math.round(c.temperature)}°C`;
+      document.getElementById('w-wind').textContent = `Vind: ${Math.round(c.windspeed)} m/s`;
+      document.getElementById('w-code').textContent = `Väder: ${codeMap[c.weathercode] || '—'}`;
+    }catch(e){
+      const el = document.getElementById('weather-card');
+      if(el){ el.insertAdjacentHTML('beforeend','<p>Kunde inte hämta väder just nu.</p>'); }
+    }
+  })();
 </script>
 </body>
 </html>
