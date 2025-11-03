@@ -9,63 +9,72 @@
       --turkos:#2EC7C9;
       --marin:#003049;
       --gul:#FECB2F;
-      --bakgrund:#ffffff;
-      --text:#0a0a0a; /* mörkare text för tydlighet */
+      --text:#0a0a0a;
     }
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text)}
     .app{height:100%;display:grid;place-items:center}
     .frame{position:relative;width:100vw;height:100vh;overflow:hidden}
-    /* Global bakgrund på alla slides */
+    /* Global bakgrund */
     .frame::before{
-      content:"";
-      position:absolute;inset:0;
+      content:""; position:absolute; inset:0;
       background:url('bg.jpg') center/cover no-repeat;
-      transform:scale(1.02);
-      z-index:0;
+      transform:scale(1.02); z-index:0;
     }
     /* Ljus toning för läsbarhet */
     .frame::after{
-      content:"";
-      position:absolute;inset:0;
-      background:rgba(255,255,255,.25);
+      content:""; position:absolute; inset:0;
+      background:rgba(255,255,255,.20); /* svag toning */
       z-index:1;
     }
     /* Slides */
-    .slide{position:absolute;inset:0;padding:7vh 6vw;display:flex;flex-direction:column;gap:3vh;justify-content:center;opacity:0;transform:scale(1.01);transition:opacity .8s ease,transform .8s ease;background:transparent !important; z-index:2;}
-    .slide.active{opacity:1;transform:scale(1)}
+    .slide{
+      position:absolute; inset:0; padding:7vh 6vw;
+      display:flex; flex-direction:column; gap:3vh; justify-content:center;
+      opacity:0; transform:scale(1.01);
+      transition:opacity .8s ease,transform .8s ease;
+      background:transparent !important; z-index:2;
+    }
+    .slide.active{opacity:1; transform:scale(1)}
     /* Headerband */
-    .band{position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,var(--marin),var(--turkos));color:#fff;padding:2.8vh 6vw;display:flex;align-items:center;gap:1rem;z-index:3}
-    .band h1{margin:0;font-weight:800;letter-spacing:.5px;font-size:clamp(22px,3.8vh,48px)}
-    .band small{margin-left:auto;opacity:.9;font-size:clamp(12px,1.8vh,18px)}
-    /* Cards */
-    .cards{display:grid;grid-template-columns:repeat(12,1fr);gap:2.2vh}
+    .band{
+      position:absolute; top:0; left:0; right:0;
+      background:linear-gradient(90deg,var(--marin),var(--turkos));
+      color:#fff; padding:2.8vh 6vw; display:flex; align-items:center; gap:1rem; z-index:3
+    }
+    .band h1{margin:0; font-weight:800; letter-spacing:.5px; font-size:clamp(22px,3.8vh,48px)}
+    .band small{margin-left:auto; opacity:.9; font-size:clamp(12px,1.8vh,18px)}
+    /* Grid + kort (extremt transparent “glass”) */
+    .cards{display:grid; grid-template-columns:repeat(12,1fr); gap:2.2vh}
     .card{
       grid-column:span 6;
-      background:rgba(255,255,255,.40);   /* mer transparent */
-      backdrop-filter:blur(12px);         /* mer blur */
-      border:2px solid rgba(238,242,247,.8);
+      background:rgba(255,255,255,.25);   /* NÄSTAN genomskinlig */
+      backdrop-filter:blur(14px);         /* mer blur för läsbarhet */
+      border:2px solid rgba(238,242,247,.6);
       border-radius:24px;
       box-shadow:0 10px 30px rgba(0,0,0,.06);
       padding:3vh 3vw
     }
-    .card h2{margin:.2rem 0 1.2rem 0;color:var(--marin);font-size:clamp(18px,3vh,34px)}
-    .card p,.card li{font-size:clamp(16px,2.4vh,26px);line-height:1.35;margin:.2rem 0}
-    .pill{display:inline-block;background:var(--gul);color:#111;padding:.35rem .7rem;border-radius:999px;font-weight:700;font-size:clamp(12px,1.9vh,18px)}
-    /* Välkomst-panel med glas-effekt */
+    .card h2{margin:.2rem 0 1.2rem 0; color:var(--marin); font-size:clamp(18px,3vh,34px)}
+    .card p,.card li{font-size:clamp(16px,2.4vh,26px); line-height:1.35; margin:.2rem 0}
+    .pill{display:inline-block; background:var(--gul); color:#111; padding:.35rem .7rem; border-radius:999px; font-weight:700; font-size:clamp(12px,1.9vh,18px)}
+    /* Välkomstpanel */
     .welcome-panel{
-      background:rgba(255,255,255,.35);   /* mer transparent */
-      backdrop-filter:blur(14px);
-      border-radius:20px;
-      padding:2.5vh 3vw;
-      box-shadow:0 8px 24px rgba(0,0,0,.08);
-      text-align:center;
+      background:rgba(255,255,255,.25);
+      backdrop-filter:blur(16px);
+      border-radius:20px; padding:2.5vh 3vw; box-shadow:0 8px 24px rgba(0,0,0,.08); text-align:center;
+      margin-top:18vh; align-self:center; width:min(900px,92vw);
     }
-    /* Progress-prickar */
-    .progress{position:absolute;bottom:2.6vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:3}
-    .dot{width:12px;height:12px;border-radius:50%;background:#cbd5e1;transition:all .3s}
-    .dot.active{background:var(--turkos);box-shadow:0 0 0 6px rgba(46,199,201,.18)}
-    /* Responsivt */
+    /* QR-ruta */
+    .qr{display:flex; align-items:center; gap:1rem; margin-top:.6rem; flex-wrap:wrap}
+    .qr img{width:110px; height:110px; border-radius:12px; background:#fff; padding:6px; box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    .qr a{font-size:clamp(14px,2.1vh,18px); word-break:break-word}
+    .row{display:flex; gap:2vh; flex-wrap:wrap}
+    .half{flex:1 1 420px}
+    /* Prickar */
+    .progress{position:absolute; bottom:2.6vh; left:50%; transform:translateX(-50%); display:flex; gap:.6rem; z-index:3}
+    .dot{width:12px; height:12px; border-radius:50%; background:#cbd5e1; transition:all .3s}
+    .dot.active{background:var(--turkos); box-shadow:0 0 0 6px rgba(46,199,201,.18)}
     @media (max-width: 960px){ .card{grid-column:span 12} }
   </style>
 </head>
@@ -77,9 +86,9 @@
       <small>Infoskärm</small>
     </div>
 
-    <!-- SLIDE 1: Välkommen -->
+    <!-- 1: VÄLKOMMEN -->
     <section class="slide active" data-title="Välkommen">
-      <div style="margin-top:18vh;display:flex;flex-direction:column;gap:2.2vh;align-items:center" class="welcome-panel">
+      <div class="welcome-panel">
         <p style="font-size:clamp(28px,5vh,60px);margin:0;color:var(--marin);font-weight:800;letter-spacing:.5px;">Välkommen</p>
         <p style="font-size:clamp(24px,4.2vh,52px);margin:0">Welcome</p>
         <p style="font-size:clamp(24px,4.2vh,52px);margin:0">Willkommen</p>
@@ -90,7 +99,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 2: Kontakt -->
+    <!-- 2: KONTAKT -->
     <section class="slide" data-title="Kontakt">
       <div class="cards" style="margin-top:10vh">
         <div class="card" style="grid-column:span 7">
@@ -109,7 +118,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 3: Faciliteter -->
+    <!-- 3: FACILITETER -->
     <section class="slide" data-title="Faciliteter">
       <div class="cards" style="margin-top:10vh">
         <div class="card" style="grid-column:span 7">
@@ -135,8 +144,80 @@
       </div>
     </section>
 
+    <!-- 4: AFFÄRER -->
+    <section class="slide" data-title="Affärer">
+      <div class="cards" style="margin-top:10vh">
+        <div class="card half">
+          <h2>🛒 ICA Kvantum Stenungsund</h2>
+          <p>Vassgatan 1, 444 31 Stenungsund</p>
+          <p>Tel: 0303-72 62 00</p>
+          <div class="qr">
+            <img alt="QR till ICA Kvantum Stenungsund" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.ica.se%2Fbutiker%2Fkvantum%2Fstenungsund%2Fica-kvantum-stenungsund-1003398%2F">
+            <a href="https://www.ica.se/butiker/kvantum/stenungsund/ica-kvantum-stenungsund-1003398/" target="_blank" rel="noopener">Öppna hemsida</a>
+          </div>
+        </div>
+        <div class="card half">
+          <h2>🛍️ Willys Stenungsund</h2>
+          <p>Strandvägen 35, 444 31 Stenungsund</p>
+          <p>Tel: 0303-72 82 80</p>
+          <div class="qr">
+            <img alt="QR till Willys Stenungsund (karta)" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fmaps.google.com%2F%3Fq%3DWillys%20Stenungsund%20Strandv%C3%A4gen%2035">
+            <a href="https://www.willys.se/butik-sok" target="_blank" rel="noopener">Sök butik på willys.se</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5: RESTAURANGER -->
+    <section class="slide" data-title="Restauranger">
+      <div class="cards" style="margin-top:10vh">
+        <div class="card half">
+          <h2>🐟 Laxbutiken Ljungskile</h2>
+          <p>Ljungs Berg 200 (E6 avfart 93), 459 93 Ljungskile</p>
+          <p>Tel: 0522-208 10</p>
+          <div class="qr">
+            <img alt="QR Laxbutiken" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.laxbutiken.se%2F">
+            <a href="https://www.laxbutiken.se/" target="_blank" rel="noopener">laxbutiken.se</a>
+          </div>
+        </div>
+
+        <div class="card half">
+          <h2>🍕 Pizzeria Milano (Stenungsund)</h2>
+          <p>Strandplan 35, 444 31 Stenungsund</p>
+          <p>Tel: 0303-45 99 00</p>
+          <div class="qr">
+            <img alt="QR Milano" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fpizzeriamilano-stenungsund.se%2F">
+            <a href="https://pizzeriamilano-stenungsund.se/" target="_blank" rel="noopener">pizzeriamilano-stenungsund.se</a>
+          </div>
+        </div>
+
+        <div class="card half">
+          <h2>🍽️ Mr Johanssons (Stenungsund)</h2>
+          <p>Gärdesvägen 1, 444 31 Stenungsund</p>
+          <p>Tel: 0303-67 212</p>
+          <div class="qr">
+            <img alt="QR Mr Johanssons" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.mrjohanssons.se%2Fstenungsund%2F">
+            <a href="https://www.mrjohanssons.se/stenungsund/" target="_blank" rel="noopener">mrjohanssons.se/stenungsund</a>
+          </div>
+        </div>
+
+        <div class="card half">
+          <h2>🍔 McDonald’s Stenungsund</h2>
+          <p>Stenunge Allé 1, 444 30 Stenungsund</p>
+          <p>Tel: 0303-65 48 0</p>
+          <div class="qr">
+            <img alt="QR McDonald's Stenungsund" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.mcdonalds.com%2Fse%2Fsv-se%2Flocation%2Fstenungsund%2Fstenungsund%2Fstenunge-all--1%2F160.html">
+            <a href="https://www.mcdonalds.com/se/sv-se/location/stenungsund/stenungsund/stenunge-all--1/160.html" target="_blank" rel="noopener">mcdonalds.com – Stenungsund</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress-prickar: 5 slides -->
     <div class="progress" aria-hidden="true">
       <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
       <span class="dot"></span>
       <span class="dot"></span>
     </div>
@@ -144,18 +225,21 @@
 </div>
 
 <script>
-  const SLIDE_TIME_MS = 10000; // 10 sekunder per slide
+  const SLIDE_TIME_MS = 10000; // 10 sek/slide
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dots = Array.from(document.querySelectorAll('.dot'));
-  let index = 0;
-  let timer;
-  function show(i){slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));index=i;}
+  let index = 0, timer;
+  function show(i){ slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
+                    dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
+                    index=i; }
   function next(){ show((index+1)%slides.length); }
   function start(){ clearInterval(timer); timer = setInterval(next, SLIDE_TIME_MS); }
   start();
-  let paused=false;
-  addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight'){next();start();} if(e.key==='ArrowLeft'){show((index-1+slides.length)%slides.length);start();} if(e.key===' '){ paused=!paused; paused?clearInterval(timer):start(); }});
-  function updateBand(){ const band=document.querySelector('.band small'); const t=slides[index]?.dataset?.title || 'Infoskärm'; band.textContent=t; }
+  addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight'){next();start();}
+                                     if(e.key==='ArrowLeft'){show((index-1+slides.length)%slides.length);start();}
+                                     if(e.key===' '){ clearInterval(timer); timer?timer=null:start(); }});
+  function updateBand(){ const el=document.querySelector('.band small');
+                         el.textContent = document.querySelectorAll('.slide')[index]?.dataset?.title || 'Infoskärm'; }
   setInterval(updateBand,300);
 </script>
 </body>
