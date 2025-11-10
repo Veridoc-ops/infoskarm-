@@ -41,10 +41,10 @@
     .mini-card .emoji{font-size:clamp(34px,6vh,64px);line-height:1;margin-bottom:.4em}
     .mini-card .label{font-size:clamp(14px,2.4vh,22px);font-weight:600}
 
-    /* Listor + QR-layout */
-    .item{display:grid;grid-template-columns:80px 1fr 130px;gap:1.2rem;align-items:center}
+    /* Ikoner & listor */
     .icon{font-size:clamp(28px,4.5vh,40px);display:grid;place-items:center;width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,.35);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4)}
     .icon-lg{font-size:clamp(36px,6vh,54px);display:grid;place-items:center;width:72px;height:72px;border-radius:18px;background:rgba(255,255,255,.35);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4)}
+    .item{display:grid;grid-template-columns:80px 1fr 130px;gap:1.2rem;align-items:center}
     .qr img{width:110px;height:110px;border-radius:12px;background:#fff;padding:6px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
     .qr a{display:block;font-size:clamp(12px,1.9vh,18px);margin-top:.4rem}
     .list{display:grid;gap:1.2rem}
@@ -52,6 +52,24 @@
     /* Centrerade listor – för Regler/Tillval/Utcheckning */
     .center-list{list-style:none;padding:0;text-align:center;font-size:clamp(18px,2.8vh,32px);line-height:1.5;margin:0}
     .center-list li{margin:.35em 0}
+
+    /* Kollektivtrafik – förbättrade komponenter */
+    .transport-header{display:flex;align-items:center;justify-content:center;gap:1rem;margin:-.4rem 0 1.2rem;}
+    .transport-header .emoji{
+      font-size:clamp(40px,6.4vh,64px);line-height:1;display:grid;place-items:center;width:72px;height:72px;
+      border-radius:18px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(8px);
+    }
+    .btn-row{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:1rem;}
+    .btn{
+      display:inline-flex;align-items:center;gap:.5rem;padding:.7em 1.1em;border-radius:12px;text-decoration:none;
+      border:2px solid rgba(255,255,255,.45);background:rgba(255,255,255,.24);backdrop-filter:blur(10px);
+      font-weight:700;font-size:clamp(14px,2.2vh,20px);color:var(--marin);
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .qr-stack{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+    .note{text-align:center;opacity:.85;font-size:clamp(13px,2vh,18px);margin-top:1rem}
+    .divider-dots{display:flex;justify-content:center;gap:.35rem;margin:1.2rem 0 .6rem}
+    .divider-dots i{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.2)}
 
     /* Progress */
     .progress{position:absolute;bottom:2.6vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:3}
@@ -119,14 +137,14 @@
 
           <h2 style="margin-top:3.6vh">Regler</h2>
           <ul class="center-list">
-            <li>⏰ Incheckning från 15:00</li>
+            <li>⏰ Incheckning från <strong>15:00</strong></li>
             <li>🐾 Husdjur tillåtet (ej i gemensamma utrymmen)</li>
           </ul>
 
           <h2 style="margin-top:3.2vh">Tillval</h2>
           <ul class="center-list">
-            <li>🛏️ Extra lakan – 60 kr</li>
-            <li>🧼 Extra handduk – 20 kr</li>
+            <li>🛏️ Extra lakan – <strong>60 kr</strong></li>
+            <li>🧼 Extra handduk – <strong>20 kr</strong></li>
           </ul>
         </div>
       </div>
@@ -203,38 +221,6 @@
             </div>
           </div>
         </div>
-
-        <div class="card">
-          <h2>Restauranger – Mr Johanssons</h2>
-          <div class="item">
-            <div class="icon">🍽️</div>
-            <div>
-              <div>Gärdesvägen 1, 444 31 Stenungsund</div>
-              <div>Tel: 0303-67 212</div>
-            </div>
-            <div class="qr">
-              <img alt="QR – Vägbeskrivning Mr Johanssons"
-                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DG%C3%A4rdesv%C3%A4gen%2B1%252C%2B444%2B31%2BStenungsund">
-              <a href="https://www.google.com/maps/dir/?api=1&destination=G%C3%A4rdesv%C3%A4gen+1,+444+31+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>Restauranger – McDonald’s</h2>
-          <div class="item">
-            <div class="icon">🍔</div>
-            <div>
-              <div>Stenunge Allé 1, 444 30 Stenungsund</div>
-              <div>Tel: 0303-65 48 00</div>
-            </div>
-            <div class="qr">
-              <img alt="QR – Vägbeskrivning McDonald’s"
-                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStenunge%2BAll%C3%A9%2B1%252C%2B444%2B30%2BStenungsund">
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Stenunge+All%C3%A9+1,+444+30+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -258,7 +244,7 @@
       </div>
     </section>
 
-    <!-- 7: Utcheckning (NY SLIDE) -->
+    <!-- 7: Utcheckning (NY) -->
     <section class="slide" data-title="Utcheckning">
       <div class="cards" style="margin-top:10vh">
         <div class="card" style="grid-column:span 7">
@@ -281,50 +267,90 @@
       </div>
     </section>
 
-    <!-- 8: Kollektivtrafik -->
+    <!-- 8: Kollektivtrafik (förbättrad) -->
     <section class="slide" data-title="Kollektivtrafik">
       <div class="cards" style="margin-top:10vh">
-        <div class="card">
-          <h2>Kollektivtrafik – Tåg</h2>
-          <div class="item">
-            <div class="icon">🚆</div>
-            <div>Svenshögen station – mot Göteborg / Uddevalla.</div>
-            <div class="qr">
-              <img alt="QR – Karta Svenshögen station"
-                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
-              <a href="https://www.google.com/maps/search/Svensh%C3%B6gen%20station" target="_blank" rel="noopener">Visa i Maps</a>
-            </div>
+
+        <!-- Tåg -->
+        <div class="card" style="grid-column:span 7">
+          <div class="transport-header">
+            <div class="emoji">🚆</div>
+            <h2 style="margin:0">Tåg – Svenshögen station</h2>
+          </div>
+
+          <ul class="center-list">
+            <li>Mot <strong>Göteborg</strong> och <strong>Uddevalla</strong></li>
+            <li>Biljetter i <em>Västtrafik To Go</em></li>
+          </ul>
+
+          <div class="btn-row">
+            <a class="btn" href="https://www.google.com/maps/search/Svensh%C3%B6gen%20station" target="_blank" rel="noopener">Visa station i Maps</a>
+          </div>
+
+          <div class="divider-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+          <div class="qr-stack">
+            <img alt="QR – Karta Svenshögen station"
+                 src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
+            <small>Skanna för att öppna i Maps</small>
           </div>
         </div>
 
-        <div class="card">
-          <h2>Kollektivtrafik – Buss 334</h2>
-          <div class="item">
-            <div class="icon">🚌</div>
-            <div>Hållplats: <strong>Svenshögens sjukhus</strong> (linje 334).</div>
-            <div class="qr">
-              <img alt="QR – Västtrafik reseplanerare"
-                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.vasttrafik.se%2Freseplanering%2F">
-              <a href="https://www.vasttrafik.se/reseplanering/" target="_blank" rel="noopener">Planera resa</a>
-            </div>
+        <!-- Buss 334 -->
+        <div class="card" style="grid-column:span 5">
+          <div class="transport-header">
+            <div class="emoji">🚌</div>
+            <h2 style="margin:0">Buss 334 – Svenshögens sjukhus</h2>
+          </div>
+
+          <ul class="center-list">
+            <li>Mot <strong>Stenungsund</strong> / <strong>Ljungskile</strong></li>
+            <li>Planera resa i Västtrafik</li>
+          </ul>
+
+          <div class="btn-row">
+            <a class="btn" href="https://www.vasttrafik.se/reseplanering/" target="_blank" rel="noopener">Öppna reseplaneraren</a>
+          </div>
+
+          <div class="divider-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+          <div class="qr-stack">
+            <img alt="QR – Västtrafik reseplanerare"
+                 src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.vasttrafik.se%2Freseplanering%2F">
+            <small>Skanna för reseplanering</small>
           </div>
         </div>
 
-        <div class="card">
-          <h2>Kollektivtrafik – App</h2>
-          <div class="item">
-            <div class="icon">📱</div>
-            <div>Västtrafik To Go – köp biljett i appen.</div>
-            <div class="qr">
+        <!-- Appar -->
+        <div class="card" style="grid-column:span 12">
+          <div class="transport-header" style="justify-content:center">
+            <div class="emoji">📱</div>
+            <h2 style="margin:0">Appar – Västtrafik To Go</h2>
+          </div>
+
+          <div class="btn-row">
+            <a class="btn" href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
+            <a class="btn" href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
+          </div>
+
+          <div class="divider-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+          <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;align-items:flex-start;margin-top:.4rem">
+            <div class="qr-stack">
               <img alt="QR – App Store"
                    src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
-              <a href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
+              <small>iOS – App Store</small>
+            </div>
+            <div class="qr-stack">
               <img alt="QR – Google Play"
                    src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
-              <a href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
+              <small>Android – Google Play</small>
             </div>
           </div>
+
+          <p class="note">Tips: Spara hållplatser och stationer som favoriter i appen för snabbare biljetter.</p>
         </div>
+
       </div>
     </section>
 
