@@ -44,9 +44,14 @@
     /* Listor + QR-layout */
     .item{display:grid;grid-template-columns:80px 1fr 130px;gap:1.2rem;align-items:center}
     .icon{font-size:clamp(28px,4.5vh,40px);display:grid;place-items:center;width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,.35);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4)}
+    .icon-lg{font-size:clamp(36px,6vh,54px);display:grid;place-items:center;width:72px;height:72px;border-radius:18px;background:rgba(255,255,255,.35);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4)}
     .qr img{width:110px;height:110px;border-radius:12px;background:#fff;padding:6px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
     .qr a{display:block;font-size:clamp(12px,1.9vh,18px);margin-top:.4rem}
     .list{display:grid;gap:1.2rem}
+
+    /* Centrerade listor – för Regler/Tillval/Utcheckning */
+    .center-list{list-style:none;padding:0;text-align:center;font-size:clamp(18px,2.8vh,32px);line-height:1.5;margin:0}
+    .center-list li{margin:.35em 0}
 
     /* Progress */
     .progress{position:absolute;bottom:2.6vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:3}
@@ -54,7 +59,11 @@
     .dot.active{background:var(--turkos);box-shadow:0 0 0 6px rgba(46,199,201,.18)}
 
     @media(max-width:1200px){.mini-grid{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:800px){.mini-grid{grid-template-columns:repeat(2,1fr)}.item{grid-template-columns:64px 1fr 110px}.card{grid-column:span 12}}
+    @media(max-width:800px){
+      .mini-grid{grid-template-columns:repeat(2,1fr)}
+      .item{grid-template-columns:64px 1fr 110px}
+      .card{grid-column:span 12}
+    }
   </style>
 </head>
 <body>
@@ -95,7 +104,7 @@
       </div>
     </section>
 
-    <!-- 3: Faciliteter -->
+    <!-- 3: Faciliteter + Regler + Tillval -->
     <section class="slide" data-title="Faciliteter">
       <div class="cards" style="margin-top:10vh">
         <div class="card" style="grid-column:span 12">
@@ -109,10 +118,15 @@
           </div>
 
           <h2 style="margin-top:3.6vh">Regler</h2>
-          <ul>
-            <li>Incheckning från 15:00</li>
-            <li>Utcheckning senast 13:00</li>
-            <li>Husdjur tillåtet (ej i gemensamma utrymmen)</li>
+          <ul class="center-list">
+            <li>⏰ Incheckning från 15:00</li>
+            <li>🐾 Husdjur tillåtet (ej i gemensamma utrymmen)</li>
+          </ul>
+
+          <h2 style="margin-top:3.2vh">Tillval</h2>
+          <ul class="center-list">
+            <li>🛏️ Extra lakan – 60 kr</li>
+            <li>🧼 Extra handduk – 20 kr</li>
           </ul>
         </div>
       </div>
@@ -130,7 +144,8 @@
               <div>Tel: 0303-72 62 00</div>
             </div>
             <div class="qr">
-              <img alt="QR – Vägbeskrivning till ICA Kvantum Stenungsund" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DVassgatan%2B1%252C%2B444%2B31%2BStenungsund">
+              <img alt="QR – Vägbeskrivning till ICA Kvantum Stenungsund"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DVassgatan%2B1%252C%2B444%2B31%2BStenungsund">
               <a href="https://www.google.com/maps/dir/?api=1&destination=Vassgatan+1,+444+31+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
             </div>
           </div>
@@ -145,7 +160,8 @@
               <div>Tel: 0303-72 82 80</div>
             </div>
             <div class="qr">
-              <img alt="QR – Vägbeskrivning till Willys Stenungsund" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStrandv%C3%A4gen%2B35%252C%2B444%2B31%2BStenungsund">
+              <img alt="QR – Vägbeskrivning till Willys Stenungsund"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStrandv%C3%A4gen%2B35%252C%2B444%2B31%2BStenungsund">
               <a href="https://www.google.com/maps/dir/?api=1&destination=Strandv%C3%A4gen+35,+444+31+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
             </div>
           </div>
@@ -165,7 +181,8 @@
               <div>Tel: 0522-208 10</div>
             </div>
             <div class="qr">
-              <img alt="QR – Vägbeskrivning Laxbutiken" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DLjungs%2BBerg%2B200%252C%2B459%2B93%2BLjungskile">
+              <img alt="QR – Vägbeskrivning Laxbutiken"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DLjungs%2BBerg%2B200%252C%2B459%2B93%2BLjungskile">
               <a href="https://www.google.com/maps/dir/?api=1&destination=Ljungs+Berg+200,+459+93+Ljungskile" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
             </div>
           </div>
@@ -180,7 +197,8 @@
               <div>Tel: 0303-45 99 00</div>
             </div>
             <div class="qr">
-              <img alt="QR – Vägbeskrivning Pizzeria Milano" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStrandplan%2B35%252C%2B444%2B31%2BStenungsund">
+              <img alt="QR – Vägbeskrivning Pizzeria Milano"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStrandplan%2B35%252C%2B444%2B31%2BStenungsund">
               <a href="https://www.google.com/maps/dir/?api=1&destination=Strandplan+35,+444+31+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
             </div>
           </div>
@@ -195,7 +213,8 @@
               <div>Tel: 0303-67 212</div>
             </div>
             <div class="qr">
-              <img alt="QR – Vägbeskrivning Mr Johanssons" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DG%C3%A4rdesv%C3%A4gen%2B1%252C%2B444%2B31%2BStenungsund">
+              <img alt="QR – Vägbeskrivning Mr Johanssons"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DG%C3%A4rdesv%C3%A4gen%2B1%252C%2B444%2B31%2BStenungsund">
               <a href="https://www.google.com/maps/dir/?api=1&destination=G%C3%A4rdesv%C3%A4gen+1,+444+31+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
             </div>
           </div>
@@ -210,7 +229,8 @@
               <div>Tel: 0303-65 48 00</div>
             </div>
             <div class="qr">
-              <img alt="QR – Vägbeskrivning McDonald’s" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStenunge%2BAll%C3%A9%2B1%252C%2B444%2B30%2BStenungsund">
+              <img alt="QR – Vägbeskrivning McDonald’s"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStenunge%2BAll%C3%A9%2B1%252C%2B444%2B30%2BStenungsund">
               <a href="https://www.google.com/maps/dir/?api=1&destination=Stenunge+All%C3%A9+1,+444+30+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
             </div>
           </div>
@@ -238,7 +258,30 @@
       </div>
     </section>
 
-    <!-- 7: Kollektivtrafik -->
+    <!-- 7: Utcheckning (NY SLIDE) -->
+    <section class="slide" data-title="Utcheckning">
+      <div class="cards" style="margin-top:10vh">
+        <div class="card" style="grid-column:span 7">
+          <h2>Utcheckningsinstruktioner</h2>
+          <ul class="center-list">
+            <li>🕐 Utcheckning senast kl <strong>13.00</strong> (om inget annat avtalats)</li>
+            <li>🗝️ Lämna nyckelkortet i plastfickan på kylskåpet eller på bordet</li>
+            <li>👋 Ni behöver <strong>inte</strong> säga till personalen när ni lämnar</li>
+            <li>🧹 Städa gärna av grovt innan avresa</li>
+          </ul>
+        </div>
+        <div class="card" style="grid-column:span 5;display:grid;align-content:center;gap:1.2rem">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center">
+            <div class="icon-lg">⭐</div>
+            <h2>Tack för din vistelse!</h2>
+            <p style="font-size:clamp(16px,2.6vh,28px);margin:0 0 .4em;">Vi blir jätteglada om du lämnar ett omdöme på bokningssidorna.</p>
+            <p style="opacity:.85;font-size:clamp(14px,2.2vh,22px);margin:0">Det hjälper oss och framtida gäster.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8: Kollektivtrafik -->
     <section class="slide" data-title="Kollektivtrafik">
       <div class="cards" style="margin-top:10vh">
         <div class="card">
@@ -247,7 +290,8 @@
             <div class="icon">🚆</div>
             <div>Svenshögen station – mot Göteborg / Uddevalla.</div>
             <div class="qr">
-              <img alt="QR – Karta Svenshögen station" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
+              <img alt="QR – Karta Svenshögen station"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
               <a href="https://www.google.com/maps/search/Svensh%C3%B6gen%20station" target="_blank" rel="noopener">Visa i Maps</a>
             </div>
           </div>
@@ -259,7 +303,8 @@
             <div class="icon">🚌</div>
             <div>Hållplats: <strong>Svenshögens sjukhus</strong> (linje 334).</div>
             <div class="qr">
-              <img alt="QR – Västtrafik reseplanerare" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.vasttrafik.se%2Freseplanering%2F">
+              <img alt="QR – Västtrafik reseplanerare"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.vasttrafik.se%2Freseplanering%2F">
               <a href="https://www.vasttrafik.se/reseplanering/" target="_blank" rel="noopener">Planera resa</a>
             </div>
           </div>
@@ -271,9 +316,11 @@
             <div class="icon">📱</div>
             <div>Västtrafik To Go – köp biljett i appen.</div>
             <div class="qr">
-              <img alt="QR – App Store" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
+              <img alt="QR – App Store"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
               <a href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
-              <img alt="QR – Google Play" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
+              <img alt="QR – Google Play"
+                   src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
               <a href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
             </div>
           </div>
@@ -281,10 +328,11 @@
       </div>
     </section>
 
-    <!-- Progress (7 slides) -->
+    <!-- Progress (8 slides) -->
     <div class="progress" aria-hidden="true">
       <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
-      <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="dot"></span><span class="dot"></span>
     </div>
   </div>
 </div>
@@ -298,12 +346,10 @@
 <script>
   const SLIDE_TIME_MS = 12000;
 
-  // Vänta tills DOM finns så första sliden alltid blir synlig
   window.addEventListener('DOMContentLoaded', () => {
     const slides=[...document.querySelectorAll('.slide')];
     const dots=[...document.querySelectorAll('.dot')];
 
-    // Failsafe: markera första som aktiv om ingen är det
     if (!slides.some(s => s.classList.contains('active')) && slides.length) {
       slides[0].classList.add('active');
       if (dots[0]) dots[0].classList.add('active');
@@ -322,10 +368,8 @@
     }
     function next(){ show((i+1)%slides.length) }
 
-    // Starta rotation
     setInterval(next, SLIDE_TIME_MS);
 
-    // Initiera header-underrubrik
     const small = document.querySelector('.band small');
     small && (small.textContent = slides[i]?.dataset?.title || 'Infoskärm');
   });
