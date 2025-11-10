@@ -31,6 +31,7 @@
     .card{grid-column:span 6;background:rgba(255,255,255,.22);backdrop-filter:blur(16px);border:2px solid rgba(255,255,255,.35);border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.05);padding:3vh 3vw}
     .card h2{margin:.3rem 0 1.2rem;color:var(--marin);font-size:clamp(18px,3vh,34px);text-align:center}
     .card p,.card li{font-size:clamp(16px,2.4vh,26px);line-height:1.35;margin:.2rem 0}
+    .list{display:grid;gap:1.2rem}
 
     /* Välkomstpanel */
     .welcome-panel{background:rgba(255,255,255,.22);backdrop-filter:blur(20px);border-radius:20px;padding:2.5vh 3vw;text-align:center;margin-top:18vh;align-self:center;width:min(900px,92vw)}
@@ -47,29 +48,20 @@
     .item{display:grid;grid-template-columns:80px 1fr 130px;gap:1.2rem;align-items:center}
     .qr img{width:110px;height:110px;border-radius:12px;background:#fff;padding:6px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
     .qr a{display:block;font-size:clamp(12px,1.9vh,18px);margin-top:.4rem}
-    .list{display:grid;gap:1.2rem}
 
     /* Centrerade listor – för Regler/Tillval/Utcheckning */
     .center-list{list-style:none;padding:0;text-align:center;font-size:clamp(18px,2.8vh,32px);line-height:1.5;margin:0}
     .center-list li{margin:.35em 0}
 
-    /* Kollektivtrafik – förbättrade komponenter */
-    .transport-header{display:flex;align-items:center;justify-content:center;gap:1rem;margin:-.4rem 0 1.2rem;}
-    .transport-header .emoji{
-      font-size:clamp(40px,6.4vh,64px);line-height:1;display:grid;place-items:center;width:72px;height:72px;
-      border-radius:18px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(8px);
-    }
-    .btn-row{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:1rem;}
-    .btn{
-      display:inline-flex;align-items:center;gap:.5rem;padding:.7em 1.1em;border-radius:12px;text-decoration:none;
+    /* Kollektivtrafik – diskret styling (påverkar inget annat) */
+    .t-card h2{margin-top:.2rem}
+    .t-buttons{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:1rem}
+    .t-btn{
+      display:inline-flex;align-items:center;gap:.5rem;padding:.6em 1em;border-radius:12px;text-decoration:none;
       border:2px solid rgba(255,255,255,.45);background:rgba(255,255,255,.24);backdrop-filter:blur(10px);
       font-weight:700;font-size:clamp(14px,2.2vh,20px);color:var(--marin);
     }
-    .btn:hover{transform:translateY(-1px)}
-    .qr-stack{display:flex;flex-direction:column;align-items:center;gap:.4rem}
-    .note{text-align:center;opacity:.85;font-size:clamp(13px,2vh,18px);margin-top:1rem}
-    .divider-dots{display:flex;justify-content:center;gap:.35rem;margin:1.2rem 0 .6rem}
-    .divider-dots i{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.2)}
+    .t-btn:hover{transform:translateY(-1px)}
 
     /* Progress */
     .progress{position:absolute;bottom:2.6vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:3}
@@ -150,7 +142,7 @@
       </div>
     </section>
 
-    <!-- 4: Affärer -->
+    <!-- 4: Affärer (oförändrad struktur) -->
     <section class="slide" data-title="Affärer">
       <div class="cards" style="margin-top:10vh">
         <div class="card">
@@ -267,88 +259,62 @@
       </div>
     </section>
 
-    <!-- 8: Kollektivtrafik (förbättrad) -->
+    <!-- 8: Kollektivtrafik (försiktigt förbättrad) -->
     <section class="slide" data-title="Kollektivtrafik">
       <div class="cards" style="margin-top:10vh">
-
         <!-- Tåg -->
-        <div class="card" style="grid-column:span 7">
-          <div class="transport-header">
-            <div class="emoji">🚆</div>
-            <h2 style="margin:0">Tåg – Svenshögen station</h2>
-          </div>
-
+        <div class="card t-card" style="grid-column:span 7">
+          <h2>🚆 Tåg – Svenshögen station</h2>
           <ul class="center-list">
             <li>Mot <strong>Göteborg</strong> och <strong>Uddevalla</strong></li>
             <li>Biljetter i <em>Västtrafik To Go</em></li>
           </ul>
-
-          <div class="btn-row">
-            <a class="btn" href="https://www.google.com/maps/search/Svensh%C3%B6gen%20station" target="_blank" rel="noopener">Visa station i Maps</a>
+          <div class="t-buttons">
+            <a class="t-btn" href="https://www.google.com/maps/search/Svensh%C3%B6gen%20station" target="_blank" rel="noopener">Visa station i Maps</a>
           </div>
-
-          <div class="divider-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-
-          <div class="qr-stack">
+          <div class="qr" style="margin-top:1rem;text-align:center">
             <img alt="QR – Karta Svenshögen station"
                  src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
-            <small>Skanna för att öppna i Maps</small>
+            <div><small>Skanna för att öppna i Maps</small></div>
           </div>
         </div>
 
-        <!-- Buss 334 -->
-        <div class="card" style="grid-column:span 5">
-          <div class="transport-header">
-            <div class="emoji">🚌</div>
-            <h2 style="margin:0">Buss 334 – Svenshögens sjukhus</h2>
-          </div>
-
+        <!-- Buss -->
+        <div class="card t-card" style="grid-column:span 5">
+          <h2>🚌 Buss 334 – Svenshögens sjukhus</h2>
           <ul class="center-list">
             <li>Mot <strong>Stenungsund</strong> / <strong>Ljungskile</strong></li>
             <li>Planera resa i Västtrafik</li>
           </ul>
-
-          <div class="btn-row">
-            <a class="btn" href="https://www.vasttrafik.se/reseplanering/" target="_blank" rel="noopener">Öppna reseplaneraren</a>
+          <div class="t-buttons">
+            <a class="t-btn" href="https://www.vasttrafik.se/reseplanering/" target="_blank" rel="noopener">Öppna reseplaneraren</a>
           </div>
-
-          <div class="divider-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-
-          <div class="qr-stack">
+          <div class="qr" style="margin-top:1rem;text-align:center">
             <img alt="QR – Västtrafik reseplanerare"
                  src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.vasttrafik.se%2Freseplanering%2F">
-            <small>Skanna för reseplanering</small>
+            <div><small>Skanna för reseplanering</small></div>
           </div>
         </div>
 
-        <!-- Appar -->
+        <!-- Appar (oförändrat innehåll men med knappar) -->
         <div class="card" style="grid-column:span 12">
-          <div class="transport-header" style="justify-content:center">
-            <div class="emoji">📱</div>
-            <h2 style="margin:0">Appar – Västtrafik To Go</h2>
+          <h2>📱 Appar – Västtrafik To Go</h2>
+          <div class="t-buttons">
+            <a class="t-btn" href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
+            <a class="t-btn" href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
           </div>
-
-          <div class="btn-row">
-            <a class="btn" href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
-            <a class="btn" href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
-          </div>
-
-          <div class="divider-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-
-          <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;align-items:flex-start;margin-top:.4rem">
-            <div class="qr-stack">
+          <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;align-items:flex-start;margin-top:1rem">
+            <div class="qr" style="text-align:center">
               <img alt="QR – App Store"
                    src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
-              <small>iOS – App Store</small>
+              <div><small>iOS – App Store</small></div>
             </div>
-            <div class="qr-stack">
+            <div class="qr" style="text-align:center">
               <img alt="QR – Google Play"
                    src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
-              <small>Android – Google Play</small>
+              <div><small>Android – Google Play</small></div>
             </div>
           </div>
-
-          <p class="note">Tips: Spara hållplatser och stationer som favoriter i appen för snabbare biljetter.</p>
         </div>
 
       </div>
