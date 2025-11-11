@@ -63,7 +63,7 @@
       mix-blend-mode:multiply; opacity:.42;
     }
 
-    /* Snö i två lager */
+    /* Snö i två lager (hela vykortet) */
     #snow-back, #snow-front{position:absolute; inset:0; z-index:2; pointer-events:none}
     #snow-front{z-index:6}
 
@@ -76,6 +76,11 @@
       overflow:visible;
       border-bottom:6px solid rgba(202,162,74,.35);
     }
+    /* Eget snölager bara i headern (bakom texten) */
+    .snow-header{
+      position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.9;
+    }
+    .band h1, .band small{position:relative; z-index:2}
     .band h1{
       margin:0; font-family:"Cormorant Garamond", serif; font-weight:700; letter-spacing:.5px;
       font-size:clamp(26px,4.2vh,56px); text-shadow:0 1px 0 rgba(0,0,0,.22);
@@ -87,14 +92,14 @@
       -webkit-background-clip:text; background-clip:text; color:#fff;
     }
 
-    /* Girlangzon ligger alltid under texten */
+    /* Girlangzon ligger under texten men ovanpå header-snön */
     .garland-zone{
       position:absolute; left:0; right:0; bottom:0; height:var(--garland-h);
-      display:block; z-index:6; pointer-events:none;
+      display:block; z-index:3; pointer-events:none;
     }
     .garland-zone svg{width:100%; height:100%; display:block; filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}
 
-    /* Ljusslinga – TYDLIGARE blink (större amplitud + glow) */
+    /* Ljusslinga – TYDLIG blink (amplitud + glow) */
     @keyframes twinkleStrong{
       0%, 100% { opacity:.18; transform:scale(.92); }
       45%      { opacity:1;   transform:scale(1.28); }
@@ -103,7 +108,6 @@
       transform-origin:center;
       animation:twinkleStrong 2.2s ease-in-out infinite;
       opacity:.18;
-      /* extra lyster kring lampan */
       filter: drop-shadow(0 0 4px rgba(255,215,130,.85)) drop-shadow(0 0 8px rgba(255,200,90,.55));
     }
     .light.d2{ animation-duration:2.6s; animation-delay:.35s}
@@ -215,6 +219,9 @@
 
       <!-- Header -->
       <div class="band">
+        <!-- Snö endast i headern (bakom text, framför bakgrund) -->
+        <canvas id="snow-header" class="snow-header" aria-hidden="true"></canvas>
+
         <h1>Svenshögens vandrarhem</h1>
         <small id="band-sub">Infoskärm</small>
 
@@ -622,9 +629,9 @@
 </noscript>
 
 <script>
-  const SLIDE_TIME_MS = 12000;
-  const HOLIDAY_MODE   = true;   // slå av snö/”God jul”-text med false
-  const HOLIDAY_LIGHTS = true;   // slå av/på lampornas blink
+  const SLIDE_TIME_MS   = 12000;
+  const HOLIDAY_MODE    = true;   // slå av snö/”God jul”-text med false
+  const HOLIDAY_LIGHTS  = true;   // slå av/på lampornas blink
 
   // Bildspel + bandets underrubrik
   window.addEventListener('DOMContentLoaded', () => {
@@ -672,7 +679,7 @@
     }
   })();
 
-  // YMNINGT SNÖFALL i TVÅ LAGER (högre densitet + lite snabbare)
+  // YMNINGT SNÖFALL i TVÅ LAGER (hela vykortet)
   (function(){
     if (!HOLIDAY_MODE) return;
 
@@ -703,7 +710,6 @@
       front.height = h;
 
       const base = w*h;
-      // Öka densiteten (mer snö) men håll rimlig cap för prestanda
       const nBack  = Math.min(360, Math.floor(base/11000));  // många små i bakgrunden
       const nFront = Math.min(300, Math.floor(base/15000));  // fler och större i förgrunden
       flakesBack  = makeFlakes(nBack, 'back');
@@ -731,6 +737,57 @@
     }
 
     window.addEventListener('resize', resize);
+    resize(); tick();
+  })();
+
+  // EXTRA: Snö endast i headern (tätare & lite snabbare, bakom texten)
+  (function(){
+    if (!HOLIDAY_MODE) return;
+
+    const canvas = document.getElementById('snow-header');
+    const ctx = canvas.getContext('2d');
+    let w, h, flakes = [];
+
+    function makeHeaderFlakes(count){
+      return new Array(count).fill(0).map(()=>({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: 1.2 + Math.random()*2.4,
+        sp: 1.0 + Math.random()*1.4,      // snabbare i header
+        drift: .25 + Math.random()*.55,
+        ph: Math.random()*Math.PI*2,
+        alpha: .85
+      }));
+    }
+
+    function resize(){
+      // storlek enligt headerns faktiska yta
+      w = canvas.width  = canvas.offsetWidth;
+      h = canvas.height = canvas.offsetHeight;
+
+      const base = w*h;
+      const n = Math.min(220, Math.floor(base/1600)); // betydligt tätare per yta
+      flakes = makeHeaderFlakes(n);
+    }
+
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle = 'rgba(255,255,255,1)';
+      for(const f of flakes){
+        f.y += f.sp;
+        f.x += Math.sin(f.ph += 0.012) * f.drift;
+        if (f.y>h+8 || f.x<-8 || f.x>w+8){ f.x=Math.random()*w; f.y=-8; }
+        ctx.globalAlpha = f.alpha;
+        ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(tick);
+    }
+
+    // observera storleksändringar även när bandets höjd ändras på responsivitet
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+
     resize(); tick();
   })();
 </script>
