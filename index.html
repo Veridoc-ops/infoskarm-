@@ -13,10 +13,10 @@
       --falurod:#8b1d15;
       --falurod-deep:#6e150f;
       --gran:#1f6f50;
-      --lin:#f7f3ea;      /* gräddvitt papper */
+      --lin:#f7f3ea;
       --bläck:#222326;
       --accent:#caa24a;
-      --turkos:#2EC7C9;   /* för progressprick */
+      --turkos:#2EC7C9;  /* progress */
       --glass-bg: rgba(255,255,255,.62);
       --stroke: rgba(139,29,21,.18);
     }
@@ -25,7 +25,7 @@
     html,body{height:100%;margin:0;background:var(--lin);color:var(--bläck);
       font-family:"Lora", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
 
-    /* Pappersstruktur + vignette över hela sidan */
+    /* Pappersstruktur + vignette */
     body::before{
       content:""; position:fixed; inset:0; z-index:-2;
       background:
@@ -47,9 +47,8 @@
       position:relative; width:100%; height:100%; border-radius:32px;
       overflow:hidden;
       box-shadow:0 20px 50px rgba(0,0,0,.18), 0 2px 0 rgba(255,255,255,.6) inset;
-      /* synlig bakgrundsbild */
       background:
-        linear-gradient(180deg, rgba(247,243,234,.45), rgba(247,243,234,.35)),
+        linear-gradient(180deg, rgba(247,243,234,.38), rgba(247,243,234,.30)),
         url('bg.jpg') center/cover no-repeat;
     }
 
@@ -58,55 +57,42 @@
       content:""; position:absolute; inset:0; pointer-events:none;
       background:
         radial-gradient(120% 110% at 50% 10%, transparent 60%, rgba(0,0,0,.18) 100%);
-      mix-blend-mode:multiply; opacity:.45;
+      mix-blend-mode:multiply; opacity:.42;
     }
 
-    /* Snöpartiklar */
-    #snow{position:absolute; inset:0; z-index:3; pointer-events:none; opacity:.45}
+    /* Snö i två lager (ymnigt) */
+    #snow-back, #snow-front{position:absolute; inset:0; z-index:2; pointer-events:none}
+    #snow-front{z-index:6} /* över det mesta för djup */
 
-    /* Header – kurvad nedkant, akvarellkänsla med falurött */
+    /* Header – faluröd med girlang (riktig SVG) */
     .band{
       position:absolute; top:0; left:0; right:0; z-index:5; text-align:center; color:#fff;
-      padding:2.6vh 6vw 3.6vh;
+      padding:3.2vh 6vw 3.8vh;
       background:linear-gradient(180deg, var(--falurod), var(--falurod-deep));
       box-shadow:0 10px 30px rgba(0,0,0,.20);
       overflow:visible;
+      border-bottom:6px solid rgba(202,162,74,.35);
     }
-    /* Kurvad bas på bandet via mask */
-    .band::after{
-      content:""; position:absolute; left:0; right:0; bottom:-28px; height:56px;
-      background:
-        radial-gradient(80px 36px at 10% 0, rgba(255,255,255,.95) 60%, transparent 61%),
-        radial-gradient(90px 40px at 32% 0, rgba(255,255,255,.95) 60%, transparent 61%),
-        radial-gradient(110px 46px at 58% 0, rgba(255,255,255,.95) 60%, transparent 61%),
-        radial-gradient(90px 40px at 78% 0, rgba(255,255,255,.95) 60%, transparent 61%),
-        radial-gradient(80px 36px at 94% 0, rgba(255,255,255,.95) 60%, transparent 61%);
-      filter:blur(1px);
-      opacity:.25;
-      pointer-events:none;
-    }
-
     .band h1{
       margin:0; font-family:"Cormorant Garamond", serif; font-weight:700; letter-spacing:.5px;
-      font-size:clamp(26px,4.2vh,56px); text-shadow:0 1px 0 rgba(0,0,0,.2);
+      font-size:clamp(26px,4.2vh,56px); text-shadow:0 1px 0 rgba(0,0,0,.22);
     }
     .band small{
-      display:inline-block; margin-top:.3vh; font-weight:600; letter-spacing:.3px;
-      font-size:clamp(13px,2.1vh,22px); opacity:.95;
+      display:inline-block; margin-top:.35vh; font-weight:600; letter-spacing:.3px;
+      font-size:clamp(13px,2.1vh,22px); opacity:.96;
+      background:linear-gradient(90deg, rgba(255,255,255,.18), rgba(255,255,255,.0), rgba(255,255,255,.18));
+      -webkit-background-clip:text; background-clip:text; color:#fff;
     }
 
-    /* Diskret grankvist-linje */
-    .garland{
-      margin-top:.6vh; display:flex; gap:.8rem; align-items:center; justify-content:center; filter:drop-shadow(0 1px 0 rgba(0,0,0,.15));
+    /* Girlang-behållare (SVG fyller bandets bredd) */
+    .garland-wrap{
+      position:absolute; left:0; right:0; bottom:-6px; height:80px; z-index:6; pointer-events:none;
     }
-    .garland .sprig{
-      width:80px; height:4px; border-radius:2px; background:linear-gradient(90deg, rgba(255,255,255,.6), rgba(255,255,255,.35));
-    }
-    .garland .berry{ width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .garland-wrap svg{width:100%; height:100%; display:block; filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}
 
-    /* Snödrivor längst ned – mjuka former (SVG) */
+    /* Snödrivor längst ned – mjuka former */
     .snow-hills{
-      position:absolute; left:0; right:0; bottom:0; height:18vh; z-index:2; pointer-events:none;
+      position:absolute; left:0; right:0; bottom:0; height:18vh; z-index:1; pointer-events:none;
       background:
         radial-gradient(60% 60% at 20% 140%, rgba(255,255,255,.92) 50%, transparent 51%),
         radial-gradient(70% 70% at 60% 130%, rgba(255,255,255,.95) 50%, transparent 51%),
@@ -114,19 +100,17 @@
       filter:blur(2px);
     }
 
-    /* Slide-lager över snön */
+    /* Slides */
     .slides{position:relative; z-index:4; height:100%}
-
-    /* Slides – mer mjuk rörelse och tyngdpunkt under headern */
     .slide{
-      position:absolute; inset:0; padding:12.5vh 6vw 8vh;
+      position:absolute; inset:0; padding:13.5vh 6vw 8vh;
       display:flex; flex-direction:column; gap:3vh; justify-content:center;
       opacity:0; transform:translateY(8px) scale(.995);
       transition:opacity .7s ease, transform .7s ease;
     }
     .slide.active{opacity:1; transform:translateY(0) scale(1)}
 
-    /* Grid + kort med “postcard” kant */
+    /* Kort & layout */
     .cards{display:grid; grid-template-columns:repeat(12,1fr); gap:2.2vh}
     .card{
       grid-column:span 6; background:var(--glass-bg); backdrop-filter:blur(10px);
@@ -146,7 +130,7 @@
     }
     .card p,.card li{font-size:clamp(16px,2.4vh,26px); line-height:1.5; margin:.1rem 0}
 
-    /* Välkomstpanel – rund “etikett” */
+    /* Välkomstpanel */
     .welcome-panel{
       background:rgba(255,255,255,.75); border:2px solid rgba(31,111,80,.18);
       border-radius:24px; padding:2.4vh 3vw; text-align:center; margin-top:20vh;
@@ -198,16 +182,118 @@
 <div class="app">
   <div class="frame">
     <div class="postcard">
-      <canvas id="snow" aria-hidden="true"></canvas>
+      <!-- SNÖ: bakre & främre lager -->
+      <canvas id="snow-back" aria-hidden="true"></canvas>
 
       <!-- Header -->
       <div class="band">
         <h1>Svenshögens vandrarhem</h1>
         <small id="band-sub">Infoskärm</small>
-        <div class="garland" aria-hidden="true">
-          <span class="sprig"></span><span class="berry"></span><span class="berry"></span><span class="berry"></span><span class="sprig"></span>
+
+        <!-- Realistisk gran­girlang (SVG) -->
+        <div class="garland-wrap" aria-hidden="true">
+          <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <defs>
+              <!-- Nålnyans och highlight -->
+              <linearGradient id="needle" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a7a59"/>
+                <stop offset="100%" stop-color="#16583f"/>
+              </linearGradient>
+              <radialGradient id="baubleRed" cx="35%" cy="35%" r="70%">
+                <stop offset="0%" stop-color="#ff9fa0"/>
+                <stop offset="35%" stop-color="#c72a2e"/>
+                <stop offset="100%" stop-color="#7d1719"/>
+              </radialGradient>
+              <radialGradient id="baubleGold" cx="35%" cy="35%" r="70%">
+                <stop offset="0%" stop-color="#ffe7a8"/>
+                <stop offset="35%" stop-color="#d1a23b"/>
+                <stop offset="100%" stop-color="#8a6a1a"/>
+              </radialGradient>
+              <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="0.6"/>
+              </filter>
+
+              <!-- En barrkvist: gren + många nålar -->
+              <g id="twig">
+                <!-- gren -->
+                <path d="M0 0 L140 0" stroke="#3b2a1a" stroke-width="3" stroke-linecap="round" filter="url(#soft)"/>
+                <!-- nålar (upprepade små streck i olika vinklar) -->
+                <g stroke="url(#needle)" stroke-linecap="round">
+                  <!-- övre sida -->
+                  <line x1="10" y1="0" x2="10" y2="-10" stroke-width="2"/>
+                  <line x1="20" y1="0" x2="22" y2="-13" stroke-width="2"/>
+                  <line x1="30" y1="0" x2="30" y2="-12" stroke-width="2"/>
+                  <line x1="40" y1="0" x2="44" y2="-14" stroke-width="2"/>
+                  <line x1="50" y1="0" x2="51" y2="-12" stroke-width="2"/>
+                  <line x1="60" y1="0" x2="64" y2="-15" stroke-width="2"/>
+                  <line x1="70" y1="0" x2="73" y2="-13" stroke-width="2"/>
+                  <line x1="80" y1="0" x2="82" y2="-12" stroke-width="2"/>
+                  <line x1="90" y1="0" x2="95" y2="-14" stroke-width="2"/>
+                  <line x1="100" y1="0" x2="103" y2="-12" stroke-width="2"/>
+                  <line x1="110" y1="0" x2="114" y2="-13" stroke-width="2"/>
+                  <line x1="120" y1="0" x2="122" y2="-12" stroke-width="2"/>
+                  <line x1="130" y1="0" x2="134" y2="-14" stroke-width="2"/>
+                  <!-- nedre sida -->
+                  <line x1="15" y1="0" x2="17" y2="13" stroke-width="2"/>
+                  <line x1="25" y1="0" x2="25" y2="12" stroke-width="2"/>
+                  <line x1="35" y1="0" x2="38" y2="15" stroke-width="2"/>
+                  <line x1="45" y1="0" x2="47" y2="12" stroke-width="2"/>
+                  <line x1="55" y1="0" x2="58" y2="14" stroke-width="2"/>
+                  <line x1="65" y1="0" x2="68" y2="13" stroke-width="2"/>
+                  <line x1="75" y1="0" x2="76" y2="12" stroke-width="2"/>
+                  <line x1="85" y1="0" x2="89" y2="15" stroke-width="2"/>
+                  <line x1="95" y1="0" x2="97" y2="12" stroke-width="2"/>
+                  <line x1="105" y1="0" x2="109" y2="13" stroke-width="2"/>
+                  <line x1="115" y1="0" x2="118" y2="14" stroke-width="2"/>
+                  <line x1="125" y1="0" x2="127" y2="12" stroke-width="2"/>
+                </g>
+              </g>
+
+              <!-- En klunga med twigs i olika vinklar -->
+              <g id="cluster">
+                <use href="#twig" transform="rotate(-10)"/>
+                <use href="#twig" transform="translate(0,6) rotate(8) scale(0.92)"/>
+                <use href="#twig" transform="translate(8,-4) rotate(-2) scale(0.88)"/>
+                <use href="#twig" transform="translate(-6,4) rotate(16) scale(0.85)"/>
+              </g>
+            </defs>
+
+            <!-- Garlandslinga längs bandets nederkant -->
+            <g transform="translate(20,58)">
+              <!-- repetera kluster över bredden -->
+              <g>
+                <!-- 12–14 kluster, lätt slump i höjd -->
+                <use href="#cluster" transform="translate(0,0)"/>
+                <use href="#cluster" transform="translate(100,4)"/>
+                <use href="#cluster" transform="translate(200,-3)"/>
+                <use href="#cluster" transform="translate(300,2)"/>
+                <use href="#cluster" transform="translate(400,-2)"/>
+                <use href="#cluster" transform="translate(500,3)"/>
+                <use href="#cluster" transform="translate(600,-4)"/>
+                <use href="#cluster" transform="translate(700,2)"/>
+                <use href="#cluster" transform="translate(800,-1)"/>
+                <use href="#cluster" transform="translate(900,3)"/>
+                <use href="#cluster" transform="translate(1000,-2)"/>
+                <use href="#cluster" transform="translate(1100,1)"/>
+              </g>
+
+              <!-- kulor med glans -->
+              <g>
+                <circle cx="140" cy="-6" r="9" fill="url(#baubleGold)"/>
+                <circle cx="280" cy="-4" r="8" fill="url(#baubleRed)"/>
+                <circle cx="420" cy="-7" r="10" fill="url(#baubleGold)"/>
+                <circle cx="560" cy="-5" r="8" fill="url(#baubleRed)"/>
+                <circle cx="700" cy="-6" r="9" fill="url(#baubleGold)"/>
+                <circle cx="840" cy="-4" r="8" fill="url(#baubleRed)"/>
+                <circle cx="980" cy="-6" r="9" fill="url(#baubleGold)"/>
+              </g>
+            </g>
+          </svg>
         </div>
       </div>
+
+      <!-- Främre snö (över headern också) -->
+      <canvas id="snow-front" aria-hidden="true"></canvas>
 
       <!-- Snödrivor i botten -->
       <div class="snow-hills" aria-hidden="true"></div>
@@ -421,7 +507,7 @@
           </div>
         </section>
 
-        <!-- 8: Kollektivtrafik (original struktur) -->
+        <!-- 8: Kollektivtrafik -->
         <section class="slide" data-title="Kollektivtrafik">
           <div class="cards" style="margin-top:10vh">
             <div class="card">
@@ -468,7 +554,7 @@
           </div>
         </section>
 
-        <!-- Progress (8) -->
+        <!-- Progress -->
         <div class="progress" aria-hidden="true">
           <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
           <span class="dot"></span><span class="dot"></span><span class="dot"></span>
@@ -487,7 +573,7 @@
 
 <script>
   const SLIDE_TIME_MS = 12000;
-  const HOLIDAY_MODE = true;
+  const HOLIDAY_MODE = true; // slå av snö/”God jul”-text med false
 
   // Bildspel + bandets underrubrik
   window.addEventListener('DOMContentLoaded', () => {
@@ -530,36 +616,68 @@
     }
   })();
 
-  // Mjuk snö (respekt för prestanda)
+  // YMNINGT SNÖFALL i TVÅ LAGER (prestandaoptimerat)
   (function(){
     if (!HOLIDAY_MODE) return;
-    const canvas = document.getElementById('snow');
-    const ctx = canvas.getContext('2d');
-    let w,h,flakes;
 
-    function resize(){
-      w = canvas.width = canvas.offsetWidth;
-      h = canvas.height = canvas.offsetHeight;
-      const count = Math.min(120, Math.floor(w*h/22000));
-      flakes = new Array(count).fill(0).map(()=>({
+    const back = document.getElementById('snow-back');
+    const front = document.getElementById('snow-front');
+    const ctxB = back.getContext('2d');
+    const ctxF = front.getContext('2d');
+
+    let w, h, flakesBack = [], flakesFront = [];
+
+    function makeFlakes(count, depth){
+      const arr = new Array(count).fill(0).map(()=>({
         x: Math.random()*w,
         y: Math.random()*h,
-        r: 1 + Math.random()*2.2,
-        sp: .35 + Math.random()*.75,
-        drift: .15 + Math.random()*.35,
-        ph: Math.random()*Math.PI*2
+        r: depth==='back' ? (1 + Math.random()*1.6) : (1.4 + Math.random()*3.2),
+        sp: depth==='back' ? (.25 + Math.random()*.55) : (.7 + Math.random()*1.2),
+        drift: depth==='back' ? (.12 + Math.random()*.28) : (.2 + Math.random()*.45),
+        ph: Math.random()*Math.PI*2,
+        alpha: depth==='back' ? (.5 + Math.random()*.25) : (.75 + Math.random()*.25)
       }));
+      return arr;
     }
-    function tick(){
+
+    function resize(){
+      w = back.width  = back.offsetWidth;
+      h = back.height = back.offsetHeight;
+      front.width  = w;
+      front.height = h;
+
+      // Skala mängden snö efter yta
+      const base = w*h;
+      const nBack = Math.min(220, Math.floor(base/18000));   // många små i bakgrunden
+      const nFront = Math.min(180, Math.floor(base/26000));  // färre men större i förgrund
+      flakesBack  = makeFlakes(nBack, 'back');
+      flakesFront = makeFlakes(nFront, 'front');
+    }
+
+    function drawLayer(ctx, arr){
       ctx.clearRect(0,0,w,h);
-      ctx.fillStyle='rgba(255,255,255,0.95)';
-      for (const f of flakes){
-        f.y += f.sp; f.x += Math.sin(f.ph += 0.010)*f.drift;
-        if (f.y>h+8 || f.x<-8 || f.x>w+8){ f.x=Math.random()*w; f.y=-8; }
-        ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill();
+      for (const f of arr){
+        f.y += f.sp;
+        f.x += Math.sin(f.ph += 0.010) * f.drift;
+        if (f.y>h+10 || f.x<-10 || f.x>w+10){
+          f.x = Math.random()*w; f.y = -10;
+        }
+        ctx.globalAlpha = f.alpha;
+        ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI*2); ctx.fill();
       }
+      ctx.globalAlpha = 1;
+    }
+
+    function tick(){
+      // bakre: lite “kyligare” ton
+      ctxB.fillStyle = 'rgba(255,255,255,0.92)';
+      drawLayer(ctxB, flakesBack);
+      // främre: helt vit för närhet
+      ctxF.fillStyle = 'rgba(255,255,255,1)';
+      drawLayer(ctxF, flakesFront);
       requestAnimationFrame(tick);
     }
+
     window.addEventListener('resize', resize);
     resize(); tick();
   })();
