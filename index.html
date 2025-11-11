@@ -5,26 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Svenshögens vandrarhem – Info</title>
   <style>
-    :root{ --turkos:#2EC7C9; --marin:#003049; --gul:#FECB2F; --text:#0a0a0a; }
+    :root{
+      --turkos:#2EC7C9; --marin:#003049; --gul:#FECB2F; --text:#0a0a0a;
+      --jul-röd:#C81E1E; --jul-grön:#0F8A5F;
+    }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text)}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);}
+
     .app{height:100%;display:grid;place-items:center}
     .frame{position:relative;width:100vw;height:100vh;overflow:hidden}
+
+    /* Bakgrund */
     .frame::before{content:"";position:absolute;inset:0;background:url('bg.jpg') center/cover no-repeat;transform:scale(1.02);z-index:0}
     .frame::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.15);z-index:1}
 
-    /* Slides */
-    .slide{position:absolute;inset:0;padding:7vh 6vw;display:flex;flex-direction:column;gap:3vh;justify-content:center;opacity:0;transform:scale(1.01);transition:opacity .8s,transform .8s;background:transparent;z-index:2}
+    /* SNÖ – canvasoverlay */
+    #snow{
+      position:absolute;inset:0;z-index:2;pointer-events:none;
+      opacity:.9; /* lite mjukare */
+    }
+
+    /* Slides (lyft z-index över snön) */
+    .slide{position:absolute;inset:0;padding:7vh 6vw;display:flex;flex-direction:column;gap:3vh;justify-content:center;opacity:0;transform:scale(1.01);transition:opacity .8s,transform .8s;background:transparent;z-index:3}
     .slide.active{opacity:1;transform:scale(1)}
 
-    /* Headerband */
+    /* Headerband – extra julaccent */
     .band{
-      position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,var(--marin),var(--turkos));
-      color:#fff;padding:2.6vh 6vw;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35vh;z-index:3;text-align:center
+      position:absolute;top:0;left:0;right:0;
+      background:linear-gradient(90deg,var(--marin),var(--turkos));
+      color:#fff;padding:2.6vh 6vw;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35vh;z-index:4;text-align:center
     }
     .band h1,.band small{margin:0;font-family:inherit;letter-spacing:.3px}
     .band h1{font-weight:800;font-size:clamp(22px,3.8vh,48px)}
     .band small{font-weight:700;font-size:clamp(14px,2.2vh,22px);opacity:.96}
+
+    /* Liten “girlang”-skugga under bandet för julkänsla */
+    .band::after{
+      content:"";
+      position:absolute;left:0;right:0;bottom:-8px;height:8px;
+      background:linear-gradient(90deg,rgba(200,30,30,.35),rgba(15,138,95,.35),rgba(200,30,30,.35));
+      filter:blur(6px);
+    }
 
     /* Kort & layout */
     .cards{display:grid;grid-template-columns:repeat(12,1fr);gap:2.2vh}
@@ -53,10 +75,10 @@
     .center-list{list-style:none;padding:0;text-align:center;font-size:clamp(18px,2.8vh,32px);line-height:1.5;margin:0}
     .center-list li{margin:.35em 0}
 
-    /* Progress */
-    .progress{position:absolute;bottom:2.6vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:3}
+    /* Progress – liten julglow på aktiv prick */
+    .progress{position:absolute;bottom:2.6vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:4}
     .dot{width:12px;height:12px;border-radius:50%;background:#cbd5e1}
-    .dot.active{background:var(--turkos);box-shadow:0 0 0 6px rgba(46,199,201,.18)}
+    .dot.active{background:var(--turkos);box-shadow:0 0 0 6px rgba(46,199,201,.18), 0 0 12px rgba(200,30,30,.25)}
 
     @media(max-width:1200px){.mini-grid{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:800px){
@@ -69,13 +91,16 @@
 <body>
 <div class="app">
   <div class="frame">
+    <!-- SNÖ-canvas -->
+    <canvas id="snow"></canvas>
+
     <div class="band">
       <h1>Svenshögens vandrarhem</h1>
       <small>Infoskärm</small>
     </div>
 
     <!-- 1: Välkommen -->
-    <section class="slide active" data-title="Välkommen">
+    <section class="slide active" data-title="Välkommen ❄️">
       <div class="welcome-panel">
         <p style="font-size:clamp(32px,6vh,70px);color:var(--marin);font-weight:800;margin:0;">Välkommen</p>
         <p style="font-size:clamp(20px,3.8vh,45px);margin-top:1vh">Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ</p>
@@ -169,7 +194,7 @@
       </div>
     </section>
 
-    <!-- 5: Restauranger (FYRA kort – inklusive Mr Johanssons & McDonald’s) -->
+    <!-- 5: Restauranger (4 kort inkl. Mr Johanssons & McDonald's) -->
     <section class="slide" data-title="Restauranger">
       <div class="cards" style="margin-top:8vh">
         <div class="card">
@@ -258,7 +283,7 @@
       </div>
     </section>
 
-    <!-- 7: Utcheckning (NY) -->
+    <!-- 7: Utcheckning -->
     <section class="slide" data-title="Utcheckning">
       <div class="cards" style="margin-top:10vh">
         <div class="card" style="grid-column:span 7">
@@ -281,7 +306,7 @@
       </div>
     </section>
 
-    <!-- 8: Kollektivtrafik (ORIGINAL STRUKTUR) -->
+    <!-- 8: Kollektivtrafik (original struktur) -->
     <section class="slide" data-title="Kollektivtrafik">
       <div class="cards" style="margin-top:10vh">
         <div class="card">
@@ -345,7 +370,9 @@
 
 <script>
   const SLIDE_TIME_MS = 12000;
+  const HOLIDAY_MODE = true; // slå av/på julaccent om ni vill
 
+  // Slides + header-undertext
   window.addEventListener('DOMContentLoaded', () => {
     const slides=[...document.querySelectorAll('.slide')];
     const dots=[...document.querySelectorAll('.dot')];
@@ -358,20 +385,25 @@
     let i = slides.findIndex(s => s.classList.contains('active'));
     if (i < 0) i = 0;
 
+    function headerText(){
+      const title = slides[i]?.dataset?.title || 'Infoskärm';
+      if (HOLIDAY_MODE) return `🎄 ${title} • God jul!`;
+      return title;
+    }
+
     function show(n){
       slides.forEach((s,x)=>s.classList.toggle('active',x===n));
       dots.forEach((d,x)=>d.classList.toggle('active',x===n));
       i=n;
-      const title = slides[i]?.dataset?.title || 'Infoskärm';
       const small = document.querySelector('.band small');
-      if (small) small.textContent = title;
+      if (small) small.textContent = headerText();
     }
     function next(){ show((i+1)%slides.length) }
 
     setInterval(next, SLIDE_TIME_MS);
 
     const small = document.querySelector('.band small');
-    small && (small.textContent = slides[i]?.dataset?.title || 'Infoskärm');
+    small && (small.textContent = headerText());
   });
 
   // Väder (Open-Meteo)
@@ -388,6 +420,57 @@
       const el=document.getElementById('weather-card');
       el && el.insertAdjacentHTML('beforeend','<p>Kunde inte hämta väder just nu.</p>');
     }
+  })();
+
+  // FALLANDE SNÖ – lätt & skonsam
+  (function(){
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+    let w, h, flakes;
+
+    function resize(){
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      const count = Math.min(180, Math.floor(w*h/12000)); // skalar efter yta
+      flakes = new Array(count).fill(0).map(()=>newFlake());
+    }
+
+    function newFlake(){
+      return {
+        x: Math.random()*w,
+        y: Math.random()*-h,
+        r: 1.2 + Math.random()*2.6,        // radie
+        sp: 0.6 + Math.random()*1.1,       // fallhastighet
+        drift: (Math.random()*0.6)+0.2,    // sidodrift
+        phase: Math.random()*Math.PI*2
+      };
+    }
+
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      for (let f of flakes){
+        f.y += f.sp;
+        f.x += Math.sin(f.phase += 0.015) * f.drift;
+        if (f.y > h + 10 || f.x < -10 || f.x > w+10){
+          // återställ flingan högst upp
+          f.x = Math.random()*w;
+          f.y = -10;
+          f.r = 1.2 + Math.random()*2.6;
+          f.sp = 0.6 + Math.random()*1.1;
+          f.drift = (Math.random()*0.6)+0.2;
+          f.phase = Math.random()*Math.PI*2;
+        }
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    tick();
   })();
 </script>
 </body>
