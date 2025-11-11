@@ -112,7 +112,7 @@
     }
     .garland-zone svg{width:100%; height:100%; display:block; filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}
 
-    /* === NY BLINKANDE ANIMATION (utan flyt) === */
+    /* === BLINKANDE ANIMATION (utan flyt) === */
     @keyframes blinkGlow{
       0%, 100% { opacity:.22; }
       42%      { opacity:1;   }
@@ -120,10 +120,8 @@
       58%      { opacity:1;   }
     }
     .light{
-      /* Ingen transform alls -> ingen "svävning" */
       animation:blinkGlow 2.2s ease-in-out infinite;
       opacity:.22;
-      /* varm glow som inte rör sig */
       filter: drop-shadow(0 0 4px rgba(255,215,130,.85)) drop-shadow(0 0 8px rgba(255,200,90,.55));
     }
     .light.d2{ animation-duration:2.6s; animation-delay:.35s}
@@ -239,7 +237,8 @@
         <canvas id="snow-header" class="snow-header" aria-hidden="true"></canvas>
 
         <h1>Svenshögens vandrarhem</h1>
-        <small id="band-sub">Infoskärm</small>
+        <!-- Fast text: endast 'God jul' -->
+        <small id="band-sub">God jul</small>
 
         <!-- Girlang under text – täcker aldrig texten -->
         <div class="garland-zone" aria-hidden="true">
@@ -646,10 +645,10 @@
 
 <script>
   const SLIDE_TIME_MS   = 12000;
-  const HOLIDAY_MODE    = true;   // av/på snö/”God jul”-text
+  const HOLIDAY_MODE    = true;   // av/på snö
   const HOLIDAY_LIGHTS  = true;   // av/på lampornas blink
 
-  // Bildspel + bandets underrubrik
+  // Bildspel (ingen uppdatering av headertext längre)
   window.addEventListener('DOMContentLoaded', () => {
     const slides=[...document.querySelectorAll('.slide')];
     const dots=[...document.querySelectorAll('.dot')];
@@ -661,17 +660,12 @@
     let i = slides.findIndex(s => s.classList.contains('active'));
     if (i < 0) i = 0;
 
-    function subText(){
-      const title = slides[i]?.dataset?.title || 'Infoskärm';
-      return HOLIDAY_MODE ? `${title} • God jul` : title;
-    }
     function show(n){
       slides.forEach((s,x)=>s.classList.toggle('active',x===n));
       dots.forEach((d,x)=>d.classList.toggle('active',x===n));
-      i=n; const sub=document.getElementById('band-sub'); if(sub) sub.textContent=subText();
+      i=n;
     }
     setInterval(()=>show((i+1)%slides.length), SLIDE_TIME_MS);
-    const sub=document.getElementById('band-sub'); if(sub) sub.textContent=subText();
 
     if (!HOLIDAY_LIGHTS){
       document.querySelectorAll('.light').forEach(el => el.style.animation = 'none');
@@ -684,7 +678,10 @@
       const lat=58.15, lon=11.94;
       const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
       const j=await r.json(), c=j.current_weather;
-      const codeMap={0:"Klar himmel ☀️",1:"Mest klart 🌤️",2:"Växlande moln ⛅",3:"Mulet ☁️",45:"Dimma 🌫️",48:"Dimma 🌫️",51:"Duggregn 🌦️",53:"Duggregn 🌦️",55:"Duggregn 🌦️",61:"Regn 🌧️",63:"Regn 🌧️",65:"Regn 🌧️",71:"Snö ❄️",73:"Snö ❄️",75:"Snö ❄️",80:"Skurar 🌦️",81:"Skurar 🌦️",82:"Skurar 🌦️",95:"Åska ⛈️",96:"Åska ⛈️",99:"Åska ⛈️"};
+      const codeMap={0:"Klar himmel ☀️",1:"Mest klart 🌤️",2:"Växlande moln ⛅",3:"Mulet ☁️",45:"Dimma 🌫️",48:"Dimma 🌫️",
+        51:"Duggregn 🌦️",53:"Duggregn 🌦️",55:"Duggregn 🌦️",61:"Regn 🌧️",63:"Regn 🌧️",65:"Regn 🌧️",
+        71:"Snö ❄️",73:"Snö ❄️",75:"Snö ❄️",80:"Skurar 🌦️",81:"Skurar 🌦️",82:"Skurar 🌦️",
+        95:"Åska ⛈️",96:"Åska ⛈️",99:"Åska ⛈️"};
       document.getElementById('w-temp').textContent=`Temperatur: ${Math.round(c.temperature)}°C`;
       document.getElementById('w-wind').textContent=`Vind: ${Math.round(c.windspeed)} m/s`;
       document.getElementById('w-code').textContent=`Väder: ${codeMap[c.weathercode]||'—'}`;
