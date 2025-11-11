@@ -612,4 +612,204 @@
               <h2>Kollektivtrafik – App</h2>
               <div class="item">
                 <div class="icon">📱</div>
-                <div>Västtrafik To Go –
+                <div>Västtrafik To Go – köp biljett i appen.</div>
+                <div class="qr">
+                  <img alt="QR – App Store"
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
+                  <a href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
+                  <img alt="QR – Google Play"
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
+                  <a href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progress -->
+        <div class="progress" aria-hidden="true">
+          <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<noscript>
+  <div style="position:fixed;inset:0;background:#fff;color:#000;display:grid;place-items:center;font:16px/1.4 system-ui;padding:2rem;">
+    JavaScript krävs för att visa infoskärmen. Slå på JavaScript i webbläsaren.
+  </div>
+</noscript>
+
+<script>
+  const SLIDE_TIME_MS   = 12000;
+  const HOLIDAY_MODE    = true;   // av/på snö
+  const HOLIDAY_LIGHTS  = true;   // av/på lampornas blink
+
+  // Bildspel (headern använder inte längre sidrubriker)
+  window.addEventListener('DOMContentLoaded', () => {
+    const slides=[...document.querySelectorAll('.slide')];
+    const dots=[...document.querySelectorAll('.dot')];
+
+    if (!slides.some(s => s.classList.contains('active')) && slides.length){
+      slides[0].classList.add('active');
+      if (dots[0]) dots[0].classList.add('active');
+    }
+    let i = slides.findIndex(s => s.classList.contains('active'));
+    if (i < 0) i = 0;
+
+    function show(n){
+      slides.forEach((s,x)=>s.classList.toggle('active',x===n));
+      dots.forEach((d,x)=>d.classList.toggle('active',x===n));
+      i=n;
+    }
+    setInterval(()=>show((i+1)%slides.length), SLIDE_TIME_MS);
+
+    // Säsongstext i headern (ingen sidtitel visas)
+    const el = document.getElementById('band-sub');
+    if (el){
+      const now = new Date();               // körs i gästernas webbläsare
+      const m = now.getMonth()+1;           // 1..12
+      const d = now.getDate();              // 1..31
+      // Visa "God jul & gott nytt år" mellan 25 dec och 6 jan (inklusive)
+      const isXmasToEpiphany =
+        (m === 12 && d >= 25) || (m === 1 && d <= 6);
+      el.textContent = isXmasToEpiphany ? "God jul & gott nytt år" : "God jul";
+    }
+
+    if (!HOLIDAY_LIGHTS){
+      document.querySelectorAll('.light').forEach(el => el.style.animation = 'none');
+    }
+  });
+
+  // Väder (Open-Meteo)
+  (async function(){
+    try{
+      const lat=58.15, lon=11.94;
+      const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+      const j=await r.json(), c=j.current_weather;
+      const codeMap={0:"Klar himmel ☀️",1:"Mest klart 🌤️",2:"Växlande moln ⛅",3:"Mulet ☁️",45:"Dimma 🌫️",48:"Dimma 🌫️",
+        51:"Duggregn 🌦️",53:"Duggregn 🌦️",55:"Duggregn 🌦️",61:"Regn 🌧️",63:"Regn 🌧️",65:"Regn 🌧️",
+        71:"Snö ❄️",73:"Snö ❄️",75:"Snö ❄️",80:"Skurar 🌦️",81:"Skurar 🌦️",82:"Skurar 🌦️",
+        95:"Åska ⛈️",96:"Åska ⛈️",99:"Åska ⛈️"};
+      document.getElementById('w-temp').textContent=`Temperatur: ${Math.round(c.temperature)}°C`;
+      document.getElementById('w-wind').textContent=`Vind: ${Math.round(c.windspeed)} m/s`;
+      document.getElementById('w-code').textContent=`Väder: ${codeMap[c.weathercode]||'—'}`;
+    }catch(e){
+      const el=document.getElementById('weather-card');
+      el && el.insertAdjacentHTML('beforeend','<p>Kunde inte hämta väder just nu.</p>');
+    }
+  })();
+
+  // YMNINGT SNÖFALL i TVÅ LAGER (hela vykortet)
+  (function(){
+    if (!HOLIDAY_MODE) return;
+
+    const back = document.getElementById('snow-back');
+    const front = document.getElementById('snow-front');
+    const ctxB = back.getContext('2d');
+    const ctxF = front.getContext('2d');
+
+    let w, h, flakesBack = [], flakesFront = [];
+
+    function makeFlakes(count, depth){
+      const arr = new Array(count).fill(0).map(()=>({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: depth==='back' ? (1 + Math.random()*1.7) : (1.6 + Math.random()*3.4),
+        sp: depth==='back' ? (.35 + Math.random()*.65) : (.9 + Math.random()*1.35),
+        drift: depth==='back' ? (.14 + Math.random()*.32) : (.24 + Math.random()*.5),
+        ph: Math.random()*Math.PI*2,
+        alpha: depth==='back' ? (.55 + Math.random()*.25) : (.8 + Math.random()*.2)
+      }));
+      return arr;
+    }
+
+    function resize(){
+      w = back.width  = back.offsetWidth;
+      h = back.height = back.offsetHeight;
+      front.width  = w;
+      front.height = h;
+
+      const base = w*h;
+      const nBack  = Math.min(360, Math.floor(base/11000));  // små i bakgrund
+      const nFront = Math.min(300, Math.floor(base/15000));  // fler i förgrund
+      flakesBack  = makeFlakes(nBack, 'back');
+      flakesFront = makeFlakes(nFront, 'front');
+    }
+
+    function drawLayer(ctx, arr){
+      ctx.clearRect(0,0,w,h);
+      for (const f of arr){
+        f.y += f.sp;
+        f.x += Math.sin(f.ph += 0.010) * f.drift;
+        if (f.y>h+10 || f.x<-10 || f.x>w+10){
+          f.x = Math.random()*w; f.y = -10;
+        }
+        ctx.globalAlpha = f.alpha;
+        ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI*2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function tick(){
+      ctxB.fillStyle = 'rgba(255,255,255,0.92)'; drawLayer(ctxB, flakesBack);
+      ctxF.fillStyle = 'rgba(255,255,255,1)';    drawLayer(ctxF, flakesFront);
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('resize', resize);
+    resize(); tick();
+  })();
+
+  // Extra: snö endast i headern (tätare & lite snabbare)
+  (function(){
+    const HOLIDAY_MODE = true;
+    if (!HOLIDAY_MODE) return;
+
+    const canvas = document.getElementById('snow-header');
+    const ctx = canvas.getContext('2d');
+    let w, h, flakes = [];
+
+    function makeHeaderFlakes(count){
+      return new Array(count).fill(0).map(()=>({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: 1.2 + Math.random()*2.4,
+        sp: 1.0 + Math.random()*1.4,
+        drift: .25 + Math.random()*.55,
+        ph: Math.random()*Math.PI*2,
+        alpha: .9
+      }));
+    }
+
+    function resize(){
+      w = canvas.width  = canvas.offsetWidth;
+      h = canvas.height = canvas.offsetHeight;
+      const base = w*h;
+      const n = Math.min(240, Math.floor(base/1500));
+      flakes = makeHeaderFlakes(n);
+    }
+
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle = '#fff';
+      for(const f of flakes){
+        f.y += f.sp;
+        f.x += Math.sin(f.ph += 0.012) * f.drift;
+        if (f.y>h+8 || f.x<-8 || f.x>w+8){ f.x=Math.random()*w; f.y=-8; }
+        ctx.globalAlpha = f.alpha;
+        ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(tick);
+    }
+
+    new ResizeObserver(resize).observe(canvas);
+    resize(); tick();
+  })();
+</script>
+</body>
+</html>
