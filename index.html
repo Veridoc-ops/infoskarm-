@@ -94,17 +94,25 @@
     }
     .garland-zone svg{width:100%; height:100%; display:block; filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}
 
-    /* Ljusslinga – animation */
-    @keyframes twinkle{
-      0%, 100%{ opacity: .25; }
-      50%{ opacity: 1; }
+    /* Ljusslinga – TYDLIGARE blink (större amplitud + glow) */
+    @keyframes twinkleStrong{
+      0%, 100% { opacity:.18; transform:scale(.92); }
+      45%      { opacity:1;   transform:scale(1.28); }
     }
-    .light{ transform-origin:center; animation:twinkle 2.8s ease-in-out infinite; }
-    .light.d2{ animation-duration:3.2s; animation-delay:.4s}
-    .light.d3{ animation-duration:2.6s; animation-delay:.8s}
-    .light.d4{ animation-duration:3.4s; animation-delay:1.1s}
-    .light.d5{ animation-duration:2.9s; animation-delay:1.5s}
-    .light.d6{ animation-duration:3.1s; animation-delay:1.9s}
+    .light{
+      transform-origin:center;
+      animation:twinkleStrong 2.2s ease-in-out infinite;
+      opacity:.18;
+      /* extra lyster kring lampan */
+      filter: drop-shadow(0 0 4px rgba(255,215,130,.85)) drop-shadow(0 0 8px rgba(255,200,90,.55));
+    }
+    .light.d2{ animation-duration:2.6s; animation-delay:.35s}
+    .light.d3{ animation-duration:2.0s; animation-delay:.7s}
+    .light.d4{ animation-duration:2.8s; animation-delay:1.0s}
+    .light.d5{ animation-duration:2.1s; animation-delay:1.35s}
+    .light.d6{ animation-duration:2.5s; animation-delay:1.7s}
+    .light.d7{ animation-duration:2.3s; animation-delay:2.0s}
+    .light.d8{ animation-duration:2.9s; animation-delay:.15s}
 
     /* Snödrivor längst ned – mjuka former */
     .snow-hills{
@@ -281,7 +289,7 @@
               </g>
             </defs>
 
-            <!-- Släpa kvistar över bredden -->
+            <!-- Släta kvistar över bredden -->
             <g transform="translate(20,58)">
               <g>
                 <use href="#cluster" transform="translate(0,0)"/>
@@ -309,20 +317,25 @@
                 <circle cx="980" cy="-6" r="9" fill="url(#baubleGold)"/>
               </g>
 
-              <!-- Ljusslinga (blinkar mjukt) -->
+              <!-- Ljusslinga (tydlig blink + glow) -->
               <g class="lights">
-                <!-- Varma lampor med olika storlek & delay-klasser -->
-                <circle class="light"  cx="70"   cy="-2" r="5.2" fill="url(#lampWarm)"/>
-                <circle class="light d2" cx="170"  cy="-5" r="4.6" fill="url(#lampWarm)"/>
-                <circle class="light d3" cx="250"  cy="-3" r="5.0" fill="url(#lampWarm)"/>
-                <circle class="light d4" cx="350"  cy="-6" r="4.8" fill="url(#lampWarm)"/>
-                <circle class="light d5" cx="460"  cy="-4" r="5.4" fill="url(#lampWarm)"/>
-                <circle class="light d6" cx="570"  cy="-6" r="4.7" fill="url(#lampWarm)"/>
-                <circle class="light"  cx="650"  cy="-3" r="5.1" fill="url(#lampWarm)"/>
-                <circle class="light d2" cx="760"  cy="-6" r="4.9" fill="url(#lampWarm)"/>
-                <circle class="light d3" cx="860"  cy="-4" r="5.3" fill="url(#lampWarm)"/>
-                <circle class="light d4" cx="950"  cy="-6" r="4.6" fill="url(#lampWarm)"/>
-                <circle class="light d5" cx="1060" cy="-3" r="5.2" fill="url(#lampWarm)"/>
+                <circle class="light"   cx="70"   cy="-2" r="5.2" fill="url(#lampWarm)"/>
+                <circle class="light d2" cx="130"  cy="-6" r="4.8" fill="url(#lampWarm)"/>
+                <circle class="light d3" cx="190"  cy="-3" r="5.1" fill="url(#lampWarm)"/>
+                <circle class="light d4" cx="250"  cy="-6" r="4.9" fill="url(#lampWarm)"/>
+                <circle class="light d5" cx="310"  cy="-4" r="5.4" fill="url(#lampWarm)"/>
+                <circle class="light d6" cx="370"  cy="-6" r="4.7" fill="url(#lampWarm)"/>
+                <circle class="light d7" cx="430"  cy="-3" r="5.3" fill="url(#lampWarm)"/>
+                <circle class="light d8" cx="490"  cy="-6" r="4.9" fill="url(#lampWarm)"/>
+                <circle class="light d2" cx="550"  cy="-4" r="5.5" fill="url(#lampWarm)"/>
+                <circle class="light d3" cx="610"  cy="-6" r="4.8" fill="url(#lampWarm)"/>
+                <circle class="light d4" cx="670"  cy="-3" r="5.2" fill="url(#lampWarm)"/>
+                <circle class="light d5" cx="730"  cy="-6" r="4.7" fill="url(#lampWarm)"/>
+                <circle class="light d6" cx="790"  cy="-4" r="5.3" fill="url(#lampWarm)"/>
+                <circle class="light d7" cx="860"  cy="-6" r="4.9" fill="url(#lampWarm)"/>
+                <circle class="light d8" cx="930"  cy="-3" r="5.4" fill="url(#lampWarm)"/>
+                <circle class="light d2" cx="1000" cy="-6" r="4.8" fill="url(#lampWarm)"/>
+                <circle class="light d3" cx="1070" cy="-4" r="5.2" fill="url(#lampWarm)"/>
               </g>
             </g>
           </svg>
@@ -610,7 +623,7 @@
 
 <script>
   const SLIDE_TIME_MS = 12000;
-  const HOLIDAY_MODE = true;     // slå av snö/”God jul”-text med false
+  const HOLIDAY_MODE   = true;   // slå av snö/”God jul”-text med false
   const HOLIDAY_LIGHTS = true;   // slå av/på lampornas blink
 
   // Bildspel + bandets underrubrik
@@ -659,7 +672,7 @@
     }
   })();
 
-  // YMNINGT SNÖFALL i TVÅ LAGER (prestandaoptimerat)
+  // YMNINGT SNÖFALL i TVÅ LAGER (högre densitet + lite snabbare)
   (function(){
     if (!HOLIDAY_MODE) return;
 
@@ -674,11 +687,11 @@
       const arr = new Array(count).fill(0).map(()=>({
         x: Math.random()*w,
         y: Math.random()*h,
-        r: depth==='back' ? (1 + Math.random()*1.6) : (1.4 + Math.random()*3.2),
-        sp: depth==='back' ? (.25 + Math.random()*.55) : (.7 + Math.random()*1.2),
-        drift: depth==='back' ? (.12 + Math.random()*.28) : (.2 + Math.random()*.45),
+        r: depth==='back' ? (1 + Math.random()*1.7) : (1.6 + Math.random()*3.4),
+        sp: depth==='back' ? (.35 + Math.random()*.65) : (.9 + Math.random()*1.35),
+        drift: depth==='back' ? (.14 + Math.random()*.32) : (.24 + Math.random()*.5),
         ph: Math.random()*Math.PI*2,
-        alpha: depth==='back' ? (.5 + Math.random()*.25) : (.75 + Math.random()*.25)
+        alpha: depth==='back' ? (.55 + Math.random()*.25) : (.8 + Math.random()*.2)
       }));
       return arr;
     }
@@ -690,8 +703,9 @@
       front.height = h;
 
       const base = w*h;
-      const nBack = Math.min(260, Math.floor(base/16000));   // många små i bakgrunden
-      const nFront = Math.min(210, Math.floor(base/24000));  // färre men större i förgrund
+      // Öka densiteten (mer snö) men håll rimlig cap för prestanda
+      const nBack  = Math.min(360, Math.floor(base/11000));  // många små i bakgrunden
+      const nFront = Math.min(300, Math.floor(base/15000));  // fler och större i förgrunden
       flakesBack  = makeFlakes(nBack, 'back');
       flakesFront = makeFlakes(nFront, 'front');
     }
@@ -711,10 +725,8 @@
     }
 
     function tick(){
-      ctxB.fillStyle = 'rgba(255,255,255,0.92)';
-      drawLayer(ctxB, flakesBack);
-      ctxF.fillStyle = 'rgba(255,255,255,1)';
-      drawLayer(ctxF, flakesFront);
+      ctxB.fillStyle = 'rgba(255,255,255,0.92)'; drawLayer(ctxB, flakesBack);
+      ctxF.fillStyle = 'rgba(255,255,255,1)';    drawLayer(ctxF, flakesFront);
       requestAnimationFrame(tick);
     }
 
