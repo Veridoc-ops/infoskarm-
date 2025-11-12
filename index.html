@@ -20,11 +20,12 @@
       --stroke: rgba(139,29,21,.18);
       --header-art:url('https://upload.wikimedia.org/wikipedia/commons/0/0a/Julaftonen_av_Carl_Larsson_1904.jpg');
 
-      /* sätts dynamiskt i JS */
-      --padTop: 200px;
+      /* sätts i JS utifrån headerns faktiska höjd */
+      --padTop: 160px;
 
-      --garland-h: 80px;
-      --garland-gap: 8px;
+      /* MINDRE header */
+      --garland-h: 56px;        /* var ~80 */
+      --garland-gap: 6px;       /* var 8  */
     }
 
     *{box-sizing:border-box}
@@ -44,16 +45,16 @@
     .app{height:100%;display:grid;place-items:center}
     .frame{
       position:relative; width:100vw; height:100vh; overflow:hidden;
-      padding:3vh 3vw;  /* safe frame */
+      padding:2.4vh 2.4vw;  /* lite safe frame, men mindre än tidigare */
     }
     @media (display-mode: fullscreen){
-      .frame{padding:2.5vh 2.5vw} /* mindre overscan i fullskärm */
+      .frame{padding:2vh 2vw}
     }
 
     .postcard{
-      position:relative; width:100%; height:100%; border-radius:32px;
+      position:relative; width:100%; height:100%; border-radius:28px;
       overflow:hidden;
-      box-shadow:0 20px 50px rgba(0,0,0,.18), 0 2px 0 rgba(255,255,255,.6) inset;
+      box-shadow:0 16px 42px rgba(0,0,0,.16), 0 2px 0 rgba(255,255,255,.6) inset;
       background:
         linear-gradient(180deg, rgba(247,243,234,.38), rgba(247,243,234,.30)),
         url('bg.jpg') center/cover no-repeat;
@@ -61,22 +62,23 @@
     .postcard::after{
       content:""; position:absolute; inset:0; pointer-events:none;
       background: radial-gradient(120% 110% at 50% 10%, transparent 60%, rgba(0,0,0,.18) 100%);
-      mix-blend-mode:multiply; opacity:.42;
+      mix-blend-mode:multiply; opacity:.38;
     }
 
     #snow-back, #snow-front{position:absolute; inset:0; z-index:2; pointer-events:none}
     #snow-front{z-index:6}
 
+    /* ————— KOMPAKT HEADER ————— */
     .band{
       position:absolute; top:0; left:0; right:0; z-index:5; text-align:center; color:#fff;
-      padding:2.2vh 6vw calc(1.6vh + var(--garland-h) + var(--garland-gap));
+      padding:1.4vh 5vw calc(1.1vh + var(--garland-h) + var(--garland-gap)); /* mindre padding */
       background:linear-gradient(180deg, var(--falurod), var(--falurod-deep));
-      box-shadow:0 10px 30px rgba(0,0,0,.20);
-      border-bottom:6px solid rgba(202,162,74,.35);
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+      border-bottom:5px solid rgba(202,162,74,.35);
       overflow:visible;
     }
     .band::before{
-      content:""; position:absolute; inset:0; z-index:0; opacity:.35;
+      content:""; position:absolute; inset:0; z-index:0; opacity:.34;
       background:
         linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25) 40%, rgba(0,0,0,.55)),
         var(--header-art);
@@ -87,13 +89,14 @@
     .snow-header{position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.95}
     .band h1, .band small{position:relative; z-index:2}
     .band h1{
-      margin:0; font-family:"Cormorant Garamond", serif; font-weight:700; letter-spacing:.5px;
-      font-size:clamp(26px,4.2vh,56px); text-shadow:0 1px 0 rgba(0,0,0,.22);
+      margin:0; font-family:"Cormorant Garamond", serif; font-weight:700; letter-spacing:.4px;
+      font-size:clamp(22px,3.2vh,42px);   /* mindre än tidigare */
+      text-shadow:0 1px 0 rgba(0,0,0,.22);
+      line-height:1.1;
     }
     .band small{
-      display:inline-block; margin-top:.35vh; font-weight:600; letter-spacing:.3px;
-      font-size:clamp(13px,2.1vh,22px); opacity:.96;
-      background:linear-gradient(90deg, rgba(255,255,255,.18), rgba(255,255,255,.0), rgba(255,255,255,.18));
+      display:inline-block; margin-top:.2vh; font-weight:600; letter-spacing:.25px;
+      font-size:clamp(12px,1.8vh,18px); opacity:.95;
       -webkit-background-clip:text; background-clip:text; color:#fff;
     }
 
@@ -123,7 +126,7 @@
     .light.d8{animation-duration:2.9s;animation-delay:.15s}
 
     .snow-hills{
-      position:absolute; left:0; right:0; bottom:0; height:18vh; z-index:1; pointer-events:none;
+      position:absolute; left:0; right:0; bottom:0; height:16vh; z-index:1; pointer-events:none; /* lite lägre */
       background:
         radial-gradient(60% 60% at 20% 140%, rgba(255,255,255,.92) 50%, transparent 51%),
         radial-gradient(70% 70% at 60% 130%, rgba(255,255,255,.95) 50%, transparent 51%),
@@ -134,76 +137,76 @@
     .slides{position:relative; z-index:4; height:100%}
     .slide{
       position:absolute; inset:0;
-      /* Ny: dynamisk top-padding baserat på headerns faktiska höjd + buffert */
-      padding:calc(var(--padTop) + 24px) 6vw 8vh;
-      display:flex; flex-direction:column; gap:3vh; justify-content:center;
-      opacity:0; transform:translateY(8px) scale(.995);
-      transition:opacity .7s ease, transform .7s ease;
+      padding:calc(var(--padTop) + 10px) 5.5vw 6.5vh; /* mindre top + botten */
+      display:flex; flex-direction:column; gap:2.6vh; justify-content:center;
+      opacity:0; transform:translateY(6px) scale(.995);
+      transition:opacity .6s ease, transform .6s ease;
     }
     .slide.active{opacity:1; transform:translateY(0) scale(1)}
 
-    .cards{display:grid; grid-template-columns:repeat(12,1fr); gap:2.2vh}
+    .cards{display:grid; grid-template-columns:repeat(12,1fr); gap:1.8vh}
     .card{
       grid-column:span 6; background:var(--glass-bg); backdrop-filter:blur(10px);
-      border-radius:22px; padding:3vh 3vw; position:relative;
-      box-shadow:0 10px 24px rgba(0,0,0,.10);
+      border-radius:20px; padding:2.4vh 2.6vw; position:relative;
+      box-shadow:0 10px 22px rgba(0,0,0,.10);
       border:2px solid var(--stroke);
     }
     .card::before{
-      content:""; position:absolute; inset:-8px; border-radius:26px; pointer-events:none;
-      border:8px solid rgba(202,162,74,.18);
+      content:""; position:absolute; inset:-6px; border-radius:22px; pointer-events:none;
+      border:6px solid rgba(202,162,74,.16);
       mask: radial-gradient(130% 110% at 50% 50%, black 65%, transparent 75%);
       opacity:.45;
     }
     .card h2{
-      margin:.2rem 0 1.1rem; font-family:"Cormorant Garamond", serif; font-weight:700;
-      color:var(--falurod-deep); text-align:center; font-size:clamp(19px,3.1vh,36px); letter-spacing:.3px;
+      margin:.1rem 0 .9rem; font-family:"Cormorant Garamond", serif; font-weight:700;
+      color:var(--falurod-deep); text-align:center; font-size:clamp(18px,2.6vh,32px);
+      letter-spacing:.25px;
     }
-    .card p,.card li{font-size:clamp(16px,2.4vh,26px); line-height:1.5; margin:.1rem 0}
+    .card p,.card li{font-size:clamp(15px,2.1vh,24px); line-height:1.45; margin:.1rem 0}
 
     .welcome-panel{
-      background:rgba(255,255,255,.75); border:2px solid rgba(31,111,80,.18);
-      border-radius:24px; padding:2.4vh 3vw; text-align:center;
+      background:rgba(255,255,255,.78); border:2px solid rgba(31,111,80,.18);
+      border-radius:20px; padding:2vh 2.4vw; text-align:center;
       align-self:center; width:min(900px,92vw);
-      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
     }
     .welcome-panel p:first-child{
-      font-family:"Cormorant Garamond", serif; color:var(--falurod-deep); font-weight:700; letter-spacing:.4px;
+      font-family:"Cormorant Garamond", serif; color:var(--falurod-deep); font-weight:700; letter-spacing:.35px;
     }
 
-    .mini-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:1.2rem; margin-top:.6rem}
+    .mini-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; margin-top:.4rem}
     .mini-card{
-      background:rgba(255,255,255,.78); border:2px solid rgba(31,111,80,.18);
-      border-radius:16px; padding:1.6vh 1vw; text-align:center;
+      background:rgba(255,255,255,.8); border:2px solid rgba(31,111,80,.18);
+      border-radius:14px; padding:1.2vh .8vw; text-align:center;
     }
-    .mini-card .emoji{font-size:clamp(34px,6vh,64px); line-height:1; margin-bottom:.35em}
-    .mini-card .label{font-weight:600; font-size:clamp(14px,2.2vh,22px)}
+    .mini-card .emoji{font-size:clamp(30px,5.2vh,56px); line-height:1; margin-bottom:.3em}
+    .mini-card .label{font-weight:600; font-size:clamp(13px,2vh,20px)}
 
-    .item{display:grid; grid-template-columns:80px 1fr 130px; gap:1.2rem; align-items:center}
+    .item{display:grid; grid-template-columns:70px 1fr 120px; gap:1rem; align-items:center}
     .icon{
-      font-size:clamp(28px,4.5vh,40px); display:grid; place-items:center; width:64px; height:64px; border-radius:14px;
+      font-size:clamp(24px,4vh,36px); display:grid; place-items:center; width:58px; height:58px; border-radius:12px;
       background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.7));
       border:1px solid rgba(0,0,0,.08); box-shadow:0 6px 12px rgba(0,0,0,.08);
     }
-    .qr img{width:110px; height:110px; border-radius:10px; background:#fff; padding:6px; box-shadow:0 6px 14px rgba(0,0,0,.08)}
-    .qr a{display:block; font-size:clamp(12px,1.9vh,18px); margin-top:.4rem}
+    .qr img{width:100px; height:100px; border-radius:10px; background:#fff; padding:6px; box-shadow:0 6px 14px rgba(0,0,0,.08)}
+    .qr a{display:block; font-size:clamp(12px,1.8vh,17px); margin-top:.3rem}
 
-    .center-list{list-style:none; padding:0; text-align:center; font-size:clamp(18px,2.7vh,31px); line-height:1.55; margin:0}
-    .center-list li{margin:.35em 0}
+    .center-list{list-style:none; padding:0; text-align:center; font-size:clamp(16px,2.3vh,24px); line-height:1.5; margin:0}
+    .center-list li{margin:.3em 0}
 
-    .progress{position:absolute; bottom:calc(2.2vh + env(safe-area-inset-bottom, 0px)); left:50%; transform:translateX(-50%);
-      display:flex; gap:.6rem; z-index:6}
-    .dot{width:12px; height:12px; border-radius:50%; background:#cbd5e1}
-    .dot.active{background:var(--turkos); box-shadow:0 0 0 6px rgba(46,199,201,.18)}
+    .progress{position:absolute; bottom:calc(1.8vh + env(safe-area-inset-bottom, 0px)); left:50%; transform:translateX(-50%);
+      display:flex; gap:.5rem; z-index:6}
+    .dot{width:10px; height:10px; border-radius:50%; background:#cbd5e1}
+    .dot.active{background:var(--turkos); box-shadow:0 0 0 5px rgba(46,199,201,.18)}
 
     @media(max-width:1200px){
-      :root{ --garland-h: 68px; }
+      :root{ --garland-h: 52px; }
       .mini-grid{grid-template-columns:repeat(3,1fr)}
     }
     @media(max-width:800px){
-      :root{ --garland-h: 58px; }
+      :root{ --garland-h: 48px; }
       .mini-grid{grid-template-columns:repeat(2,1fr)}
-      .item{grid-template-columns:64px 1fr 110px}
+      .item{grid-template-columns:56px 1fr 100px}
       .card{grid-column:span 12}
     }
   </style>
@@ -222,22 +225,50 @@
         <div class="garland-zone" aria-hidden="true">
           <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="needle" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a7a59"/><stop offset="100%" stop-color="#16583f"/></linearGradient>
-              <radialGradient id="baubleRed" cx="35%" cy="35%" r="70%"><stop offset="0%" stop-color="#ff9fa0"/><stop offset="35%" stop-color="#c72a2e"/><stop offset="100%" stop-color="#7d1719"/></radialGradient>
-              <radialGradient id="baubleGold" cx="35%" cy="35%" r="70%"><stop offset="0%" stop-color="#ffe7a8"/><stop offset="35%" stop-color="#d1a23b"/><stop offset="100%" stop-color="#8a6a1a"/></radialGradient>
-              <radialGradient id="lampWarm" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(255,247,210,1)"/><stop offset="60%" stop-color="rgba(255,208,120,0.95)"/><stop offset="100%" stop-color="rgba(190,120,20,0.35)"/></radialGradient>
+              <linearGradient id="needle" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a7a59"/><stop offset="100%" stop-color="#16583f"/>
+              </linearGradient>
+              <radialGradient id="baubleRed" cx="35%" cy="35%" r="70%">
+                <stop offset="0%" stop-color="#ff9fa0"/><stop offset="35%" stop-color="#c72a2e"/><stop offset="100%" stop-color="#7d1719"/>
+              </radialGradient>
+              <radialGradient id="baubleGold" cx="35%" cy="35%" r="70%">
+                <stop offset="0%" stop-color="#ffe7a8"/><stop offset="35%" stop-color="#d1a23b"/><stop offset="100%" stop-color="#8a6a1a"/>
+              </radialGradient>
+              <radialGradient id="lampWarm" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(255,247,210,1)"/>
+                <stop offset="60%" stop-color="rgba(255,208,120,0.95)"/>
+                <stop offset="100%" stop-color="rgba(190,120,20,0.35)"/>
+              </radialGradient>
               <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="0.6"/></filter>
+
               <g id="twig">
                 <path d="M0 0 L140 0" stroke="#3b2a1a" stroke-width="3" stroke-linecap="round" filter="url(#soft)"/>
                 <g stroke="url(#needle)" stroke-linecap="round">
-                  <line x1="10" y1="0" x2="10" y2="-10" stroke-width="2"/><line x1="20" y1="0" x2="22" y2="-13" stroke-width="2"/><line x1="30" y1="0" x2="30" y2="-12" stroke-width="2"/>
-                  <line x1="40" y1="0" x2="44" y2="-14" stroke-width="2"/><line x1="50" y1="0" x2="51" y2="-12" stroke-width="2"/><line x1="60" y1="0" x2="64" y2="-15" stroke-width="2"/>
-                  <line x1="70" y1="0" x2="73" y2="-13" stroke-width="2"/><line x1="80" y1="0" x2="82" y2="-12" stroke-width="2"/><line x1="90" y1="0" x2="95" y2="-14" stroke-width="2"/>
-                  <line x1="100" y1="0" x2="103" y2="-12" stroke-width="2"/><line x1="110" y1="0" x2="114" y2="-13" stroke-width="2"/><line x1="120" y1="0" x2="122" y2="-12" stroke-width="2"/><line x1="130" y1="0" x2="134" y2="-14" stroke-width="2"/>
-                  <line x1="15" y1="0" x2="17" y2="13" stroke-width="2"/><line x1="25" y1="0" x2="25" y2="12" stroke-width="2"/><line x1="35" y1="0" x2="38" y2="15" stroke-width="2"/>
-                  <line x1="45" y1="0" x2="47" y2="12" stroke-width="2"/><line x1="55" y1="0" x2="58" y2="14" stroke-width="2"/><line x1="65" y1="0" x2="68" y2="13" stroke-width="2"/>
-                  <line x1="75" y1="0" x2="76" y2="12" stroke-width="2"/><line x1="85" y1="0" x2="89" y2="15" stroke-width="2"/><line x1="95" y1="0" x2="97" y2="12" stroke-width="2"/>
-                  <line x1="105" y1="0" x2="109" y2="13" stroke-width="2"/><line x1="115" y1="0" x2="118" y2="14" stroke-width="2"/><line x1="125" y1="0" x2="127" y2="12" stroke-width="2"/>
+                  <line x1="10" y1="0" x2="10" y2="-10" stroke-width="2"/>
+                  <line x1="20" y1="0" x2="22" y2="-13" stroke-width="2"/>
+                  <line x1="30" y1="0" x2="30" y2="-12" stroke-width="2"/>
+                  <line x1="40" y1="0" x2="44" y2="-14" stroke-width="2"/>
+                  <line x1="50" y1="0" x2="51" y2="-12" stroke-width="2"/>
+                  <line x1="60" y1="0" x2="64" y2="-15" stroke-width="2"/>
+                  <line x1="70" y1="0" x2="73" y2="-13" stroke-width="2"/>
+                  <line x1="80" y1="0" x2="82" y2="-12" stroke-width="2"/>
+                  <line x1="90" y1="0" x2="95" y2="-14" stroke-width="2"/>
+                  <line x1="100" y1="0" x2="103" y2="-12" stroke-width="2"/>
+                  <line x1="110" y1="0" x2="114" y2="-13" stroke-width="2"/>
+                  <line x1="120" y1="0" x2="122" y2="-12" stroke-width="2"/>
+                  <line x1="130" y1="0" x2="134" y2="-14" stroke-width="2"/>
+                  <line x1="15" y1="0" x2="17" y2="13" stroke-width="2"/>
+                  <line x1="25" y1="0" x2="25" y2="12" stroke-width="2"/>
+                  <line x1="35" y1="0" x2="38" y2="15" stroke-width="2"/>
+                  <line x1="45" y1="0" x2="47" y2="12" stroke-width="2"/>
+                  <line x1="55" y1="0" x2="58" y2="14" stroke-width="2"/>
+                  <line x1="65" y1="0" x2="68" y2="13" stroke-width="2"/>
+                  <line x1="75" y1="0" x2="76" y2="12" stroke-width="2"/>
+                  <line x1="85" y1="0" x2="89" y2="15" stroke-width="2"/>
+                  <line x1="95" y1="0" x2="97" y2="12" stroke-width="2"/>
+                  <line x1="105" y1="0" x2="109" y2="13" stroke-width="2"/>
+                  <line x1="115" y1="0" x2="118" y2="14" stroke-width="2"/>
+                  <line x1="125" y1="0" x2="127" y2="12" stroke-width="2"/>
                 </g>
               </g>
               <g id="cluster">
@@ -248,7 +279,7 @@
               </g>
             </defs>
 
-            <g transform="translate(20,58)">
+            <g transform="translate(18,52)">
               <g>
                 <use href="#cluster" transform="translate(0,0)"/>
                 <use href="#cluster" transform="translate(100,4)"/>
@@ -264,32 +295,32 @@
                 <use href="#cluster" transform="translate(1100,1)"/>
               </g>
               <g>
-                <circle cx="140" cy="-6" r="9" fill="url(#baubleGold)"/>
-                <circle cx="280" cy="-4" r="8" fill="url(#baubleRed)"/>
-                <circle cx="420" cy="-7" r="10" fill="url(#baubleGold)"/>
-                <circle cx="560" cy="-5" r="8" fill="url(#baubleRed)"/>
-                <circle cx="700" cy="-6" r="9" fill="url(#baubleGold)"/>
-                <circle cx="840" cy="-4" r="8" fill="url(#baubleRed)"/>
-                <circle cx="980" cy="-6" r="9" fill="url(#baubleGold)"/>
+                <circle cx="140" cy="-6" r="8.5" fill="url(#baubleGold)"/>
+                <circle cx="280" cy="-4" r="7.8" fill="url(#baubleRed)"/>
+                <circle cx="420" cy="-7" r="9.5" fill="url(#baubleGold)"/>
+                <circle cx="560" cy="-5" r="7.8" fill="url(#baubleRed)"/>
+                <circle cx="700" cy="-6" r="8.5" fill="url(#baubleGold)"/>
+                <circle cx="840" cy="-4" r="7.8" fill="url(#baubleRed)"/>
+                <circle cx="980" cy="-6" r="8.5" fill="url(#baubleGold)"/>
               </g>
               <g class="lights">
-                <circle class="light"   cx="70"   cy="-2" r="5.2" fill="url(#lampWarm)"/>
-                <circle class="light d2" cx="130"  cy="-6" r="4.8" fill="url(#lampWarm)"/>
-                <circle class="light d3" cx="190"  cy="-3" r="5.1" fill="url(#lampWarm)"/>
-                <circle class="light d4" cx="250"  cy="-6" r="4.9" fill="url(#lampWarm)"/>
-                <circle class="light d5" cx="310"  cy="-4" r="5.4" fill="url(#lampWarm)"/>
-                <circle class="light d6" cx="370"  cy="-6" r="4.7" fill="url(#lampWarm)"/>
-                <circle class="light d7" cx="430"  cy="-3" r="5.3" fill="url(#lampWarm)"/>
-                <circle class="light d8" cx="490"  cy="-6" r="4.9" fill="url(#lampWarm)"/>
-                <circle class="light d2" cx="550"  cy="-4" r="5.5" fill="url(#lampWarm)"/>
-                <circle class="light d3" cx="610"  cy="-6" r="4.8" fill="url(#lampWarm)"/>
-                <circle class="light d4" cx="670"  cy="-3" r="5.2" fill="url(#lampWarm)"/>
-                <circle class="light d5" cx="730"  cy="-6" r="4.7" fill="url(#lampWarm)"/>
-                <circle class="light d6" cx="790"  cy="-4" r="5.3" fill="url(#lampWarm)"/>
-                <circle class="light d7" cx="860"  cy="-6" r="4.9" fill="url(#lampWarm)"/>
-                <circle class="light d8" cx="930"  cy="-3" r="5.4" fill="url(#lampWarm)"/>
-                <circle class="light d2" cx="1000" cy="-6" r="4.8" fill="url(#lampWarm)"/>
-                <circle class="light d3" cx="1070" cy="-4" r="5.2" fill="url(#lampWarm)"/>
+                <circle class="light"   cx="70"   cy="-2" r="4.8" fill="url(#lampWarm)"/>
+                <circle class="light d2" cx="130"  cy="-6" r="4.4" fill="url(#lampWarm)"/>
+                <circle class="light d3" cx="190"  cy="-3" r="4.9" fill="url(#lampWarm)"/>
+                <circle class="light d4" cx="250"  cy="-6" r="4.5" fill="url(#lampWarm)"/>
+                <circle class="light d5" cx="310"  cy="-4" r="5.0" fill="url(#lampWarm)"/>
+                <circle class="light d6" cx="370"  cy="-6" r="4.4" fill="url(#lampWarm)"/>
+                <circle class="light d7" cx="430"  cy="-3" r="4.9" fill="url(#lampWarm)"/>
+                <circle class="light d8" cx="490"  cy="-6" r="4.6" fill="url(#lampWarm)"/>
+                <circle class="light d2" cx="550"  cy="-4" r="5.1" fill="url(#lampWarm)"/>
+                <circle class="light d3" cx="610"  cy="-6" r="4.5" fill="url(#lampWarm)"/>
+                <circle class="light d4" cx="670"  cy="-3" r="4.9" fill="url(#lampWarm)"/>
+                <circle class="light d5" cx="730"  cy="-6" r="4.4" fill="url(#lampWarm)"/>
+                <circle class="light d6" cx="790"  cy="-4" r="4.9" fill="url(#lampWarm)"/>
+                <circle class="light d7" cx="860"  cy="-6" r="4.6" fill="url(#lampWarm)"/>
+                <circle class="light d8" cx="930"  cy="-3" r="5.0" fill="url(#lampWarm)"/>
+                <circle class="light d2" cx="1000" cy="-6" r="4.5" fill="url(#lampWarm)"/>
+                <circle class="light d3" cx="1070" cy="-4" r="4.9" fill="url(#lampWarm)"/>
               </g>
             </g>
           </svg>
@@ -303,8 +334,8 @@
         <!-- 1: Välkommen -->
         <section class="slide active" data-title="Välkommen">
           <div class="welcome-panel">
-            <p style="font-size:clamp(32px,6vh,70px);margin:0;">Välkommen</p>
-            <p style="font-size:clamp(20px,3.8vh,45px);margin-top:1vh">Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ</p>
+            <p style="font-size:clamp(30px,5.4vh,64px);margin:0;">Välkommen</p>
+            <p style="font-size:clamp(18px,3.4vh,38px);margin-top:.6vh">Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ</p>
           </div>
         </section>
 
@@ -343,13 +374,13 @@
                 <div class="mini-card"><div class="emoji">🏓</div><div class="label">Bordtennis</div></div>
               </div>
 
-              <h2 style="margin-top:3.6vh">Regler</h2>
+              <h2 style="margin-top:2.2vh">Regler</h2>
               <ul class="center-list">
                 <li>⏰ Incheckning från <strong>15:00</strong></li>
                 <li>🐾 Husdjur tillåtet (ej i gemensamma utrymmen)</li>
               </ul>
 
-              <h2 style="margin-top:3.2vh">Tillval</h2>
+              <h2 style="margin-top:2vh">Tillval</h2>
               <ul class="center-list">
                 <li>🛏️ Extra lakan – <strong>60 kr</strong></li>
                 <li>🧼 Extra handduk – <strong>20 kr</strong></li>
@@ -371,7 +402,7 @@
                 </div>
                 <div class="qr">
                   <img alt="QR – Vägbeskrivning till ICA Kvantum Stenungsund"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DVassgatan%2B1%252C%2B444%2B31%2BStenungsund">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DVassgatan%2B1%252C%2B444%2B31%2BStenungsund">
                   <a href="https://www.google.com/maps/dir/?api=1&destination=Vassgatan+1,+444+31+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
                 </div>
               </div>
@@ -387,7 +418,7 @@
                 </div>
                 <div class="qr">
                   <img alt="QR – Vägbeskrivning till Willys Stenungsund"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStrandv%C3%A4gen%2B35%252C%2B444%2B31%2BStenungsund">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStrandv%C3%A4gen%2B35%252C%2B444%2B31%2BStenungsund">
                   <a href="https://www.google.com/maps/dir/?api=1&destination=Strandv%C3%A4gen+35,+444+31+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
                 </div>
               </div>
@@ -408,7 +439,7 @@
                 </div>
                 <div class="qr">
                   <img alt="QR – Vägbeskrivning Laxbutiken"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DLjungs%2BBerg%2B200%252C%2B459%2B93%2BLjungskile">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DLjungs%2BBerg%2B200%252C%2B459%2B93%2BLjungskile">
                   <a href="https://www.google.com/maps/dir/?api=1&destination=Ljungs+Berg+200,+459+93+Ljungskile" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
                 </div>
               </div>
@@ -424,7 +455,7 @@
                 </div>
                 <div class="qr">
                   <img alt="QR – Vägbeskrivning Pizzeria Milano"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStrandplan%2B35%252C%2B444%2B31%2BStenungsund">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStrandplan%2B35%252C%2B444%2B31%2BStenungsund">
                   <a href="https://www.google.com/maps/dir/?api=1&destination=Strandplan+35,+444+31+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
                 </div>
               </div>
@@ -440,7 +471,7 @@
                 </div>
                 <div class="qr">
                   <img alt="QR – Vägbeskrivning Mr Johanssons"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DG%C3%A4rdesv%C3%A4gen%2B1%252C%2B444%2B31%2BStenungsund">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DG%C3%A4rdesv%C3%A4gen%2B1%252C%2B444%2B31%2BStenungsund">
                   <a href="https://www.google.com/maps/dir/?api=1&destination=G%C3%A4rdesv%C3%A4gen+1,+444+31+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
                 </div>
               </div>
@@ -456,7 +487,7 @@
                 </div>
                 <div class="qr">
                   <img alt="QR – Vägbeskrivning McDonald’s"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStenunge%2BAll%C3%A9%2B1%252C%2B444%2B30%2BStenungsund">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fdir%2F%3Fapi%3D1%26destination%3DStenunge%2BAll%C3%A9%2B1%252C%2B444%2B30%2BStenungsund">
                   <a href="https://www.google.com/maps/dir/?api=1&destination=Stenunge+All%C3%A9+1,+444+30+Stenungsund" target="_blank" rel="noopener">Öppna vägbeskrivning</a>
                 </div>
               </div>
@@ -496,12 +527,12 @@
                 <li>🧹 Städa gärna av grovt innan avresa</li>
               </ul>
             </div>
-            <div class="card" style="grid-column:span 5;display:grid;align-content:center;gap:1.2rem">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center">
-                <div class="icon" style="width:72px;height:72px;font-size:40px;">⭐</div>
+            <div class="card" style="grid-column:span 5;display:grid;align-content:center;gap:1rem">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:.8rem;text-align:center">
+                <div class="icon" style="width:66px;height:66px;font-size:36px;">⭐</div>
                 <h2>Tack för din vistelse!</h2>
-                <p style="font-size:clamp(16px,2.6vh,28px);margin:0 0 .4em;">Vi blir jätteglada om du lämnar ett omdöme på bokningssidorna.</p>
-                <p style="opacity:.85;font-size:clamp(14px,2.2vh,22px);margin:0">Det hjälper oss och framtida gäster.</p>
+                <p style="font-size:clamp(15px,2.3vh,24px);margin:0 0 .3em;">Vi blir jätteglada om du lämnar ett omdöme på bokningssidorna.</p>
+                <p style="opacity:.85;font-size:clamp(13px,2vh,20px);margin:0">Det hjälper oss och framtida gäster.</p>
               </div>
             </div>
           </div>
@@ -517,7 +548,7 @@
                 <div>Svenshögen station – mot Göteborg / Uddevalla.</div>
                 <div class="qr">
                   <img alt="QR – Karta Svenshögen station"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
                   <a href="https://www.google.com/maps/search/Svensh%C3%B6gen%20station" target="_blank" rel="noopener">Visa i Maps</a>
                 </div>
               </div>
@@ -530,7 +561,7 @@
                 <div>Hållplats: <strong>Svenshögens sjukhus</strong> (linje 334).</div>
                 <div class="qr">
                   <img alt="QR – Västtrafik reseplanerare"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fwww.vasttrafik.se%2Freseplanering%2F">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.vasttrafik.se%2Freseplanering%2F">
                   <a href="https://www.vasttrafik.se/reseplanering/" target="_blank" rel="noopener">Planera resa</a>
                 </div>
               </div>
@@ -543,10 +574,10 @@
                 <div>Västtrafik To Go – köp biljett i appen.</div>
                 <div class="qr">
                   <img alt="QR – App Store"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
                   <a href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
                   <img alt="QR – Google Play"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
                   <a href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
                 </div>
               </div>
@@ -576,13 +607,13 @@
   const HOLIDAY_MODE    = true;
   const HOLIDAY_LIGHTS  = true;
 
-  // Beräkna och sätt dynamisk top-padding
+  // Beräkna och sätt dynamisk top-padding baserat på headerns faktiska höjd
   function setDynamicTopPadding(){
     const band = document.querySelector('.band');
     if(!band) return;
     const rect = band.getBoundingClientRect();
     const h = Math.ceil(rect.height);
-    // +24px extra buffert för säkerhets skull
+    // liten buffert (10px), vi har redan kompakt header
     document.documentElement.style.setProperty('--padTop', (h) + 'px');
   }
 
@@ -611,8 +642,7 @@
       slides.forEach((s,x)=>s.classList.toggle('active',x===n));
       dots.forEach((d,x)=>d.classList.toggle('active',x===n));
       slideIndex=n;
-      // Re-beräkna padding efter varje slidebyte (Chromecast/scale kan skilja)
-      setDynamicTopPadding();
+      setDynamicTopPadding(); // säkerställ korrekt padding vid varje byte
     }
     clearInterval(slideTimer);
     slideTimer = setInterval(()=>show((slideIndex+1)%slides.length), SLIDE_TIME_MS);
@@ -625,7 +655,7 @@
     setSeasonalSubtitle();
     initSlides();
 
-    // Sätt padding direkt och upprepa några gånger under uppstart (Chromecast)
+    // Mät flera gånger under uppstart (Chromecast kan justera skalan)
     setDynamicTopPadding();
     let tries = 0;
     const poll = setInterval(()=>{
@@ -668,7 +698,7 @@
     }
   })();
 
-  // Snö – bak/fram
+  // Snö – bak/fram (oförändrat)
   (function(){
     const HOLIDAY_MODE = true;
     if (!HOLIDAY_MODE) return;
@@ -719,7 +749,7 @@
     }));}
     function resize(){
       w = canvas.width  = canvas.offsetWidth; h = canvas.height = canvas.offsetHeight;
-      const base = w*h; flakes = makeHeaderFlakes(Math.min(240, Math.floor(base/1500)));
+      const base = w*h; flakes = makeHeaderFlakes(Math.min(220, Math.floor(base/1700)));
     }
     function tick(){
       ctx.clearRect(0,0,w,h); ctx.fillStyle='#fff';
