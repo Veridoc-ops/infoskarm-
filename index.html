@@ -20,12 +20,9 @@
       --stroke: rgba(139,29,21,.18);
       --header-art:url('https://upload.wikimedia.org/wikipedia/commons/0/0a/Julaftonen_av_Carl_Larsson_1904.jpg');
 
-      /* sätts i JS utifrån headerns faktiska höjd */
       --padTop: 160px;
-
-      /* MINDRE header */
-      --garland-h: 56px;        /* var ~80 */
-      --garland-gap: 6px;       /* var 8  */
+      --garland-h: 56px;
+      --garland-gap: 6px;
     }
 
     *{box-sizing:border-box}
@@ -45,7 +42,7 @@
     .app{height:100%;display:grid;place-items:center}
     .frame{
       position:relative; width:100vw; height:100vh; overflow:hidden;
-      padding:2.4vh 2.4vw;  /* lite safe frame, men mindre än tidigare */
+      padding:2.4vh 2.4vw;
     }
     @media (display-mode: fullscreen){
       .frame{padding:2vh 2vw}
@@ -68,10 +65,9 @@
     #snow-back, #snow-front{position:absolute; inset:0; z-index:2; pointer-events:none}
     #snow-front{z-index:6}
 
-    /* ————— KOMPAKT HEADER ————— */
     .band{
       position:absolute; top:0; left:0; right:0; z-index:5; text-align:center; color:#fff;
-      padding:1.4vh 5vw calc(1.1vh + var(--garland-h) + var(--garland-gap)); /* mindre padding */
+      padding:1.4vh 5vw calc(1.1vh + var(--garland-h) + var(--garland-gap));
       background:linear-gradient(180deg, var(--falurod), var(--falurod-deep));
       box-shadow:0 10px 24px rgba(0,0,0,.18);
       border-bottom:5px solid rgba(202,162,74,.35);
@@ -90,7 +86,7 @@
     .band h1, .band small{position:relative; z-index:2}
     .band h1{
       margin:0; font-family:"Cormorant Garamond", serif; font-weight:700; letter-spacing:.4px;
-      font-size:clamp(22px,3.2vh,42px);   /* mindre än tidigare */
+      font-size:clamp(22px,3.2vh,42px);
       text-shadow:0 1px 0 rgba(0,0,0,.22);
       line-height:1.1;
     }
@@ -126,7 +122,7 @@
     .light.d8{animation-duration:2.9s;animation-delay:.15s}
 
     .snow-hills{
-      position:absolute; left:0; right:0; bottom:0; height:16vh; z-index:1; pointer-events:none; /* lite lägre */
+      position:absolute; left:0; right:0; bottom:0; height:16vh; z-index:1; pointer-events:none;
       background:
         radial-gradient(60% 60% at 20% 140%, rgba(255,255,255,.92) 50%, transparent 51%),
         radial-gradient(70% 70% at 60% 130%, rgba(255,255,255,.95) 50%, transparent 51%),
@@ -137,7 +133,7 @@
     .slides{position:relative; z-index:4; height:100%}
     .slide{
       position:absolute; inset:0;
-      padding:calc(var(--padTop) + 10px) 5.5vw 6.5vh; /* mindre top + botten */
+      padding:calc(var(--padTop) + 10px) 5.5vw 6.5vh;
       display:flex; flex-direction:column; gap:2.6vh; justify-content:center;
       opacity:0; transform:translateY(6px) scale(.995);
       transition:opacity .6s ease, transform .6s ease;
@@ -426,7 +422,7 @@
           </div>
         </section>
 
-        <!-- 5: Restauranger -->
+        <!-- 5: Restauranger 1 -->
         <section class="slide" data-title="Restauranger">
           <div class="cards">
             <div class="card">
@@ -460,7 +456,12 @@
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
+        <!-- 6: Restauranger 2 -->
+        <section class="slide" data-title="Restauranger">
+          <div class="cards">
             <div class="card">
               <h2>Restauranger – Mr Johanssons</h2>
               <div class="item">
@@ -495,7 +496,7 @@
           </div>
         </section>
 
-        <!-- 6: Väder -->
+        <!-- 7: Väder -->
         <section class="slide" data-title="Väder">
           <div class="cards">
             <div class="card" style="grid-column:span 7" id="weather-card">
@@ -515,7 +516,7 @@
           </div>
         </section>
 
-        <!-- 7: Utcheckning -->
+        <!-- 8: Utcheckning -->
         <section class="slide" data-title="Utcheckning">
           <div class="cards">
             <div class="card" style="grid-column:span 7">
@@ -538,58 +539,68 @@
           </div>
         </section>
 
-        <!-- 8: Kollektivtrafik -->
+        <!-- 9: Kollektivtrafik – Tåg -->
         <section class="slide" data-title="Kollektivtrafik">
           <div class="cards">
-            <div class="card">
+            <div class="card" style="grid-column:span 12">
               <h2>Kollektivtrafik – Tåg</h2>
               <div class="item">
                 <div class="icon">🚆</div>
-                <div>Svenshögen station – mot Göteborg / Uddevalla.</div>
+                <div>
+                  <p style="margin:0 0 .4em;">Svenshögen station – tåg mot Göteborg och Uddevalla.</p>
+                  <p style="margin:0;">Gångavstånd från vandrarhemmet.</p>
+                </div>
                 <div class="qr">
                   <img alt="QR – Karta Svenshögen station"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
+                       src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2FSvensh%C3%B6gen%20station">
                   <a href="https://www.google.com/maps/search/Svensh%C3%B6gen%20station" target="_blank" rel="noopener">Visa i Maps</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <h2>Kollektivtrafik – Buss 334</h2>
-              <div class="item">
-                <div class="icon">🚌</div>
-                <div>Hållplats: <strong>Svenshögens sjukhus</strong> (linje 334).</div>
-                <div class="qr">
-                  <img alt="QR – Västtrafik reseplanerare"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fwww.vasttrafik.se%2Freseplanering%2F">
-                  <a href="https://www.vasttrafik.se/reseplanering/" target="_blank" rel="noopener">Planera resa</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <h2>Kollektivtrafik – App</h2>
-              <div class="item">
-                <div class="icon">📱</div>
-                <div>Västtrafik To Go – köp biljett i appen.</div>
-                <div class="qr">
-                  <img alt="QR – App Store"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
-                  <a href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
-                  <img alt="QR – Google Play"
-                       src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
-                  <a href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- Progress -->
+        <!-- 10: Västtrafik – App (egen sida med stor QR) -->
+        <section class="slide" data-title="Västtrafik">
+          <div class="cards">
+            <div class="card" style="grid-column:span 12;display:grid;align-content:center;justify-items:center;">
+              <h2>Västtrafik – To Go App</h2>
+              <p style="text-align:center;max-width:620px;margin:.3em 0 1em;font-size:clamp(15px,2.2vh,24px);">
+                Ladda ner Västtrafik To Go för att planera resa och köpa biljett direkt i mobilen.
+              </p>
+              <div style="display:flex;flex-wrap:wrap;gap:2.2rem;justify-content:center;align-items:flex-start;margin-top:.5em;">
+                <div style="text-align:center;">
+                  <div class="icon" style="width:70px;height:70px;font-size:38px;margin:0 auto .6em;">📱</div>
+                  <div class="qr">
+                    <img alt="QR – App Store"
+                         style="width:150px;height:150px;"
+                         src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fapps.apple.com%2Fse%2Fapp%2Fv%C3%A4sttrafik-to-go%2Fid1081161150">
+                    <a href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank" rel="noopener">iOS – App Store</a>
+                  </div>
+                </div>
+                <div style="text-align:center;">
+                  <div class="icon" style="width:70px;height:70px;font-size:38px;margin:0 auto .6em;">🤖</div>
+                  <div class="qr">
+                    <img alt="QR – Google Play"
+                         style="width:150px;height:150px;"
+                         src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dse.vasttrafik.to_go">
+                    <a href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank" rel="noopener">Android – Google Play</a>
+                  </div>
+                </div>
+              </div>
+              <p style="text-align:center;margin-top:1.2em;font-size:clamp(14px,2vh,20px);opacity:.9;">
+                Tips: skapa favoritresor till och från Svenshögen så går det extra snabbt.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progress (nu 10 slides) -->
         <div class="progress" aria-hidden="true">
           <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
           <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span>
         </div>
       </div>
     </div>
@@ -607,17 +618,14 @@
   const HOLIDAY_MODE    = true;
   const HOLIDAY_LIGHTS  = true;
 
-  // Beräkna och sätt dynamisk top-padding baserat på headerns faktiska höjd
   function setDynamicTopPadding(){
     const band = document.querySelector('.band');
     if(!band) return;
     const rect = band.getBoundingClientRect();
     const h = Math.ceil(rect.height);
-    // liten buffert (10px), vi har redan kompakt header
     document.documentElement.style.setProperty('--padTop', (h) + 'px');
   }
 
-  // Säsongstext i headern
   function setSeasonalSubtitle(){
     const el = document.getElementById('band-sub');
     if (!el) return;
@@ -627,7 +635,6 @@
     el.textContent = isXmasToEpiphany ? "God jul & gott nytt år" : "God jul";
   }
 
-  // Slideshow
   let slideIndex = 0, slideTimer;
   function initSlides(){
     const slides=[...document.querySelectorAll('.slide')];
@@ -642,7 +649,7 @@
       slides.forEach((s,x)=>s.classList.toggle('active',x===n));
       dots.forEach((d,x)=>d.classList.toggle('active',x===n));
       slideIndex=n;
-      setDynamicTopPadding(); // säkerställ korrekt padding vid varje byte
+      setDynamicTopPadding();
     }
     clearInterval(slideTimer);
     slideTimer = setInterval(()=>show((slideIndex+1)%slides.length), SLIDE_TIME_MS);
@@ -651,24 +658,20 @@
   window.addEventListener('DOMContentLoaded', () => {
     if (!HOLIDAY_LIGHTS){ document.querySelectorAll('.light').forEach(el => el.style.animation='none'); }
 
-    // Init
     setSeasonalSubtitle();
     initSlides();
 
-    // Mät flera gånger under uppstart (Chromecast kan justera skalan)
     setDynamicTopPadding();
     let tries = 0;
     const poll = setInterval(()=>{
       setDynamicTopPadding();
-      if (++tries > 6) clearInterval(poll); // ~3s
+      if (++tries > 6) clearInterval(poll);
     }, 500);
 
-    // När typsnitten är klara – mät igen
     if (document.fonts && document.fonts.ready){
       document.fonts.ready.then(()=>setDynamicTopPadding());
     }
 
-    // Reagera på ändringar
     if ('ResizeObserver' in window){
       new ResizeObserver(setDynamicTopPadding).observe(document.querySelector('.band'));
     }
@@ -698,7 +701,7 @@
     }
   })();
 
-  // Snö – bak/fram (oförändrat)
+  // Snö – bak/fram
   (function(){
     const HOLIDAY_MODE = true;
     if (!HOLIDAY_MODE) return;
