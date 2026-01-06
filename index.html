@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Svenshögens vandrarhem – Info</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -14,81 +14,38 @@
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:'Lora',system-ui,sans-serif;color:var(--dark)}
 body{
-  background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(46,199,201,.35), transparent 60%),
-    linear-gradient(180deg,#b7ddeb,#eef7fb);
+  background:radial-gradient(1200px 600px at 50% -10%, rgba(46,199,201,.35), transparent 60%), linear-gradient(180deg,#b7ddeb,#eef7fb);
 }
 .frame{height:100vh;padding:2vh}
-.postcard{
-  height:100%;border-radius:28px;background:var(--glass);
-  backdrop-filter:blur(12px);
-  box-shadow:0 20px 50px rgba(0,0,0,.18);
-  overflow:hidden;position:relative
-}
-
-/* HEADER */
-.band{
-  position:absolute;top:0;left:0;right:0;height:140px;
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  color:#fff;
-  background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80') center/cover;
-  text-shadow:0 2px 6px rgba(0,0,0,.45)
-}
+.postcard{height:100%;border-radius:28px;background:var(--glass);backdrop-filter:blur(12px);box-shadow:0 20px 50px rgba(0,0,0,.18);overflow:hidden;position:relative}
+.band{position:absolute;top:0;left:0;right:0;height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80') center/cover;text-shadow:0 2px 6px rgba(0,0,0,.45)}
 .band h1{margin:0;font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vh,44px)}
 .band small{opacity:.9}
-
-/* SLIDES */
 .slides{position:absolute;top:140px;bottom:50px;left:0;right:0}
-.slide{
-  position:absolute;inset:0;padding:4vh 6vw;
-  display:flex;justify-content:center;align-items:center;
-  opacity:0;transition:.7s
-}
+.slide{position:absolute;inset:0;padding:4vh 6vw;display:flex;justify-content:center;align-items:center;opacity:0;transition:.7s}
 .slide.active{opacity:1}
-
-/* CARD */
-.card{
-  width:100%;max-width:1200px;
-  background:rgba(255,255,255,.8);
-  border-radius:24px;padding:3vh 3vw;
-  box-shadow:0 14px 30px rgba(0,0,0,.15);
-}
+.card{width:100%;max-width:1200px;background:rgba(255,255,255,.8);border-radius:24px;padding:3vh 3vw;box-shadow:0 14px 30px rgba(0,0,0,.15)}
 .center{text-align:center}
-
-h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(28px,3.6vh,38px);
-  margin-top:0
-}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vh,38px);margin-top:0}
 p{font-size:18px;line-height:1.6}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:1.8rem
-}
-.mini{
-  background:rgba(255,255,255,.9);
-  border-radius:18px;
-  padding:1.6rem;
-  text-align:center
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.8rem}
+.mini{background:rgba(255,255,255,.9);border-radius:18px;padding:1.6rem;text-align:center}
 .mini strong{display:block;font-size:18px;margin-bottom:.3rem}
 .mini img{margin-top:.8rem}
-
-/* CLOCK WEATHER */
 .clock{font-size:64px;font-weight:600}
 .date{opacity:.75;margin-bottom:1rem}
 .weather{margin-top:1rem;font-size:26px;font-weight:600}
-
-/* PROGRESS */
-.progress{
-  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  display:flex;gap:.6rem
-}
+.progress{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:.6rem}
 .dot{width:10px;height:10px;border-radius:50%;background:#cbd5e1}
 .dot.active{background:var(--accent);box-shadow:0 0 0 5px rgba(46,199,201,.25)}
+.cards{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem}
+.item{display:flex;align-items:center;gap:1rem;margin-top:1rem}
+.icon{font-size:28px;width:36px;height:36px;text-align:center}
+.qr img{width:120px;height:120px}
+.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;text-align:center}
+.mini-card{background:rgba(255,255,255,.9);border-radius:16px;padding:1rem}
+.center-list{text-align:center;list-style:none;padding:0}
+.center-list li{margin:0.5rem 0}
 </style>
 </head>
 <body>
@@ -102,7 +59,7 @@ p{font-size:18px;line-height:1.6}
 
 <div class="slides">
 
-<!-- VÄLKOMMEN -->
+<!-- 1: Välkommen -->
 <section class="slide active">
   <div class="card center">
     <div id="clock" class="clock"></div>
@@ -113,9 +70,9 @@ p{font-size:18px;line-height:1.6}
   </div>
 </section>
 
-<!-- KONTAKT -->
+<!-- 2: Kontakt -->
 <section class="slide">
-  <div class="card center">
+  <div class="card">
     <h2>Kontakt</h2>
     <p><strong>Telefon (Jour):</strong> +46 73 402 84 98</p>
     <p><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</p>
@@ -123,62 +80,75 @@ p{font-size:18px;line-height:1.6}
   </div>
 </section>
 
-<!-- FACILITETER -->
+<!-- 3: Faciliteter -->
 <section class="slide">
   <div class="card">
-    <h2 class="center">Faciliteter</h2>
-    <div class="grid">
+    <h2>Faciliteter</h2>
+    <div class="mini-grid">
       <div class="mini">🍽️ Kök & allrum 24/7</div>
       <div class="mini">🧺 Tvättmöjlighet</div>
       <div class="mini">🅿️ Gratis parkering</div>
       <div class="mini">🎱 Biljard</div>
       <div class="mini">🏓 Bordtennis</div>
     </div>
+    <h2>Regler</h2>
+    <ul class="center-list">
+      <li>⏰ Incheckning från <strong>15:00</strong></li>
+      <li>🐾 Husdjur tillåtet (ej i gemensamma utrymmen)</li>
+    </ul>
+    <h2>Tillval</h2>
+    <ul class="center-list">
+      <li>🛏️ Lakan – <strong>60 kr</strong></li>
+      <li>🧼 Handduk – <strong>20 kr</strong></li>
+    </ul>
   </div>
 </section>
 
-<!-- AFFÄRER -->
+<!-- 4: Affärer -->
 <section class="slide">
   <div class="card">
-    <h2 class="center">Affärer</h2>
-    <div class="grid">
-      <div class="mini"><strong>ICA Kvantum Stenungsund</strong>Stort sortiment<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.ica.se/butiker/kvantum/stenungsund/ica-kvantum-stenungsund-1003460/"></div>
-      <div class="mini"><strong>Willys Stenungsund</strong>Lågpris<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.willys.se"></div>
-      <div class="mini"><strong>Coop Strandvägen</strong>Nära centrum<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.coop.se/butiker-erbjudanden/coop/coop-strandvagen/"></div>
+    <h2>Affärer</h2>
+    <div class="mini-grid">
+      <div class="mini"><strong>ICA Kvantum Stenungsund</strong><br>Vassgatan 1, 444 31 Stenungsund<br>Tel: 0303-72 62 00</div>
+      <div class="mini"><strong>Willys Stenungsund</strong><br>Strandvägen 35, 444 31 Stenungsund<br>Tel: 0303-72 82 80</div>
+      <div class="mini"><strong>Coop Strandvägen</strong><br>Strandvägen 10, 444 31 Stenungsund<br>Tel: 0303-123 45 67</div>
     </div>
   </div>
 </section>
 
-<!-- RESTAURANGER -->
+<!-- 5: Restauranger -->
 <section class="slide">
   <div class="card">
-    <h2 class="center">Restauranger</h2>
-    <div class="grid">
-      <div class="mini"><strong>Laxbutiken Ljungskile</strong>🐟 Fisk & lunch<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.laxbutiken.se"></div>
-      <div class="mini"><strong>Pizzeria Milano</strong>🍕 Svenshögen<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.facebook.com/PizzeriaMilanoSvenshogen"></div>
-      <div class="mini"><strong>Mr Johanssons</strong>🍔 Stenungsund<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://mrjohanssons.se"></div>
-      <div class="mini"><strong>McDonald's Stenungsund</strong>🍟 Drive-in<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.mcdonalds.com/se/sv-se.html"></div>
+    <h2>Restauranger</h2>
+    <div class="mini-grid">
+      <div class="mini"><strong>Laxbutiken Ljungskile</strong><br>Ljungs Berg 200, 459 93 Ljungskile<br>Tel: 0522-208 10</div>
+      <div class="mini"><strong>Pizzeria Milano</strong><br>Strandplan 35, 444 31 Stenungsund<br>Tel: 0303-45 99 00</div>
+      <div class="mini"><strong>Mr Johanssons</strong><br>Gärdesvägen 1, 444 31 Stenungsund<br>Tel: 0303-67 212</div>
+      <div class="mini"><strong>McDonald's Stenungsund</strong><br>Stenunge Allé 1, 444 30 Stenungsund<br>Tel: 0303-65 48 00</div>
     </div>
   </div>
 </section>
 
-<!-- RESOR & VÄSTTRAFIK -->
+<!-- 6: Kollektivtrafik -->
 <section class="slide">
-  <div class="card center">
-    <h2>Resa till och från Svenshögens vandrarhem</h2>
-    <p><strong>Busshållplats:</strong> <a href="https://www.google.com/maps/search/?api=1&query=Svenshögens+sjukhus" target="_blank">Svenshögens sjukhus, Buss 334</a></p>
-    <p><strong>Tågstation:</strong> <a href="https://www.google.com/maps/search/?api=1&query=Svenshögens+station" target="_blank">Svenshögens station</a></p>
-    <p>Använd appen <strong>Västtrafik To Go</strong> för tidtabeller och biljetter</p>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://www.vasttrafik.se" alt="QR Västtrafik">
+  <div class="card">
+    <h2>Kollektivtrafik</h2>
+    <div class="mini-grid">
+      <div class="mini"><strong>Buss:</strong> Svenshögens sjukhus – Buss 334</div>
+      <div class="mini"><strong>Tåg:</strong> Svenshögen station – mot Göteborg & Uddevalla</div>
+    </div>
+    <p>Rekommenderas att använda Västtrafik To Go app.</p>
   </div>
 </section>
 
 </div>
+
 <div class="progress" id="progress"></div>
 </div>
 </div>
 
 <script>
+// SLIDE PROGRESS
 const slides=[...document.querySelectorAll('.slide')];
 const progress=document.getElementById('progress');
 slides.forEach((_,i)=>{
