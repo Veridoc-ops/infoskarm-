@@ -8,23 +8,22 @@
 <style>
 :root{
   --accent:#2EC7C9;
-  --glass:rgba(255,255,255,.85);
+  --glass:rgba(255,255,255,.72);
   --dark:#1f2a30;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;font-family:'Lora',system-ui,sans-serif;color:var(--dark);}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Lora',system-ui,sans-serif;color:var(--dark)}
 body{
   background:
     radial-gradient(1200px 600px at 50% -10%, rgba(46,199,201,.35), transparent 60%),
     linear-gradient(180deg,#b7ddeb,#eef7fb);
-  overflow:hidden;
 }
-.frame{height:100vh;padding:2vh;}
+.frame{height:100vh;padding:2vh}
 .postcard{
   height:100%;border-radius:28px;background:var(--glass);
   backdrop-filter:blur(12px);
   box-shadow:0 20px 50px rgba(0,0,0,.18);
-  overflow:hidden;position:relative;
+  overflow:hidden;position:relative
 }
 
 /* HEADER */
@@ -35,80 +34,86 @@ body{
   background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80') center/cover;
   text-shadow:0 2px 6px rgba(0,0,0,.45)
 }
-.band h1{margin:0;font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vh,44px);}
+.band h1{margin:0;font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vh,44px)}
 .band small{opacity:.9}
 
 /* SLIDES */
-.slides{position:absolute;top:140px;bottom:50px;left:0;right:0;display:flex;}
+.slides{position:absolute;top:140px;bottom:50px;left:0;right:0;overflow:auto;}
 .slide{
   position:absolute;inset:0;padding:4vh 6vw;
   display:flex;justify-content:center;align-items:center;
-  opacity:0;transition:.7s;
-  overflow-y:auto;
+  opacity:0;transition:.7s
 }
-.slide.active{opacity:1;}
+.slide.active{opacity:1;position:relative;}
 
 /* CARD */
 .card{
-  background:rgba(255,255,255,.9);
+  width:100%;max-width:1200px;
+  background:rgba(255,255,255,.8);
   border-radius:24px;padding:3vh 3vw;
   box-shadow:0 14px 30px rgba(0,0,0,.15);
-  margin-bottom:2vh;
 }
-.center{text-align:center;}
+.center{text-align:center}
+
 h2{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(24px,3vh,32px);
-  text-align:center;
-  margin-bottom:1vh;
+  font-size:clamp(28px,3.6vh,38px);
+  margin-top:0
 }
-p, li, div{font-size:16px;line-height:1.6;}
-ul.center-list{list-style:none;text-align:center;padding:0;margin:1em 0;}
-ul.center-list li{margin-bottom:0.6em;}
+p{font-size:18px;line-height:1.6}
 
 /* GRID */
-.grid, .mini-grid{display:grid;gap:1.6rem;}
-.grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
-.mini-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));}
-.mini-card{
-  background:rgba(255,255,255,.95);
-  border-radius:18px;
-  padding:1rem;
-  display:flex;flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:160px;
-  text-align:center;
+.grid{
+  display:grid;
+  gap:1.8rem;
 }
-.mini-card .emoji{font-size:32px;margin-bottom:.5rem;}
-.mini-card .label{font-weight:600;}
+.mini-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:1.6rem;
+  justify-items:center;
+  align-items:start;
+}
+.mini-card{
+  background:rgba(255,255,255,.9);
+  border-radius:18px;
+  padding:1.2rem;
+  text-align:center;
+  width:100%;
+}
+.mini-card .emoji{
+  font-size:2rem;
+  margin-bottom:.6rem;
+}
+.mini-card .label{
+  font-size:16px;
+}
 
-/* AFFÄRER & RESTAURANGER */
+/* LISTS */
+.list div{margin-bottom:.6rem;}
+.center-list{text-align:center;list-style:none;padding:0;margin:0}
+.center-list li{margin:.6rem 0}
+
+/* AFFÄRER/RESTAURANGER */
 .item{
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;
-  height:220px;
   text-align:center;
+  background:rgba(255,255,255,.9);
+  border-radius:18px;
   padding:1rem;
-  border-radius:16px;
-  background:rgba(255,255,255,.95);
 }
-.item .icon{font-size:36px;margin-bottom:.4em;}
-.item .qr img{width:120px;height:120px;margin-top:.5em;}
-.item .qr a{display:block;margin-top:.3em;font-size:14px;color:var(--accent);text-decoration:none;}
+.item .icon{font-size:2rem;margin-bottom:.5rem;}
+.item .qr img{width:120px;height:120px;margin-top:.5rem;}
 
 /* PROGRESS */
 .progress{
   position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  display:flex;gap:.6rem;
+  display:flex;gap:.6rem
 }
 .dot{width:10px;height:10px;border-radius:50%;background:#cbd5e1}
 .dot.active{background:var(--accent);box-shadow:0 0 0 5px rgba(46,199,201,.25)}
-
-/* UTLOGO */
-#welcome-back{margin-top:2em;font-size:clamp(18px,2.5vh,32px);text-align:center;}
 </style>
 </head>
 <body>
@@ -125,87 +130,74 @@ ul.center-list li{margin-bottom:0.6em;}
 <!-- 1: Välkommen -->
 <section class="slide active">
   <div class="card center">
-    <p style="font-size:clamp(30px,5vh,64px);margin:0;">Välkommen</p>
-    <p style="font-size:clamp(18px,3vh,32px);margin-top:.6vh">
-      Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ
-    </p>
+    <p style="font-size:clamp(30px,5.4vh,64px);margin:0;">Välkommen</p>
+    <p style="font-size:clamp(18px,3.4vh,38px);margin-top:.6vh">Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ</p>
   </div>
 </section>
 
 <!-- 2: Kontakt -->
 <section class="slide">
-  <div class="grid">
-    <div class="card">
-      <h2>Kontakt</h2>
-      <div>
-        <p><strong>Telefon (Jour):</strong> +46 73 402 84 98</p>
-        <p><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</p>
-        <p><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</p>
-      </div>
-    </div>
-    <div class="card">
-      <h2>Vid behov</h2>
-      <div>
-        <p>112 – Nödnummer</p>
-        <p>1177 – Sjukvårdsrådgivning</p>
-        <p><strong>WiFi (gäst):</strong> Annexet · Ingen kod</p>
-      </div>
+  <div class="card center">
+    <h2>Kontakt</h2>
+    <div class="list">
+      <div><strong>Telefon (Jour):</strong> +46 73 402 84 98</div>
+      <div><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</div>
+      <div><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</div>
+      <div><strong>112:</strong> Nödnummer</div>
+      <div><strong>1177:</strong> Sjukvårdsrådgivning</div>
+      <div><strong>WiFi (gäst):</strong> Annexet · Ingen kod</div>
     </div>
   </div>
 </section>
 
 <!-- 3: Faciliteter -->
 <section class="slide">
-  <div class="mini-grid">
-    <div class="mini-card"><div class="emoji">🍽️</div><div class="label">Kök & allrum 24/7</div></div>
-    <div class="mini-card"><div class="emoji">🧺</div><div class="label">Tvätt (fritt i duschrum)</div></div>
-    <div class="mini-card"><div class="emoji">🅿️</div><div class="label">Gratis parkering</div></div>
-    <div class="mini-card"><div class="emoji">🎱</div><div class="label">Biljard</div></div>
-    <div class="mini-card"><div class="emoji">🏓</div><div class="label">Bordtennis</div></div>
+  <div class="card center">
+    <h2>Faciliteter</h2>
+    <div class="mini-grid">
+      <div class="mini-card"><div class="emoji">🍽️</div><div class="label">Kök & allrum 24/7</div></div>
+      <div class="mini-card"><div class="emoji">🧺</div><div class="label">Tvätt (fritt i duschrum)</div></div>
+      <div class="mini-card"><div class="emoji">🅿️</div><div class="label">Gratis parkering</div></div>
+      <div class="mini-card"><div class="emoji">🎱</div><div class="label">Biljard</div></div>
+      <div class="mini-card"><div class="emoji">🏓</div><div class="label">Bordtennis</div></div>
+      <div class="mini-card"><div class="emoji">💪</div><div class="label">Gym</div></div>
+    </div>
   </div>
 </section>
 
 <!-- 4: Affärer -->
 <section class="slide">
-  <div class="grid">
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.6rem;">
     <!-- ICA Kvantum Stenungsund -->
     <div class="item">
       <div class="icon">🛍️</div>
-      <div>ICA Kvantum<br>Vassgatan 1, 444 31 Stenungsund</div>
-      <div>Tel: 0303-72 62 00</div>
+      <div>Vassgatan 1, 444 31 Stenungsund<br>Tel: 0303-72 62 00</div>
       <div class="qr">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps/dir/?api=1&destination=Vassgatan+1,+444+31+Stenungsund">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Vassgatan+1,+444+31+Stenungsund" target="_blank">Vägbeskrivning</a>
       </div>
     </div>
     <!-- Willys Stenungsund -->
     <div class="item">
       <div class="icon">🛒</div>
-      <div>Willys<br>Strandvägen 35, 444 31 Stenungsund</div>
-      <div>Tel: 0303-72 82 80</div>
+      <div>Strandvägen 35, 444 31 Stenungsund<br>Tel: 0303-72 82 80</div>
       <div class="qr">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps/dir/?api=1&destination=Strandv%C3%A4gen+35,+444+31+Stenungsund">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Strandv%C3%A4gen+35,+444+31+Stenungsund" target="_blank">Vägbeskrivning</a>
       </div>
     </div>
     <!-- ICA Kvantum Ljungskile -->
     <div class="item">
       <div class="icon">🛍️</div>
-      <div>ICA Kvantum<br>Ljungs Berg 200, 459 93 Ljungskile</div>
-      <div>Tel: 0522-208 10</div>
+      <div>Ljungs Berg 200, 459 93 Ljungskile<br>Tel: 0522-208 10</div>
       <div class="qr">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps/dir/?api=1&destination=Ljungs+Berg+200,+459+93+Ljungskile">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Ljungs+Berg+200,+459+93+Ljungskile" target="_blank">Vägbeskrivning</a>
       </div>
     </div>
     <!-- Extra Ljungskile -->
     <div class="item">
       <div class="icon">🛒</div>
-      <div>Extra<br>Storgatan 25, 459 31 Ljungskile</div>
-      <div>Tel: 0522-133 00</div>
+      <div>Västra Hamngatan 10, 459 32 Ljungskile<br>Tel: 0522-208 40</div>
       <div class="qr">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps/dir/?api=1&destination=Storgatan+25,+459+31+Ljungskile">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Storgatan+25,+459+31+Ljungskile" target="_blank">Vägbeskrivning</a>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps/dir/?api=1&destination=V%C3%A4stra+Hamngatan+10,+459+32+Ljungskile">
       </div>
     </div>
   </div>
@@ -213,61 +205,37 @@ ul.center-list li{margin-bottom:0.6em;}
 
 <!-- 5: Restauranger -->
 <section class="slide">
-  <div class="grid">
-    <div class="item"><div class="icon">🐟</div><div>Laxbutiken<br>Ljungs Berg 200, 459 93 Ljungskile</div><div>Tel: 0522-208 10</div>
-      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.laxbutiken.se"><a href="https://www.laxbutiken.se" target="_blank">Webb</a></div>
-    </div>
-    <div class="item"><div class="icon">🍕</div><div>Pizzeria Milano<br>Strandplan 35, 444 31 Stenungsund</div><div>Tel: 0303-45 99 00</div>
-      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.facebook.com/PizzeriaMilanoSvenshogen"><a href="https://www.facebook.com/PizzeriaMilanoSvenshogen" target="_blank">Webb</a></div>
-    </div>
-    <div class="item"><div class="icon">🍔</div><div>Mr Johanssons<br>Gärdesvägen 1, 444 31 Stenungsund</div><div>Tel: 0303-67 212</div>
-      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://mrjohanssons.se"><a href="https://mrjohanssons.se" target="_blank">Webb</a></div>
-    </div>
-    <div class="item"><div class="icon">🍟</div><div>McDonald’s<br>Stenunge Allé 1, 444 30 Stenungsund</div><div>Tel: 0303-65 48 00</div>
-      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.mcdonalds.com/se/sv-se.html"><a href="https://www.mcdonalds.com/se/sv-se.html" target="_blank">Webb</a></div>
-    </div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.6rem;">
+    <div class="item"><div class="icon">🐟</div>Ljungs Berg 200, 459 93 Ljungskile<br>Tel: 0522-208 10<div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.laxbutiken.se"></div></div>
+    <div class="item"><div class="icon">🍕</div>Strandplan 35, 444 31 Stenungsund<br>Tel: 0303-45 99 00<div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.facebook.com/PizzeriaMilanoSvenshogen"></div></div>
+    <div class="item"><div class="icon">🍔</div>Gärdesvägen 1, 444 31 Stenungsund<br>Tel: 0303-67 212<div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://mrjohanssons.se"></div></div>
+    <div class="item"><div class="icon">🍟</div>Stenunge Allé 1, 444 30 Stenungsund<br>Tel: 0303-65 48 00<div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.mcdonalds.com/se/sv-se.html"></div></div>
   </div>
 </section>
 
-<!-- 6: Kollektivtrafik -->
+<!-- 6: Tåg -->
 <section class="slide">
-  <div class="grid">
-    <div class="item"><div class="icon">🚆</div>
-      <div>Svenshögen station<br>Tåg mot Göteborg & Uddevalla<br>Gångavstånd</div>
-      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps/search/Svensh%C3%B6gen%20station"><a href="https://www.google.com/maps/search/Svensh%C3%B6gen%20station" target="_blank">Visa i Maps</a></div>
-    </div>
-    <div class="item"><div class="icon">📱</div>
-      <div>Västtrafik To Go App – iOS</div>
-      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150"><a href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank">App Store</a></div>
-    </div>
-    <div class="item"><div class="icon">🤖</div>
-      <div>Västtrafik To Go App – Android</div>
-      <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://play.google.com/store/apps/details?id=se.vasttrafik.to_go"><a href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank">Google Play</a></div>
+  <div class="card center">
+    <h2>Kollektivtrafik – Tåg</h2>
+    <p>Svenshögen station – tåg mot Göteborg och Uddevalla.<br>Gångavstånd från vandrarhemmet.</p>
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.google.com/maps/search/Svensh%C3%B6gen%20station">
     </div>
   </div>
 </section>
 
-<!-- 7: Väder & Tips -->
+<!-- 7: Västtrafik To Go -->
 <section class="slide">
-  <div class="grid">
-    <div class="card">
-      <h2>Väder</h2>
-      <p id="w-temp">Temperatur: …</p>
-      <p id="w-wind">Vind: …</p>
-      <p id="w-code">Väder: …</p>
-      <small>Uppdateras från Open-Meteo.</small>
-    </div>
-    <div class="card">
-      <h2>Tips</h2>
-      <ul>
-        <li>Packa regnjacka vid risk för skurar</li>
-        <li>Naturstig & badplats nära vandrarhemmet</li>
-      </ul>
+  <div class="card center">
+    <h2>Västtrafik – To Go App</h2>
+    <div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1em;">
+      <div><div class="icon">📱</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150"><p>iOS</p></div>
+      <div><div class="icon">🤖</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://play.google.com/store/apps/details?id=se.vasttrafik.to_go"><p>Android</p></div>
     </div>
   </div>
 </section>
 
-<!-- 8: Utcheckning + Välkommen åter -->
+<!-- 8: Utcheckning -->
 <section class="slide">
   <div class="card center">
     <h2>Utcheckningsinstruktioner</h2>
@@ -277,13 +245,12 @@ ul.center-list li{margin-bottom:0.6em;}
       <li>👋 Ni behöver <strong>inte</strong> säga till personalen när ni lämnar</li>
       <li>🧹 Städa gärna av grovt innan avresa</li>
     </ul>
-    <div id="welcome-back">
-      VÄLKOMMEN ÅTER · WELCOME BACK · WILLKOMMEN WIEDER · BIENVENIDOS · BIENVENUE · WITAMY · ようこそ
-    </div>
+    <p style="font-size:clamp(20px,3vh,36px);margin-top:2rem;">VÄLKOMMEN ÅTER · Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ</p>
   </div>
 </section>
 
 </div>
+
 <div class="progress" id="progress"></div>
 </div>
 </div>
@@ -305,18 +272,6 @@ setInterval(()=>{
   slides[idx].classList.add('active');
   dots[idx].classList.add('active');
 },12000);
-
-// WEATHER
-const wTemp=document.getElementById('w-temp');
-const wWind=document.getElementById('w-wind');
-const wCode=document.getElementById('w-code');
-fetch('https://api.open-meteo.com/v1/forecast?latitude=58.39&longitude=11.83&current_weather=true')
-.then(r=>r.json())
-.then(d=>{
-  wTemp.textContent=`Temperatur: ${Math.round(d.current_weather.temperature)} °C`;
-  wWind.textContent=`Vind: ${d.current_weather.windspeed} km/h`;
-  wCode.textContent=`Väder: ${d.current_weather.weathercode}`;
-});
 </script>
 </body>
 </html>
