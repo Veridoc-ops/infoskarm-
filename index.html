@@ -4,181 +4,81 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Svenshögens vandrarhem – Info</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
+:root {
   --accent:#2EC7C9;
-  --lin:#f7f7f7;
-  --bläck:#222326;
   --glass-bg: rgba(255,255,255,.62);
-  --stroke: rgba(46,199,201,.18);
+  --stroke: rgba(0,0,0,.12);
+  --header-bg: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80');
   --padTop: 160px;
 }
-
-/* Globala inställningar */
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;background:var(--lin);color:var(--bläck);
-  font-family:"Lora", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
-
-body::before{
-  content:""; position:fixed; inset:0; z-index:-2;
-  background:
-    radial-gradient(1300px 800px at 50% -10%, rgba(46,199,201,.08), transparent 60%),
-    radial-gradient(900px 600px at 10% 110%, rgba(31,111,80,.08), transparent 60%),
-    radial-gradient(50% 80% at 50% 50%, rgba(0,0,0,.04), transparent 70%),
-    repeating-linear-gradient(0deg, rgba(0,0,0,.03), rgba(0,0,0,.03) 1px, transparent 2px, transparent 6px);
-  mix-blend-mode:multiply;
-}
-
+html,body{height:100%;margin:0;font-family:'Lora',system-ui,sans-serif;color:#222326;}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,#cce7f0,#f7f3ea)}
 .app{height:100%;display:grid;place-items:center}
-.frame{
-  position:relative; width:100vw; height:100vh; overflow:hidden;
-  padding:2.4vh 2.4vw;
-}
-
-.postcard{
-  position:relative; width:100%; height:100%; border-radius:28px;
-  overflow:hidden;
-  box-shadow:0 16px 42px rgba(0,0,0,.16), 0 2px 0 rgba(255,255,255,.6) inset;
-  background:
-    linear-gradient(180deg, rgba(247,243,234,.38), rgba(247,243,234,.30)),
-    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMjM4MXwwfDF8c2VhfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=1080') center/cover no-repeat;
-}
-
-.band{
-  position:absolute; top:0; left:0; right:0; z-index:5; text-align:center; color:#fff;
-  padding:1.4vh 5vw calc(1.1vh);
-  background:rgba(46,199,201,0.85);
-  box-shadow:0 10px 24px rgba(0,0,0,.18);
-}
-
-.band h1{
-  margin:0; font-family:"Cormorant Garamond", serif; font-weight:700; letter-spacing:.4px;
-  font-size:clamp(28px,3.5vh,48px); line-height:1.1;
-}
-
-.band small{
-  display:inline-block; margin-top:.2vh; font-weight:600; letter-spacing:.25px;
-  font-size:clamp(14px,2vh,20px); color:#f7f7f7;
-}
-
-.slides{position:relative; z-index:4; height:100%}
-.slide{
-  position:absolute; inset:0;
-  padding:calc(var(--padTop) + 10px) 5.5vw 6.5vh;
-  display:flex; flex-direction:column; gap:2.6vh; justify-content:center;
-  opacity:0; transform:translateY(6px) scale(.995);
-  transition:opacity .6s ease, transform .6s ease;
-}
-.slide.active{opacity:1; transform:translateY(0) scale(1)}
-
-.cards{display:grid; grid-template-columns:repeat(12,1fr); gap:1.8vh}
-.card{
-  grid-column:span 6; background:var(--glass-bg); backdrop-filter:blur(10px);
-  border-radius:20px; padding:2.4vh 2.6vw; position:relative;
-  box-shadow:0 10px 22px rgba(0,0,0,.10);
-  border:2px solid var(--stroke);
-}
-.card::before{
-  content:""; position:absolute; inset:-6px; border-radius:22px; pointer-events:none;
-  border:6px solid rgba(46,199,201,.16);
-  mask: radial-gradient(130% 110% at 50% 50%, black 65%, transparent 75%);
-  opacity:.45;
-}
-.card h2{
-  margin:.1rem 0 .9rem; font-family:"Cormorant Garamond", serif; font-weight:700;
-  color:#165a5f; text-align:center; font-size:clamp(18px,2.6vh,32px);
-  letter-spacing:.25px;
-}
-.card p,.card li{font-size:clamp(15px,2.1vh,24px); line-height:1.45; margin:.1rem 0}
-
-.welcome-panel{
-  background:rgba(255,255,255,.78); border:2px solid rgba(31,111,80,.18);
-  border-radius:20px; padding:2vh 2.4vw; text-align:center;
-  align-self:center; width:min(900px,92vw);
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
-}
-
-.mini-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; margin-top:.4rem}
-.mini-card{
-  background:rgba(255,255,255,.8); border:2px solid rgba(31,111,80,.18);
-  border-radius:14px; padding:1.2vh .8vw; text-align:center;
-}
-.mini-card .emoji{font-size:clamp(30px,5.2vh,56px); line-height:1; margin-bottom:.3em}
-.mini-card .label{font-weight:600; font-size:clamp(13px,2vh,20px)}
-
-.item{display:grid; grid-template-columns:70px 1fr 120px; gap:1rem; align-items:center}
-.icon{
-  font-size:clamp(24px,4vh,36px); display:grid; place-items:center; width:58px; height:58px; border-radius:12px;
-  background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.7));
-  border:1px solid rgba(0,0,0,.08); box-shadow:0 6px 12px rgba(0,0,0,.08);
-}
-.qr img{width:100px; height:100px; border-radius:10px; background:#fff; padding:6px; box-shadow:0 6px 14px rgba(0,0,0,.08)}
-.qr a{display:block; font-size:clamp(12px,1.8vh,17px); margin-top:.3rem}
-
-.center-list{list-style:none; padding:0; text-align:center; font-size:clamp(16px,2.3vh,24px); line-height:1.5; margin:0}
+.frame{position:relative;width:100vw;height:100vh;overflow:hidden;padding:2.4vh 2.4vw}
+.postcard{position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;box-shadow:0 16px 42px rgba(0,0,0,.16),0 2px 0 rgba(255,255,255,.6) inset;background:var(--glass-bg);backdrop-filter:blur(10px);}
+.band{position:absolute;top:0;left:0;right:0;z-index:5;text-align:center;padding:1.4vh 5vw;background:#fff;border-bottom:1px solid rgba(0,0,0,.1);box-shadow:0 10px 24px rgba(0,0,0,.1);}
+.band::before{content:"";position:absolute;inset:0;z-index:0;background:var(--header-bg);background-size:cover;background-position:center;filter:brightness(.85);}
+.band h1, .band small{position:relative;z-index:2;margin:0;}
+.band h1{font-family:'Cormorant Garamond', serif;font-weight:700;font-size:clamp(28px,4vh,48px);color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.3);}
+.band small{display:inline-block;margin-top:.2vh;font-weight:600;font-size:clamp(14px,2vh,18px);color:#eef;}
+.slides{position:relative;z-index:4;height:100%}
+.slide{position:absolute;inset:0;padding:calc(var(--padTop)+10px) 5.5vw 6.5vh;display:flex;flex-direction:column;gap:2.6vh;justify-content:center;opacity:0;transform:translateY(6px) scale(.995);transition:opacity .6s ease, transform .6s ease;}
+.slide.active{opacity:1;transform:translateY(0) scale(1)}
+.cards{display:grid;grid-template-columns:repeat(12,1fr);gap:1.8vh}
+.card{grid-column:span 6;background:var(--glass-bg);border-radius:20px;padding:2.4vh 2.6vw;position:relative;box-shadow:0 10px 22px rgba(0,0,0,.1);border:2px solid var(--stroke);}
+.card::before{content:"";position:absolute;inset:-6px;border-radius:22px;pointer-events:none;border:6px solid rgba(46,199,201,.16);opacity:.45;}
+.card h2{margin:.1rem 0 .9rem;font-family:'Cormorant Garamond', serif;font-weight:700;color:#0c5560;text-align:center;font-size:clamp(18px,2.6vh,32px);}
+.card p,.card li{font-size:clamp(15px,2.1vh,24px);line-height:1.45;margin:.1rem 0}
+.mini-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:.4rem}
+.mini-card{background:rgba(255,255,255,.8);border:2px solid rgba(0,0,0,.1);border-radius:14px;padding:1.2vh .8vw;text-align:center;}
+.mini-card .emoji{font-size:clamp(30px,5.2vh,56px);margin-bottom:.3em}
+.mini-card .label{font-weight:600;font-size:clamp(13px,2vh,20px)}
+.center-list{list-style:none;padding:0;text-align:center;font-size:clamp(16px,2.3vh,24px);margin:0}
 .center-list li{margin:.3em 0}
-
-.progress{position:absolute; bottom:calc(1.8vh + env(safe-area-inset-bottom, 0px)); left:50%; transform:translateX(-50%);
-  display:flex; gap:.5rem; z-index:6}
-.dot{width:10px; height:10px; border-radius:50%; background:#cbd5e1}
-.dot.active{background:var(--accent); box-shadow:0 0 0 5px rgba(46,199,201,.18)}
-
-@media(max-width:1200px){
-  .mini-grid{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:800px){
-  .mini-grid{grid-template-columns:repeat(2,1fr)}
-  .item{grid-template-columns:56px 1fr 100px}
-  .card{grid-column:span 12}
-}
+.progress{position:absolute;bottom:calc(1.8vh + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:6}
+.dot{width:10px;height:10px;border-radius:50%;background:#cbd5e1}.dot.active{background:var(--accent);box-shadow:0 0 0 5px rgba(46,199,201,.18)}
+@media(max-width:1200px){.mini-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:800px){.mini-grid{grid-template-columns:repeat(2,1fr)}.card{grid-column:span 12}}
 </style>
 </head>
-
 <body>
 <div class="app">
   <div class="frame">
     <div class="postcard">
-
       <div class="band">
         <h1>Svenshögens vandrarhem</h1>
-        <small>Information för gäster</small>
+        <small id="band-sub">Information</small>
       </div>
-
       <div class="slides">
-        <!-- 1: Välkommen -->
+        <!-- Slide 1: Välkommen -->
         <section class="slide active" data-title="Välkommen">
-          <div class="welcome-panel">
+          <div class="card" style="grid-column:span 12;text-align:center;">
             <p style="font-size:clamp(30px,5.4vh,64px);margin:0;">Välkommen</p>
             <p style="font-size:clamp(18px,3.4vh,38px);margin-top:.6vh">Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ</p>
           </div>
         </section>
-
-        <!-- 2: Kontakt -->
+        <!-- Slide 2: Kontakt -->
         <section class="slide" data-title="Kontakt">
           <div class="cards">
-            <div class="card" style="grid-column:span 7">
+            <div class="card" style="grid-column:span 6">
               <h2>Kontakt</h2>
-              <div class="list">
-                <div><strong>Telefon (Jour):</strong> +46 73 402 84 98</div>
-                <div><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</div>
-                <div><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</div>
-              </div>
+              <p><strong>Telefon (Jour):</strong> +46 73 402 84 98</p>
+              <p><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</p>
+              <p><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</p>
             </div>
-            <div class="card" style="grid-column:span 5">
+            <div class="card" style="grid-column:span 6">
               <h2>Vid behov</h2>
-              <div class="list">
-                <div>112 – Nödnummer</div>
-                <div>1177 – Sjukvårdsrådgivning</div>
-                <div><strong>WiFi (gäst):</strong> Annexet · Ingen kod</div>
-              </div>
+              <p>112 – Nödnummer</p>
+              <p>1177 – Sjukvårdsrådgivning</p>
+              <p><strong>WiFi (gäst):</strong> Annexet · Ingen kod</p>
             </div>
           </div>
         </section>
-
-        <!-- 3: Faciliteter + Regler + Tillval -->
+        <!-- Slide 3: Faciliteter -->
         <section class="slide" data-title="Faciliteter">
           <div class="cards">
             <div class="card" style="grid-column:span 12">
@@ -190,14 +90,12 @@ body::before{
                 <div class="mini-card"><div class="emoji">🎱</div><div class="label">Biljard</div></div>
                 <div class="mini-card"><div class="emoji">🏓</div><div class="label">Bordtennis</div></div>
               </div>
-
-              <h2 style="margin-top:2.2vh">Regler</h2>
+              <h2>Regler</h2>
               <ul class="center-list">
                 <li>⏰ Incheckning från <strong>15:00</strong></li>
                 <li>🐾 Husdjur tillåtet (ej i gemensamma utrymmen)</li>
               </ul>
-
-              <h2 style="margin-top:2vh">Tillval</h2>
+              <h2>Tillval</h2>
               <ul class="center-list">
                 <li>🛏️ lakan – <strong>60 kr</strong></li>
                 <li>🧼 handduk – <strong>20 kr</strong></li>
@@ -205,46 +103,72 @@ body::before{
             </div>
           </div>
         </section>
-
-        <!-- Fortsättning av slides (Affärer, Restauranger, Väder, Utcheckning, Kollektivtrafik, Västtrafik) -->
-        <!-- Här kopieras all info från din ursprungliga kod exakt -->
-
+        <!-- Slide 4: Affärer -->
+        <section class="slide" data-title="Affärer">
+          <div class="cards">
+            <div class="card">
+              <h2>Affärer – ICA Kvantum</h2>
+              <p>Vassgatan 1, 444 31 Stenungsund</p>
+              <p>Tel: 0303-72 62 00</p>
+            </div>
+            <div class="card">
+              <h2>Affärer – Willys</h2>
+              <p>Strandvägen 35, 444 31 Stenungsund</p>
+              <p>Tel: 0303-72 82 80</p>
+            </div>
+          </div>
+        </section>
+        <!-- Slide 5: Restauranger 1 -->
+        <section class="slide" data-title="Restauranger">
+          <div class="cards">
+            <div class="card">
+              <h2>Restauranger – Laxbutiken</h2>
+              <p>Ljungs Berg 200, 459 93 Ljungskile</p>
+              <p>Tel: 0522-208 10</p>
+            </div>
+            <div class="card">
+              <h2>Restauranger – Pizzeria Milano</h2>
+              <p>Strandplan 35, 444 31 Stenungsund</p>
+              <p>Tel: 0303-45 99 00</p>
+            </div>
+          </div>
+        </section>
+        <!-- Slide 6: Restauranger 2 -->
+        <section class="slide" data-title="Restauranger">
+          <div class="cards">
+            <div class="card">
+              <h2>Restauranger – Mr Johanssons</h2>
+              <p>Gärdesvägen 1, 444 31 Stenungsund</p>
+              <p>Tel: 0303-67 212</p>
+            </div>
+            <div class="card">
+              <h2>Restauranger – McDonald’s</h2>
+              <p>Stenunge Allé 1, 444 30 Stenungsund</p>
+              <p>Tel: 0303-65 48 00</p>
+            </div>
+          </div>
+        </section>
       </div>
-
-      <!-- Progress -->
       <div class="progress" aria-hidden="true">
         <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="dot"></span>
       </div>
-
     </div>
   </div>
 </div>
 
 <script>
-const SLIDE_TIME_MS = 12000;
 let slideIndex = 0;
-function initSlides(){
-  const slides = [...document.querySelectorAll('.slide')];
-  const dots = [...document.querySelectorAll('.dot')];
-  if(!slides.length) return;
-  slides.forEach(s => s.classList.remove('active'));
-  dots.forEach(d => d.classList.remove('active'));
-  slides[0].classList.add('active'); dots[0].classList.add('active');
-
-  function show(n){
-    slides.forEach((s,x)=>s.classList.toggle('active',x===n));
-    dots.forEach((d,x)=>d.classList.toggle('active',x===n));
-    slideIndex=n;
-  }
-  setInterval(()=>show((slideIndex+1)%slides.length), SLIDE_TIME_MS);
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+function showSlide(n){
+  slides.forEach((s,i)=>s.classList.toggle('active',i===n));
+  dots.forEach((d,i)=>d.classList.toggle('active',i===n));
+  slideIndex=n;
 }
-
-window.addEventListener('DOMContentLoaded', ()=>{
-  initSlides();
-});
+setInterval(()=>{
+  showSlide((slideIndex+1)%slides.length);
+},8000);
 </script>
 </body>
 </html>
