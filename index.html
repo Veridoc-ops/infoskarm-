@@ -1,138 +1,98 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Svenshögens vandrarhem – Info</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
 :root{
-  --glass: rgba(255,255,255,.70);
-  --accent:#2ec7c9;
+  --accent:#2EC7C9;
+  --glass:rgba(255,255,255,.72);
   --dark:#1f2a30;
 }
-
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:"Lora",system-ui}
-
+html,body{height:100%;margin:0;font-family:'Lora',system-ui,sans-serif;color:var(--dark)}
 body{
   background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(46,199,201,.25), transparent 60%),
+    radial-gradient(1200px 600px at 50% -10%, rgba(46,199,201,.35), transparent 60%),
     linear-gradient(180deg,#b7ddeb,#eef7fb);
 }
-
-.app{height:100%;padding:2vh}
+.frame{height:100vh;padding:2vh}
 .postcard{
-  height:100%;
-  border-radius:28px;
-  background:rgba(255,255,255,.35);
+  height:100%;border-radius:28px;background:var(--glass);
   backdrop-filter:blur(12px);
   box-shadow:0 20px 50px rgba(0,0,0,.18);
-  overflow:hidden;
-  position:relative;
+  overflow:hidden;position:relative
 }
 
 /* HEADER */
 .band{
-  height:140px;
-  background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80")
-    center/cover;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+  position:absolute;top:0;left:0;right:0;height:140px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
   color:#fff;
-  text-shadow:0 2px 6px rgba(0,0,0,.45);
+  background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80') center/cover;
+  text-shadow:0 2px 6px rgba(0,0,0,.45)
 }
-.band h1{
-  margin:0;
-  font-family:"Cormorant Garamond",serif;
-  font-size:clamp(26px,4vh,44px);
-}
+.band h1{margin:0;font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vh,44px)}
 .band small{opacity:.9}
 
 /* SLIDES */
-.slides{
-  position:absolute;
-  top:140px;
-  bottom:60px;
-  left:0;
-  right:0;
-}
-
+.slides{position:absolute;top:140px;bottom:50px;left:0;right:0}
 .slide{
-  position:absolute;
-  inset:0;
-  padding:4vh 6vw;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  opacity:0;
-  transition:.7s;
+  position:absolute;inset:0;padding:4vh 6vw;
+  display:flex;justify-content:center;align-items:center;
+  opacity:0;transition:.7s
 }
 .slide.active{opacity:1}
 
-/* CARDS */
+/* CARD */
 .card{
-  width:100%;
-  max-width:1200px;
-  background:var(--glass);
-  border-radius:22px;
-  padding:3vh 3vw;
+  width:100%;max-width:1200px;
+  background:rgba(255,255,255,.8);
+  border-radius:24px;padding:3vh 3vw;
   box-shadow:0 14px 30px rgba(0,0,0,.15);
 }
-
 .center{text-align:center}
 
+h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,3.6vh,38px);
+  margin-top:0
+}
+p{font-size:18px;line-height:1.6}
+
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:1.8rem;
+  gap:1.8rem
 }
-
 .mini{
-  background:rgba(255,255,255,.75);
+  background:rgba(255,255,255,.9);
   border-radius:18px;
   padding:1.6rem;
-  text-align:center;
+  text-align:center
 }
+.mini strong{display:block;font-size:18px;margin-bottom:.3rem}
+.mini img{margin-top:.8rem}
 
-/* CLOCK & WEATHER */
-.clock{
-  font-size:64px;
-  font-weight:600;
-}
+/* CLOCK WEATHER */
+.clock{font-size:64px;font-weight:600}
 .date{opacity:.75;margin-bottom:1rem}
-.weather{
-  margin-top:1rem;
-  font-size:28px;
-}
+.weather{margin-top:1rem;font-size:26px;font-weight:600}
 
 /* PROGRESS */
 .progress{
-  position:absolute;
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:.6rem;
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+  display:flex;gap:.6rem
 }
-.dot{
-  width:10px;height:10px;
-  border-radius:50%;
-  background:#bfcbd2;
-}
-.dot.active{
-  background:var(--accent);
-  box-shadow:0 0 0 5px rgba(46,199,201,.25);
-}
+.dot{width:10px;height:10px;border-radius:50%;background:#cbd5e1}
+.dot.active{background:var(--accent);box-shadow:0 0 0 5px rgba(46,199,201,.25)}
 </style>
 </head>
-
 <body>
-<div class="app">
+<div class="frame">
 <div class="postcard">
 
 <div class="band">
@@ -142,20 +102,18 @@ body{
 
 <div class="slides">
 
-<!-- 1 VÄLKOMMEN -->
+<!-- VÄLKOMMEN -->
 <section class="slide active">
   <div class="card center">
-    <div id="clock" class="clock">--:--</div>
+    <div id="clock" class="clock"></div>
     <div id="date" class="date"></div>
-
-    <h2 style="margin:.6em 0">Välkommen</h2>
+    <h2>Välkommen</h2>
     <p>Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ</p>
-
-    <div id="weather" class="weather">🌤️ -- °C</div>
+    <div id="weather" class="weather"></div>
   </div>
 </section>
 
-<!-- 2 KONTAKT -->
+<!-- KONTAKT -->
 <section class="slide">
   <div class="card center">
     <h2>Kontakt</h2>
@@ -165,7 +123,7 @@ body{
   </div>
 </section>
 
-<!-- 3 FACILITETER -->
+<!-- FACILITETER -->
 <section class="slide">
   <div class="card">
     <h2 class="center">Faciliteter</h2>
@@ -179,80 +137,78 @@ body{
   </div>
 </section>
 
-<!-- 4 AFFÄRER -->
+<!-- AFFÄRER -->
 <section class="slide">
-  <div class="card center">
-    <h2>Affärer</h2>
-    <p>ICA Kvantum – Stenungsund</p>
-    <p>Willys – Stenungsund</p>
+  <div class="card">
+    <h2 class="center">Affärer</h2>
+    <div class="grid">
+      <div class="mini"><strong>ICA Kvantum Stenungsund</strong>Stort sortiment<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.ica.se/butiker/kvantum/stenungsund/ica-kvantum-stenungsund-1003460/"></div>
+      <div class="mini"><strong>Willys Stenungsund</strong>Lågpris<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.willys.se"></div>
+      <div class="mini"><strong>Coop Strandvägen</strong>Nära centrum<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.coop.se/butiker-erbjudanden/coop/coop-strandvagen/"></div>
+    </div>
   </div>
 </section>
 
-<!-- 5 RESTAURANGER -->
+<!-- RESTAURANGER -->
 <section class="slide">
-  <div class="card center">
-    <h2>Restauranger</h2>
-    <p>Laxbutiken · Pizzeria Milano</p>
-    <p>Mr Johanssons · McDonald’s</p>
+  <div class="card">
+    <h2 class="center">Restauranger</h2>
+    <div class="grid">
+      <div class="mini"><strong>Laxbutiken Ljungskile</strong>🐟 Fisk & lunch<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.laxbutiken.se"></div>
+      <div class="mini"><strong>Pizzeria Milano</strong>🍕 Svenshögen<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.facebook.com/PizzeriaMilanoSvenshogen"></div>
+      <div class="mini"><strong>Mr Johanssons</strong>🍔 Stenungsund<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://mrjohanssons.se"></div>
+      <div class="mini"><strong>McDonald's Stenungsund</strong>🍟 Drive-in<br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://www.mcdonalds.com/se/sv-se.html"></div>
+    </div>
   </div>
 </section>
 
-<!-- 6 VÄSTTRAFIK -->
+<!-- VÄSTTRAFIK -->
 <section class="slide">
   <div class="card center">
     <h2>Västtrafik</h2>
-    <p>Använd Västtrafik To Go-appen för resor</p>
+    <p>Använd appen Västtrafik To Go</p>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://www.vasttrafik.se">
   </div>
 </section>
 
 </div>
-
 <div class="progress" id="progress"></div>
-
 </div>
 </div>
 
 <script>
-/* SLIDES */
-const slides=[...document.querySelectorAll(".slide")];
-const progress=document.getElementById("progress");
-
+const slides=[...document.querySelectorAll('.slide')];
+const progress=document.getElementById('progress');
 slides.forEach((_,i)=>{
-  const d=document.createElement("span");
-  d.className="dot"+(i===0?" active":"");
+  const d=document.createElement('span');
+  d.className='dot'+(i===0?' active':'');
   progress.appendChild(d);
 });
-const dots=[...document.querySelectorAll(".dot")];
-
+const dots=[...document.querySelectorAll('.dot')];
 let idx=0;
 setInterval(()=>{
-  slides[idx].classList.remove("active");
-  dots[idx].classList.remove("active");
+  slides[idx].classList.remove('active');
+  dots[idx].classList.remove('active');
   idx=(idx+1)%slides.length;
-  slides[idx].classList.add("active");
-  dots[idx].classList.add("active");
+  slides[idx].classList.add('active');
+  dots[idx].classList.add('active');
 },12000);
 
-/* CLOCK */
-const clockEl=document.getElementById("clock");
-const dateEl=document.getElementById("date");
+// CLOCK
+const clockEl=document.getElementById('clock');
+const dateEl=document.getElementById('date');
 function tick(){
   const n=new Date();
-  clockEl.textContent=n.toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"});
-  dateEl.textContent=n.toLocaleDateString("sv-SE",{weekday:"long",day:"numeric",month:"long"});
+  clockEl.textContent=n.toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});
+  dateEl.textContent=n.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long'});
 }
 tick();setInterval(tick,1000);
 
-/* WEATHER */
-const weatherEl=document.getElementById("weather");
-fetch("https://api.open-meteo.com/v1/forecast?latitude=58.15&longitude=11.94&current_weather=true")
+// WEATHER
+const weatherEl=document.getElementById('weather');
+fetch('https://api.open-meteo.com/v1/forecast?latitude=58.39&longitude=11.83&current_weather=true')
 .then(r=>r.json())
-.then(j=>{
-  const t=Math.round(j.current_weather.temperature);
-  weatherEl.textContent=`🌡️ ${t} °C`;
-});
+.then(d=>{weatherEl.textContent=`🌡️ ${Math.round(d.current_weather.temperature)} °C`;});
 </script>
-
 </body>
 </html>
