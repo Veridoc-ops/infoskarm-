@@ -3,95 +3,254 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Infoskärm – Svenshögen</title>
+<title>Svenshögens vandrarhem – Info</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:system-ui;
-  background:linear-gradient(#e6f2f4,#cfe9ef);
+:root{
+  --glass: rgba(255,255,255,.70);
+  --accent:#2ec7c9;
+  --dark:#1f2a30;
 }
-.slide{
-  position:absolute;
-  inset:0;
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:"Lora",system-ui}
+
+body{
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(46,199,201,.25), transparent 60%),
+    linear-gradient(180deg,#b7ddeb,#eef7fb);
+}
+
+.app{height:100%;padding:2vh}
+.postcard{
+  height:100%;
+  border-radius:28px;
+  background:rgba(255,255,255,.35);
+  backdrop-filter:blur(12px);
+  box-shadow:0 20px 50px rgba(0,0,0,.18);
+  overflow:hidden;
+  position:relative;
+}
+
+/* HEADER */
+.band{
+  height:140px;
+  background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80")
+    center/cover;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  color:#fff;
+  text-shadow:0 2px 6px rgba(0,0,0,.45);
+}
+.band h1{
+  margin:0;
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(26px,4vh,44px);
+}
+.band small{opacity:.9}
+
+/* SLIDES */
+.slides{
+  position:absolute;
+  top:140px;
+  bottom:60px;
+  left:0;
+  right:0;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  padding:4vh 6vw;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   opacity:0;
-  transition:.6s;
+  transition:.7s;
 }
 .slide.active{opacity:1}
-.clock{font-size:64px}
-.weather{font-size:28px;margin-top:10px}
+
+/* CARDS */
+.card{
+  width:100%;
+  max-width:1200px;
+  background:var(--glass);
+  border-radius:22px;
+  padding:3vh 3vw;
+  box-shadow:0 14px 30px rgba(0,0,0,.15);
+}
+
+.center{text-align:center}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.8rem;
+}
+
+.mini{
+  background:rgba(255,255,255,.75);
+  border-radius:18px;
+  padding:1.6rem;
+  text-align:center;
+}
+
+/* CLOCK & WEATHER */
+.clock{
+  font-size:64px;
+  font-weight:600;
+}
+.date{opacity:.75;margin-bottom:1rem}
+.weather{
+  margin-top:1rem;
+  font-size:28px;
+}
+
+/* PROGRESS */
 .progress{
-  position:fixed;bottom:20px;left:50%;
+  position:absolute;
+  bottom:18px;
+  left:50%;
   transform:translateX(-50%);
-  display:flex;gap:10px;
+  display:flex;
+  gap:.6rem;
 }
 .dot{
-  width:10px;height:10px;border-radius:50%;
-  background:#aaa;
+  width:10px;height:10px;
+  border-radius:50%;
+  background:#bfcbd2;
 }
-.dot.active{background:#2ec7c9}
+.dot.active{
+  background:var(--accent);
+  box-shadow:0 0 0 5px rgba(46,199,201,.25);
+}
 </style>
 </head>
 
 <body>
+<div class="app">
+<div class="postcard">
 
+<div class="band">
+  <h1>Svenshögens vandrarhem</h1>
+  <small>Information till gäster</small>
+</div>
+
+<div class="slides">
+
+<!-- 1 VÄLKOMMEN -->
 <section class="slide active">
-  <div id="clock" class="clock">--:--</div>
-  <div>Välkommen</div>
-  <div id="weather" class="weather">🌤️ -- °C</div>
+  <div class="card center">
+    <div id="clock" class="clock">--:--</div>
+    <div id="date" class="date"></div>
+
+    <h2 style="margin:.6em 0">Välkommen</h2>
+    <p>Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ</p>
+
+    <div id="weather" class="weather">🌤️ -- °C</div>
+  </div>
 </section>
 
+<!-- 2 KONTAKT -->
 <section class="slide">
-  <h1>Kontakt</h1>
-  <p>+46 73 402 84 98</p>
+  <div class="card center">
+    <h2>Kontakt</h2>
+    <p><strong>Telefon (Jour):</strong> +46 73 402 84 98</p>
+    <p><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</p>
+    <p><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</p>
+  </div>
 </section>
 
+<!-- 3 FACILITETER -->
 <section class="slide">
-  <h1>Faciliteter</h1>
-  <p>Kök · Parkering · WiFi</p>
+  <div class="card">
+    <h2 class="center">Faciliteter</h2>
+    <div class="grid">
+      <div class="mini">🍽️ Kök & allrum 24/7</div>
+      <div class="mini">🧺 Tvättmöjlighet</div>
+      <div class="mini">🅿️ Gratis parkering</div>
+      <div class="mini">🎱 Biljard</div>
+      <div class="mini">🏓 Bordtennis</div>
+    </div>
+  </div>
 </section>
 
-<div class="progress" id="dots"></div>
+<!-- 4 AFFÄRER -->
+<section class="slide">
+  <div class="card center">
+    <h2>Affärer</h2>
+    <p>ICA Kvantum – Stenungsund</p>
+    <p>Willys – Stenungsund</p>
+  </div>
+</section>
+
+<!-- 5 RESTAURANGER -->
+<section class="slide">
+  <div class="card center">
+    <h2>Restauranger</h2>
+    <p>Laxbutiken · Pizzeria Milano</p>
+    <p>Mr Johanssons · McDonald’s</p>
+  </div>
+</section>
+
+<!-- 6 VÄSTTRAFIK -->
+<section class="slide">
+  <div class="card center">
+    <h2>Västtrafik</h2>
+    <p>Använd Västtrafik To Go-appen för resor</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://www.vasttrafik.se">
+  </div>
+</section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+
+</div>
+</div>
 
 <script>
+/* SLIDES */
 const slides=[...document.querySelectorAll(".slide")];
-const dots=document.getElementById("dots");
+const progress=document.getElementById("progress");
 
 slides.forEach((_,i)=>{
   const d=document.createElement("span");
   d.className="dot"+(i===0?" active":"");
-  dots.appendChild(d);
+  progress.appendChild(d);
 });
+const dots=[...document.querySelectorAll(".dot")];
 
-const dotEls=[...document.querySelectorAll(".dot")];
-let index=0;
-
+let idx=0;
 setInterval(()=>{
-  slides[index].classList.remove("active");
-  dotEls[index].classList.remove("active");
-  index=(index+1)%slides.length;
-  slides[index].classList.add("active");
-  dotEls[index].classList.add("active");
-},5000);
+  slides[idx].classList.remove("active");
+  dots[idx].classList.remove("active");
+  idx=(idx+1)%slides.length;
+  slides[idx].classList.add("active");
+  dots[idx].classList.add("active");
+},12000);
 
-// KLOCKA
+/* CLOCK */
 const clockEl=document.getElementById("clock");
+const dateEl=document.getElementById("date");
 function tick(){
   const n=new Date();
   clockEl.textContent=n.toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"});
+  dateEl.textContent=n.toLocaleDateString("sv-SE",{weekday:"long",day:"numeric",month:"long"});
 }
 tick();setInterval(tick,1000);
 
-// VÄDER
+/* WEATHER */
 const weatherEl=document.getElementById("weather");
 fetch("https://api.open-meteo.com/v1/forecast?latitude=58.15&longitude=11.94&current_weather=true")
 .then(r=>r.json())
 .then(j=>{
-  weatherEl.textContent=`🌡️ ${Math.round(j.current_weather.temperature)} °C`;
+  const t=Math.round(j.current_weather.temperature);
+  weatherEl.textContent=`🌡️ ${t} °C`;
 });
 </script>
 
