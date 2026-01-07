@@ -1,335 +1,192 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Svenshögens vandrarhem – Info</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Svenshögens vandrarhem</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Lora:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --accent: #2EC7C9;
-  --glass: rgba(255,255,255,.95);
-  --dark: #1f2a30;
-}
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html, body {
-  height: 100%;
-  font-family: 'Lora', sans-serif;
-  color: var(--dark);
-  overflow: hidden;
-  background: linear-gradient(180deg,#b7ddeb,#eef7fb);
+:root{
+  --accent:#3b6f8f;
+  --bg:#eef4f8;
+  --card:#ffffff;
+  --text:#1f2a30;
 }
 
-.frame {
-  height: 100vh;
-  padding: 1vh;
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  height:100%;
+  font-family:'Lora',serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow:hidden;
 }
-.postcard {
-  height: 100%;
-  border-radius: 28px;
-  background: var(--glass);
-  box-shadow: 0 20px 50px rgba(0,0,0,.18);
-  position: relative;
-  overflow: hidden;
+
+/* FRAME */
+.frame{
+  height:100vh;
+  padding:12px;
+}
+.postcard{
+  height:100%;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 12px 40px rgba(0,0,0,.12);
+  overflow:hidden;
+  position:relative;
 }
 
 /* HEADER */
-.band {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80') center/cover;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,.45);
+.band{
+  height:110px;
+  background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
+  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80') center/cover;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
-.band h1 { font-size: clamp(28px, 4vh, 44px); font-family: 'Cormorant Garamond', serif; }
-.band small { opacity: .9; }
+.band h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;
+}
+.band small{opacity:.85}
 
 /* SLIDES */
-.slides {
-  position: absolute;
-  top: 120px;
-  bottom: 20px;
-  left: 0;
-  right: 0;
+.slides{
+  position:absolute;
+  top:110px;
+  bottom:40px;
+  left:0;right:0;
 }
-.slide {
-  position: absolute;
-  inset: 0;
-  padding: 2vh 4vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: .7s;
+.slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:.6s;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
-.slide.active {
-  opacity: 1;
-}
+.slide.active{opacity:1}
 
 /* CARD */
-.card {
-  width: 100%;
-  background: var(--glass);
-  border-radius: 18px;
-  padding: 2vh 2vw;
-  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+.card{
+  width:100%;
+  max-width:900px;
+  background:var(--card);
+  border-radius:18px;
+  padding:28px;
 }
-.center { text-align: center; }
-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px,3vh,34px); margin-bottom: 1vh; }
-p { font-size: 16px; line-height: 1.4; }
+.center{text-align:center}
+
+h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+/* WELCOME */
+.clock{font-size:52px;font-weight:600}
+.date{opacity:.7;margin-bottom:12px}
+.weather{font-size:22px;margin-top:10px}
 
 /* LIST */
-.list div { margin-bottom: .6vh; font-size: 14px; }
+.list div{margin-bottom:8px}
 
-/* FACILITIES GRID */
-.mini-grid {
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-  gap: 1vh;
-  justify-items: center;
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
 }
-.mini-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 1vh;
-  text-align: center;
-  box-shadow: 0 4px 16px rgba(0,0,0,.12);
-  width: 100%;
-  max-width: 180px;
+.item{
+  background:#f7fafc;
+  border-radius:14px;
+  padding:18px;
+  text-align:center;
 }
-.mini-card .emoji { font-size: 32px; margin-bottom: .5vh; }
-.mini-card .label { font-size: 14px; }
+.item img{height:56px;margin-bottom:10px}
+.item a{
+  display:inline-block;
+  margin-top:8px;
+  font-size:13px;
+  color:var(--accent);
+  text-decoration:none;
+}
 
-/* GRID for lists */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 1vh;
-  justify-items: center;
+/* PROGRESS */
+.progress{
+  position:absolute;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
 }
-.grid .item {
-  background: #fff;
-  border-radius: 14px;
-  padding: 1vh;
-  text-align: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,.18);
-  width: 100%;
-  max-width: 260px;
-  height: 230px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.dot{
+  width:10px;height:10px;
+  border-radius:50%;
+  background:#cbd5e1;
 }
-.grid .item img { width: 64px; height: 64px; margin: auto; }
-.grid .item .text { font-size: 14px; }
-.grid .item a { font-size: 12px; color: var(--accent); text-decoration: none; margin-top: .4rem; }
-
-/* CLOCK + WEATHER */
-.clock { font-size: 48px; font-weight: 600; }
-.date { opacity: .8; margin-bottom: 1vh; }
-.weather { margin-top: 1vh; font-size: 22px; font-weight: 600; }
-
-/* PROGRESS DOTS */
-.progress {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: .6rem;
-}
-.dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: #cbd5e1;
-}
-.dot.active {
-  background: var(--accent);
-  box-shadow: 0 0 0 5px rgba(46,199,201,.25);
+.dot.active{
+  background:var(--accent);
 }
 </style>
 </head>
+
 <body>
-
 <div class="frame">
-  <div class="postcard">
+<div class="postcard">
 
-    <div class="band">
-      <h1>Svenshögens vandrarhem</h1>
-      <small>Information till gäster</small>
-    </div>
+<div class="band">
+<h1>Svenshögens vandrarhem</h1>
+<small>Information till gäster</small>
+</div>
 
-    <div class="slides">
+<div class="slides">
 
-      <!-- 1: VÄLKOMMEN -->
-      <section class="slide active">
-        <div class="card center">
-          <div id="clock" class="clock"></div>
-          <div id="date" class="date"></div>
-          <h2>Välkommen</h2>
-          <p>Welcome · Willkommen · Bienvenidos · Bienvenue · Witamy · ようこそ</p>
-          <div id="weather" class="weather"></div>
-        </div>
-      </section>
+<section class="slide active">
+<div class="card center">
+<div id="clock" class="clock"></div>
+<div id="date" class="date"></div>
+<h2>Välkommen</h2>
+<p>Welcome · Willkommen · Bienvenidos · Bienvenue</p>
+<div id="weather" class="weather"></div>
+</div>
+</section>
 
-      <!-- 2: KONTAKT -->
-      <section class="slide">
-        <div class="card">
-          <h2>Kontakt</h2>
-          <div class="list">
-            <div><strong>Telefon (Jour):</strong> +46 73 402 84 98</div>
-            <div><strong>E‑post:</strong> svenshogensvandrarhem@gmail.com</div>
-            <div><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</div>
-            <div>112 – Nödnummer</div>
-            <div>1177 – Sjukvårdsrådgivning</div>
-            <div><strong>WiFi (gäst):</strong> Annexet · Ingen kod</div>
-          </div>
-        </div>
-      </section>
+<section class="slide">
+<div class="card">
+<h2>Kontakt</h2>
+<div class="list">
+<div><strong>Telefon:</strong> +46 73 402 84 98</div>
+<div><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</div>
+<div><strong>Adress:</strong> Hällungevägen 12</div>
+<div>112 – Nödnummer</div>
+<div>1177 – Sjukvårdsrådgivning</div>
+</div>
+</div>
+</section>
 
-      <!-- 3: FACILITETER -->
-      <section class="slide">
-        <div class="card">
-          <h2 class="center">Faciliteter</h2>
-          <div class="mini-grid">
-            <div class="mini-card"><div class="emoji">🍽️</div><div class="label">Kök & allrum</div></div>
-            <div class="mini-card"><div class="emoji">🧺</div><div class="label">Tvätt (fritt)</div></div>
-            <div class="mini-card"><div class="emoji">🅿️</div><div class="label">Gratis parkering</div></div>
-            <div class="mini-card"><div class="emoji">🎱</div><div class="label">Biljard</div></div>
-            <div class="mini-card"><div class="emoji">🏓</div><div class="label">Bordtennis</div></div>
-            <div class="mini-card"><div class="emoji">🏋️</div><div class="label">Gym</div></div>
-          </div>
-        </div>
-      </section>
+<section class="slide">
+<div class="card center">
+<h2>Väder just nu</h2>
+<div id="weather-card" class="weather"></div>
+</div>
+</section>
 
-      <!-- 4: AFFÄRER -->
-      <section class="slide">
-        <div class="card">
-          <h2 class="center">Affärer</h2>
-          <div class="grid">
-            <div class="item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/ICA_Kvantum_Logo.svg" alt="ICA Kvantum">
-              <div class="text"><strong>ICA Kvantum Stenungsund</strong><br>Vassgatan 1, 444 31 Stenungsund</div>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Vassgatan+1,+444+31+Stenungsund" target="_blank">Vägbeskrivning</a>
-            </div>
-            <div class="item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Willys_Logo.svg" alt="Willys">
-              <div class="text"><strong>Willys Stenungsund</strong><br>Strandvägen 35, 444 31 Stenungsund</div>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Strandv%C3%A4gen+35,+444+31+Stenungsund" target="_blank">Vägbeskrivning</a>
-            </div>
-            <div class="item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/ICA_Kvantum_logo_2013.png" alt="ICA Kvantum Ljungskile">
-              <div class="text"><strong>ICA Kvantum Ljungskile</strong><br>Ljungs Berg 200, 459 93 Ljungskile</div>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Ljungs+Berg+200,+459+93+Ljungskile" target="_blank">Vägbeskrivning</a>
-            </div>
-            <div class="item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Coop_Extra_logo.svg" alt="Extra Ljungskile">
-              <div class="text"><strong>Extra Ljungskile</strong><br>Centrumvägen 5, 459 30 Ljungskile</div>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Centrumv%C3%A4gen+5,+459+30+Ljungskile" target="_blank">Vägbeskrivning</a>
-            </div>
-          </div>
-        </div>
-      </section>
+</div>
 
-      <!-- 5: RESTAURANGER -->
-      <section class="slide">
-        <div class="card">
-          <h2 class="center">Restauranger</h2>
-          <div class="grid">
-            <div class="item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Laxbutiken_logo.png" alt="Laxbutiken">
-              <div class="text"><strong>Laxbutiken Ljungskile</strong><br>Ljungs Berg 200, 459 93 Ljungskile</div>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Ljungs+Berg+200,+459+93+Ljungskile" target="_blank">Vägbeskrivning</a>
-            </div>
-            <div class="item">
-              <div style="font-size:48px;">🍕</div>
-              <div class="text"><strong>Pizzeria Milano</strong><br>Strandplan 35, 444 31 Stenungsund</div>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Strandplan+35,+444+31+Stenungsund" target="_blank">Vägbeskrivning</a>
-            </div>
-            <div class="item">
-              <div style="font-size:48px;">🍔</div>
-              <div class="text"><strong>Mr Johanssons</strong><br>Gärdesvägen 1, 444 31 Stenungsund</div>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=G%C3%A4rdesv%C3%A4gen+1,+444+31+Stenungsund" target="_blank">Vägbeskrivning</a>
-            </div>
-            <div class="item">
-              <div style="font-size:48px;">🍟</div>
-              <div class="text"><strong>McDonald's Stenungsund</strong><br>Stenunge Allé 1, 444 30 Stenungsund</div>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Stenunge+All%C3%A9+1,+444+30+Stenungsund" target="_blank">Vägbeskrivning</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6: KOLLEKTIVTRAFIK -->
-      <section class="slide">
-        <div class="card">
-          <h2 class="center">Kollektivtrafik</h2>
-          <div class="grid">
-            <div class="item">
-              <div style="font-size:48px;">🚆</div>
-              <div class="text"><strong>Tåg</strong><br>Svenshögen station – mot Göteborg/Uddevalla<br>Promenad 15 min</div>
-              <a href="https://www.google.com/maps/search/Svensh%C3%B6gen+station" target="_blank">Vägbeskrivning</a>
-            </div>
-            <div class="item">
-              <div style="font-size:48px;">🚌</div>
-              <div class="text"><strong>Buss 334</strong><br>Svenshögens sjukhus – Promenad 5 min</div>
-              <a href="https://www.vasttrafik.se/reseplaneraren" target="_blank">Vägbeskrivning</a>
-            </div>
-            <div class="item">
-              <div style="font-size:48px;">📱</div>
-              <div class="text"><strong>Västtrafik To Go</strong><br>Planera resa & köp biljett</div>
-              <a href="https://apps.apple.com/se/app/v%C3%A4sttrafik-to-go/id1081161150" target="_blank">iOS App</a>
-              <a href="https://play.google.com/store/apps/details?id=se.vasttrafik.to_go" target="_blank">Android App</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7: VÄDER -->
-      <section class="slide">
-        <div class="card center">
-          <h2>Väder</h2>
-          <div id="weather-card">🌡️ … °C</div>
-        </div>
-      </section>
-
-      <!-- 8: UTCHECKNING -->
-      <section class="slide">
-        <div class="card">
-          <h2 class="center">Utcheckning</h2>
-          <ul class="center-list">
-            <li>🕐 Utcheckning senast kl <strong>13.00</strong></li>
-            <li>🗝️ Lämna nyckelkortet på kylskåpet eller bordet</li>
-            <li>👋 Ingen personal behövs</li>
-            <li>🧹 Städa av grovt innan avresa</li>
-          </ul>
-          <h2 class="center" style="margin-top:2vh;">VÄLKOMMEN ÅTER</h2>
-          <p class="center">Welcome back · Willkommen zurück · Bienvenidos de nuevo · Bienvenue à nouveau · Witamy ponownie · おかえりなさい</p>
-        </div>
-      </section>
-
-    </div>
-
-    <div class="progress" id="progress"></div>
-
-  </div>
+<div class="progress" id="progress"></div>
+</div>
 </div>
 
 <script>
-// SLIDES
+/* SLIDES */
 const slides=[...document.querySelectorAll('.slide')];
 const progress=document.getElementById('progress');
 slides.forEach((_,i)=>{
@@ -347,25 +204,26 @@ setInterval(()=>{
   dots[idx].classList.add('active');
 },12000);
 
-// CLOCK
+/* CLOCK */
 const clockEl=document.getElementById('clock');
 const dateEl=document.getElementById('date');
-function tick(){
+setInterval(()=>{
   const n=new Date();
   clockEl.textContent=n.toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});
   dateEl.textContent=n.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long'});
-}
-tick(); setInterval(tick,1000);
+},1000);
 
-// WEATHER
-const weatherEl=document.getElementById('weather-card');
+/* WEATHER */
+const w1=document.getElementById('weather');
+const w2=document.getElementById('weather-card');
 fetch('https://api.open-meteo.com/v1/forecast?latitude=58.39&longitude=11.83&current_weather=true')
 .then(r=>r.json())
 .then(d=>{
   const c=d.current_weather;
-  weatherEl.textContent=`🌡️ ${Math.round(c.temperature)} °C · Vind ${Math.round(c.windspeed)} m/s`;
-})
-.catch(()=>{weatherEl.textContent='🌡️ Väder ej tillgängligt';});
+  const t=`🌡️ ${Math.round(c.temperature)} °C · Vind ${Math.round(c.windspeed)} m/s`;
+  w1.textContent=t;
+  w2.textContent=t;
+});
 </script>
 
 </body>
