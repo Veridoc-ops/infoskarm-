@@ -17,133 +17,41 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 
-html,body{
-  height:100%;
-  font-family:'Lora',serif;
-  color:var(--dark);
-  background:var(--bg);
-  overflow:hidden;
-}
-
+html,body{height:100%;font-family:'Lora',serif;color:var(--dark);background:var(--bg);overflow:hidden}
 .frame{height:100vh;padding:12px}
-.postcard{
-  height:100%;
-  border-radius:24px;
-  background:var(--glass);
-  box-shadow:0 16px 40px rgba(0,0,0,.15);
-  position:relative;
-  overflow:hidden;
-}
+.postcard{height:100%;border-radius:24px;background:var(--glass);box-shadow:0 16px 40px rgba(0,0,0,.15);position:relative;overflow:hidden}
 
 /* HEADER */
-.band{
-  height:120px;
-  background:
-    linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),
-    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80')
-    center/cover;
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-.band h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(30px,4vh,44px);
-}
+.band{height:120px;background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80')center/cover;color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.band h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vh,44px)}
 .band small{opacity:.9}
 
 /* SLIDES */
-.slides{
-  position:absolute;
-  top:120px;
-  bottom:40px;
-  left:0;right:0;
-}
-.slide{
-  position:absolute;
-  inset:0;
-  padding:2vh 4vw;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  opacity:0;
-  transition:.7s;
-}
+.slides{position:absolute;top:120px;bottom:40px;left:0;right:0}
+.slide{position:absolute;inset:0;padding:2vh 4vw;display:flex;justify-content:center;align-items:center;opacity:0;transition:.7s}
 .slide.active{opacity:1}
 
 /* CARD */
-.card{
-  width:100%;
-  max-width:1200px;
-  background:var(--glass);
-  border-radius:18px;
-  padding:3vh 3vw;
-  box-shadow:0 8px 24px rgba(0,0,0,.12);
-}
+.card{width:100%;max-width:1200px;background:var(--glass);border-radius:18px;padding:3vh 3vw;box-shadow:0 8px 24px rgba(0,0,0,.12)}
 .center{text-align:center}
-
-h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(24px,3vh,34px);
-  margin-bottom:1vh;
-}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vh,34px);margin-bottom:1vh}
 
 .clock{font-size:52px;font-weight:600}
 .date{opacity:.75;margin-bottom:1vh}
 .weather{font-size:22px;font-weight:600;margin:1.5vh 0}
 
-/* GRIDS */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:2vh;
-}
-.item{
-  background:#f7fafc;
-  border-radius:16px;
-  padding:2vh;
-  text-align:center;
-}
-.item .text{
-  font-size:14px;
-  line-height:1.4;
-}
-.qr{
-  width:110px;
-  margin-top:1vh;
-  opacity:.9;
-}
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3vw;margin-top:2vh}
+.contact-box{background:#f7fafc;border-radius:16px;padding:2vh;text-align:left;font-size:15px}
 
-/* FACILITIES */
-.mini-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:1.5vh;
-}
-.mini-card{
-  background:#f7fafc;
-  border-radius:14px;
-  padding:1.5vh;
-  text-align:center;
-}
-.mini-card .emoji{font-size:32px;margin-bottom:.5vh}
+/* GRIDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2vh}
+.item{background:#f7fafc;border-radius:16px;padding:2vh;text-align:center;font-size:14px}
+.small-qr{width:80px;margin-top:1vh}
 
 /* PROGRESS */
-.progress{
-  position:absolute;
-  bottom:12px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:.6rem;
-}
-.dot{
-  width:10px;height:10px;
-  border-radius:50%;
-  background:#cbd5e1;
-}
+.progress{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:.6rem}
+.dot{width:10px;height:10px;border-radius:50%;background:#cbd5e1}
 .dot.active{background:var(--accent)}
 </style>
 </head>
@@ -173,14 +81,21 @@ h2{
 <!-- 2 KONTAKT -->
 <section class="slide">
   <div class="card">
-    <h2>Kontakt</h2>
-    <div class="list">
-      <div><strong>Telefon (Jour):</strong> +46 73 402 84 98</div>
-      <div><strong>E-post:</strong> svenshogensvandrarhem@gmail.com</div>
-      <div><strong>Adress:</strong> Hällungevägen 12, 444 97 Svenshögen</div>
-      <div>112 – Nödnummer</div>
-      <div>1177 – Sjukvårdsrådgivning</div>
-      <div><strong>WiFi:</strong> Annexet · Ingen kod</div>
+    <h2 class="center">Kontakt</h2>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <strong>Svenshögens vandrarhem</strong><br><br>
+        📞 +46 73 402 84 98<br>
+        ✉️ svenshogensvandrarhem@gmail.com<br>
+        📍 Hällungevägen 12<br>444 97 Svenshögen<br><br>
+        📶 WiFi: <strong>Annexet</strong> (ingen kod)
+      </div>
+      <div class="contact-box">
+        <strong>Viktiga nummer</strong><br><br>
+        🚑 112 – Nödnummer<br>
+        🩺 1177 – Sjukvårdsrådgivning<br>
+        🚖 Taxi Stenungsund – 0303-23 30 00
+      </div>
     </div>
   </div>
 </section>
@@ -189,89 +104,91 @@ h2{
 <section class="slide">
   <div class="card">
     <h2 class="center">Faciliteter</h2>
-    <div class="mini-grid">
-      <div class="mini-card"><div class="emoji">🍽️</div>Kök & allrum</div>
-      <div class="mini-card"><div class="emoji">🧺</div>Tvätt</div>
-      <div class="mini-card"><div class="emoji">🅿️</div>Parkering</div>
-      <div class="mini-card"><div class="emoji">🎱</div>Biljard</div>
-      <div class="mini-card"><div class="emoji">🏓</div>Bordtennis</div>
-      <div class="mini-card"><div class="emoji">🏋️</div>Gym</div>
+    <div class="grid">
+      <div class="item">🍽️ Kök & allrum</div>
+      <div class="item">🧺 Tvätt</div>
+      <div class="item">🅿️ Parkering</div>
+      <div class="item">🎱 Biljard</div>
+      <div class="item">🏓 Bordtennis</div>
+      <div class="item">🏋️ Gym</div>
     </div>
   </div>
 </section>
 
 <!-- 4 AFFÄRER -->
 <section class="slide">
-<div class="card">
-<h2 class="center">Affärer</h2>
-<div class="grid">
-
-<div class="item">
-<div class="text"><strong>ICA Kvantum Stenungsund</strong><br>Vassgatan 1, 444 31 Stenungsund</div>
-<img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps?q=Vassgatan+1+44431+Stenungsund">
-</div>
-
-<div class="item">
-<div class="text"><strong>Willys Stenungsund</strong><br>Strandvägen 35, 444 31 Stenungsund</div>
-<img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps?q=Strandvägen+35+44431+Stenungsund">
-</div>
-
-<div class="item">
-<div class="text"><strong>ICA Kvantum Ljungskile</strong><br>Ljungs Berg 200, 459 93 Ljungskile</div>
-<img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps?q=Ljungs+Berg+200+45993+Ljungskile">
-</div>
-
-<div class="item">
-<div class="text"><strong>Extra Ljungskile</strong><br>Centrumvägen 5, 459 30 Ljungskile</div>
-<img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps?q=Centrumvägen+5+45930+Ljungskile">
-</div>
-
-</div>
-</div>
+  <div class="card">
+    <h2 class="center">Affärer</h2>
+    <div class="grid">
+      <div class="item">
+        <div class="text"><strong>ICA Kvantum Stenungsund</strong></div>
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Vassgatan+1+44431+Stenungsund">
+      </div>
+      <div class="item">
+        <div class="text"><strong>Willys Stenungsund</strong></div>
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Strandvägen+35+44431+Stenungsund">
+      </div>
+      <div class="item">
+        <div class="text"><strong>ICA Kvantum Ljungskile</strong></div>
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Ljungs+Berg+200+45993+Ljungskile">
+      </div>
+      <div class="item">
+        <div class="text"><strong>Extra Ljungskile</strong></div>
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Centrumvägen+5+45930+Ljungskile">
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- 5 RESTAURANGER -->
 <section class="slide">
-<div class="card">
-<h2 class="center">Restauranger</h2>
-<div class="grid">
+  <div class="card">
+    <h2 class="center">Restauranger & Pizzerior</h2>
+    <div class="grid">
 
-<div class="item">
-<div style="font-size:48px">🍕</div>
-<div class="text"><strong>Pizzeria Milano</strong><br>Strandplan 35, 444 31 Stenungsund</div>
-<img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps?q=Strandplan+35+44431+Stenungsund">
-</div>
+      <div class="item">
+        🍕<br><strong>Pizzeria Milano</strong><br>Stenungsund
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Pizzeria+Milano+Stenungsund">
+      </div>
 
-<div class="item">
-<div style="font-size:48px">🍔</div>
-<div class="text"><strong>Mr Johanssons</strong><br>Gärdesvägen 1, 444 31 Stenungsund</div>
-<img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps?q=Gärdesvägen+1+44431+Stenungsund">
-</div>
+      <div class="item">
+        🍝<br><strong>Ti Amo</strong><br>Stenungsund
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Ti+Amo+Stenungsund">
+      </div>
 
-</div>
-</div>
+      <div class="item">
+        🍕<br><strong>Sannegårdens Pizzeria</strong><br>Stenungsund
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Sannegårdens+Pizzeria+Stenungsund">
+      </div>
+
+      <div class="item">
+        🍔<br><strong>Mr Johansson</strong><br>Stenungsund
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Mr+Johansson+Stenungsund">
+      </div>
+
+      <div class="item">
+        🍕<br><strong>:contentReference[oaicite:4]{index=4}</strong><br>Ljungskile
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Bella+Mare+Ljungskile">
+      </div>
+
+      <div class="item">
+        🍕<br><strong>:contentReference[oaicite:5]{index=5}</strong><br>Ljungskile
+        <img class="small-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Pizzeria+Marinella+Ljungskile">
+      </div>
+
+    </div>
+  </div>
 </section>
 
 <!-- 6 KOLLEKTIVTRAFIK -->
 <section class="slide">
-<div class="card">
-<h2 class="center">Kollektivtrafik</h2>
-<div class="grid">
-
-<div class="item">
-<div style="font-size:48px">🚆</div>
-<div class="text"><strong>Svenshögen station</strong><br>Tåg mot Göteborg/Uddevalla</div>
-<img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.google.com/maps?q=Svenshögen+station">
-</div>
-
-<div class="item">
-<div style="font-size:48px">🚌</div>
-<div class="text"><strong>Buss 334</strong><br>Hållplats Svenshögens sjukhus</div>
-<img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.vasttrafik.se">
-</div>
-
-</div>
-</div>
+  <div class="card">
+    <h2 class="center">Kollektivtrafik</h2>
+    <div class="grid">
+      <div class="item">🚆<br><strong>Svenshögen station</strong></div>
+      <div class="item">🚌<br><strong>Buss 334</strong></div>
+    </div>
+  </div>
 </section>
 
 <!-- 7 VÄDER -->
@@ -326,12 +243,13 @@ function tick(){
 }
 tick();setInterval(tick,1000);
 
-const w1=document.getElementById('weather');
+const weatherEls=[document.getElementById('weather'),document.getElementById('weather-card')];
 fetch('https://api.open-meteo.com/v1/forecast?latitude=58.39&longitude=11.83&current_weather=true')
 .then(r=>r.json())
 .then(d=>{
   const c=d.current_weather;
-  w1.textContent=`🌡️ ${Math.round(c.temperature)} °C · Vind ${Math.round(c.windspeed)} m/s`;
+  const txt=`🌡️ ${Math.round(c.temperature)} °C · 💨 ${Math.round(c.windspeed)} m/s`;
+  weatherEls.forEach(el=>{ if(el) el.textContent=txt; });
 });
 </script>
 
