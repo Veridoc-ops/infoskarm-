@@ -1,113 +1,148 @@
-// =============================
+// =====================================
 // Svenshögens Dashboard
-// Version 1.0
-// =============================
+// app.js v1.0
+// =====================================
 
-// Liveklocka
+// ---------- KLOCKA ----------
+
 function updateClock() {
 
     const now = new Date();
 
-    const time = now.toLocaleTimeString("sv-SE",{
-        hour:"2-digit",
-        minute:"2-digit"
+    const time = now.toLocaleTimeString("sv-SE", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
     });
 
-    document.getElementById("clock").innerHTML = time;
+    const clock = document.getElementById("clock");
+
+    if (clock) {
+        clock.textContent = time;
+    }
 
 }
 
-setInterval(updateClock,1000);
-
 updateClock();
+setInterval(updateClock, 1000);
 
+// ---------- SIFFROR ----------
 
-// Simpel animation av siffror
+function animateValue(id, end, suffix = "") {
 
-function animateValue(id,end){
+    const el = document.getElementById(id);
 
-    const element=document.getElementById(id);
+    if (!el) return;
 
-    let start=0;
+    let start = 0;
 
-    const duration=1200;
+    const duration = 1200;
+    const fps = 60;
+    const totalFrames = Math.round(duration / (1000 / fps));
+    const increment = end / totalFrames;
 
-    const increment=end/(duration/20);
+    let frame = 0;
 
-    const timer=setInterval(()=>{
+    const timer = setInterval(() => {
 
-        start+=increment;
+        frame++;
 
-        if(start>=end){
+        start += increment;
 
-            start=end;
+        if (frame >= totalFrames) {
+
+            start = end;
 
             clearInterval(timer);
 
         }
 
-        if(id==="occupancy"){
+        el.innerHTML = Math.round(start) + suffix;
 
-            element.innerHTML=Math.round(start)+"%";
-
-        }else{
-
-            element.innerHTML=Math.round(start);
-
-        }
-
-    },20);
+    }, 1000 / fps);
 
 }
 
-animateValue("occupancy",81);
-animateValue("checkin",8);
-animateValue("checkout",6);
-animateValue("rooms",11);
+animateValue("occupancy", 81, "%");
+animateValue("checkin", 8);
+animateValue("checkout", 6);
+animateValue("rooms", 11);
 
+// ---------- AI PANEL ----------
 
-// ==========================
-// AI PANEL
-// ==========================
+const aiMessages = [
 
-const messages=[
+    {
+        color: "#22c55e",
+        status: "Allt ser bra ut",
+        message: "🟢 Gör ingenting idag."
+    },
 
-"🟢 Inga åtgärder krävs idag.",
+    {
+        color: "#f59e0b",
+        status: "Observera",
+        message: "🟠 Beläggningen börjar bli hög på fredag."
+    },
 
-"🟡 Följ upp konferensofferten.",
+    {
+        color: "#ef4444",
+        status: "Åtgärd krävs",
+        message: "🔴 Höj dubbelrummen med 100 kr."
+    },
 
-"🟠 Beläggningen börjar bli hög på fredag.",
-
-"🔴 Höj dubbelrummen med 100 kr."
+    {
+        color: "#3b82f6",
+        status: "Information",
+        message: "🔵 Följ upp konferensofferten."
+    }
 
 ];
 
-let current=0;
+let currentMessage = 0;
 
-setInterval(()=>{
+function updateAI() {
 
-    current++;
+    const ai = document.getElementById("aiMessage");
+    const statusText = document.getElementById("statusText");
+    const statusBox = document.getElementById("statusBox");
 
-    if(current>=messages.length){
+    if (!ai || !statusText || !statusBox) return;
 
-        current=0;
+    const item = aiMessages[currentMessage];
+
+    ai.innerHTML = item.message;
+
+    ai.style.color = item.color;
+
+    statusText.innerHTML = item.status;
+
+    statusBox.style.background = item.color + "22";
+    statusBox.style.color = item.color;
+
+    currentMessage++;
+
+    if (currentMessage >= aiMessages.length) {
+
+        currentMessage = 0;
 
     }
 
-    document.getElementById("aiMessage").innerHTML=messages[current];
+}
 
-},12000);
+updateAI();
 
+setInterval(updateAI, 12000);
 
+// ---------- LIVE ----------
 
-// ==========================
-// Här kopplar vi Beds24 senare
-// ==========================
+console.log("Dashboard startad");
 
-// fetchBookings();
+// ---------- PLATS FÖR BEDS24 API ----------
 
-// fetchOccupancy();
-
-// fetchRevenue();
-
-console.log("Dashboard startad.");
+// async function loadBeds24() {
+//
+// }
+//
+// setInterval(loadBeds24,30000);
+//
+// loadBeds24();
